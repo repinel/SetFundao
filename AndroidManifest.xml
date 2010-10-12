@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="br.repinel"
+	android:versionName="1.3" android:versionCode="3">
+	<application android:icon="@drawable/app_icon" android:label="@string/app_name">
+
+		<activity
+			android:name=".Tab1Activity"
+			android:label="@string/app_name"/>
+
+		<activity
+			android:name=".Tab2Activity"
+			android:label="@string/app_name"/>
+			
+		<activity
+			android:name=".Tab3Activity"
+			android:label="@string/app_name"/>
+
+		<activity
+			android:name="MainTabWidget"
+			android:label="@string/app_name" android:theme="@style/TabTheme">
+
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+	</application>
+
+	<uses-sdk android:minSdkVersion="3" />
+
+	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+</manifest> 

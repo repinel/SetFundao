@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">SetFundao</string>
+	<string name="app_name_version">SetFundao 1.2</string>
+	<string name="app_descrip">"Monitor de câmeras do CET Fundão http://diseg.pu.ufrj.br"</string>
+    <string name="app_credits">"Copyright © 2010. Roque Pinel. Todos os direitos reservados."</string>
+
+	<string-array name="tab_names">
+		<item>Linha Amarela</item>
+		<item>Prefeitura</item>
+		<item>H.U.</item>
+	</string-array>
+
+	<string-array name="urls">
+		<item>"http://diseg.pu.ufrj.br/CAMERA_LAMARELA.jpg"</item>
+		<item>"http://diseg.pu.ufrj.br/CAMERA_PREFEITURA.jpg"</item>
+		<item>"http://diseg.pu.ufrj.br/CAMERA_HOSPITAL.jpg"</item>
+	</string-array>
+
+	<string name="main_quit">Sair</string>
+	<string name="main_about">Sobre</string>
+
+	<string name="error_url">URL inválida</string>
+	<string name="error_io">Erro ao estabelecer conexão</string>
+	<string name="error_illegal_state">Erro ao estabelecer conexão</string>
+	<string name="error_timeout">Tempo para estabelecer conexão expirado</string>
+	<string name="error_unknow_service">Protocolo não suporta entrada</string>
+</resources>
