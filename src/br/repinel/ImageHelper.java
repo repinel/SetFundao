@@ -29,6 +29,31 @@ public class ImageHelper {
 	 * @throws MainException 
 	 */
 	public static Bitmap downloadImage(String imageUrl, Resources res) throws MainException {
+		int connectionCounter = 0;
+
+		int maxRetryConnection = Integer.parseInt(res.getText(R.string.max_retry_connection).toString());
+
+		Bitmap bmImg = null;
+
+		while (connectionCounter < maxRetryConnection) {
+			bmImg = realDownloadImage(imageUrl, res);
+
+			if (bmImg != null)
+				break;
+
+			connectionCounter++;
+
+			try {
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				// empty
+			}
+		}
+
+		return bmImg;
+	}
+
+	private static Bitmap realDownloadImage(String imageUrl, Resources res) throws MainException {
 		Bitmap bmImg = null;
 
 		URL myFileUrl = null;

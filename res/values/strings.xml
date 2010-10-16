@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">SetFundao</string>
-	<string name="app_name_version">SetFundao 1.2</string>
+	<string name="app_name_version">SetFundao 1.4</string>
 	<string name="app_descrip">"Monitor de câmeras do CET Fundão http://diseg.pu.ufrj.br"</string>
     <string name="app_credits">"Copyright © 2010. Roque Pinel. Todos os direitos reservados."</string>
 
@@ -16,6 +16,8 @@
 		<item>"http://diseg.pu.ufrj.br/CAMERA_PREFEITURA.jpg"</item>
 		<item>"http://diseg.pu.ufrj.br/CAMERA_HOSPITAL.jpg"</item>
 	</string-array>
+	
+	<string name="max_retry_connection">3</string>
 
 	<string name="main_quit">Sair</string>
 	<string name="main_about">Sobre</string>
