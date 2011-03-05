@@ -31,12 +31,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Third tab.
+ * Fourth tab.
  * 
  * @author Roque Pinel
  *
  */
-public class Tab3Activity extends Activity implements OnClickListener {
+public class Tab4Activity extends Activity implements OnClickListener {
 
 	/**
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -50,10 +50,10 @@ public class Tab3Activity extends Activity implements OnClickListener {
 		Resources res = getResources();
 		String[] urls = res.getStringArray(R.array.urls);
 
-		Log.i(Tab3Activity.class.getName(), "onCreate:" + urls[2]);
+		Log.i(Tab4Activity.class.getName(), "onCreate:" + urls[3]);
 
 		try {
-			Bitmap bmImg = ImageHelper.downloadImage(urls[2], res);
+			Bitmap bmImg = ImageHelper.downloadImage(urls[3], res);
 			
 			ImageView imgView = (ImageView) findViewById(R.id.cameraImage);
 
@@ -80,10 +80,10 @@ public class Tab3Activity extends Activity implements OnClickListener {
 		Resources res = getResources();
 		String[] urls = res.getStringArray(R.array.urls);
 
-		Log.i(Tab3Activity.class.getName(), "onClick:" + urls[2]);
+		Log.i(Tab4Activity.class.getName(), "onClick:" + urls[3]);
 
 		try {
-			Bitmap bmImg = ImageHelper.downloadImage(urls[2], res);
+			Bitmap bmImg = ImageHelper.downloadImage(urls[3], res);
 			
 			ImageView imgView = (ImageView) findViewById(R.id.cameraImage);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Roque
+ * Copyright (C) 2011 Roque
  *
  * This file is part of SetFundao.
  *
@@ -42,7 +42,7 @@ import android.widget.TextView;
  */
 public class MainTabWidget extends TabActivity {
 
-	private static final String[] TABS = {"Tab1", "Tab2", "Tab3"};
+	private static final String[] TABS = {"Tab1", "Tab2", "Tab3", "Tab4"};
 
 	/**
 	 * @see android.app.ActivityGroup#onCreate(android.os.Bundle)
@@ -60,6 +60,7 @@ public class MainTabWidget extends TabActivity {
 			TabHost.TabSpec tab = tabHost.newTabSpec(TABS[i]);
 
 			ComponentName tabActivity = new ComponentName("br.repinel", "br.repinel." + TABS[i] + "Activity");
+			System.out.println("br.repinel." + TABS[i] + "Activity");
 
 			tab.setContent(new Intent().setComponent(tabActivity));
 			// tab.setIndicator(tabNames[i], res.getDrawable(R.drawable.ic_tab_1));

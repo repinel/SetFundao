@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 Roque
+ * Copyright (C) 2011 Roque
  *
  * This file is part of SetFundao.
  *
@@ -44,6 +44,7 @@ public class ImageHelper {
 	 * Download an image given a URL.
 	 * 
 	 * @param imageUrl The URL of the image.
+	 * @param res The resource.
 	 * @return The image.
 	 * @throws MainException 
 	 */
@@ -72,6 +73,14 @@ public class ImageHelper {
 		return bmImg;
 	}
 
+	/**
+	 * Responsable for the real download.
+	 * 
+	 * @param imageUrl The URL of the image.
+	 * @param res The resource.
+	 * @return The image.
+	 * @throws MainException
+	 */
 	private static Bitmap realDownloadImage(String imageUrl, Resources res) throws MainException {
 		Bitmap bmImg = null;
 

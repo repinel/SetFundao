@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!--
-		Copyright (C) 2009-2010 Roque Pinel
+		Copyright (C) 2011 Roque Pinel
 	-->
 	<!--
 		This file is part of SetFundao. This program is free software; you
@@ -19,22 +19,24 @@
 	-->
 <resources>
 	<string name="app_name">SetFundao</string>
-	<string name="app_name_version">SetFundao 1.4</string>
+	<string name="app_name_version">SetFundao 1.5</string>
 	<string name="app_descrip">"Monitor de câmeras do CET Fundão http://diseg.pu.ufrj.br"</string>
-    <string name="app_credits">"Sob GPLv3 http://www.gnu.org/licenses/gpl-3.0.txt\n\nCopyright © 2010. Roque Pinel. Todos os direitos reservados."</string>
+	<string name="app_credits">"Sob GPLv3 http://www.gnu.org/licenses/gpl-3.0.txt\n\nCopyright © 2011. Roque Pinel. Todos os direitos reservados."</string>
 
 	<string-array name="tab_names">
 		<item>Linha Amarela</item>
 		<item>Prefeitura</item>
 		<item>H.U.</item>
+		<item>Terminal</item>
 	</string-array>
 
 	<string-array name="urls">
-		<item>"http://diseg.pu.ufrj.br/CAMERA_LAMARELA.jpg"</item>
-		<item>"http://diseg.pu.ufrj.br/CAMERA_PREFEITURA.jpg"</item>
-		<item>"http://diseg.pu.ufrj.br/CAMERA_HOSPITAL.jpg"</item>
+		<item>"http://diseg.pu.ufrj.br/img/CAMERA_LAMARELA.jpg"</item>
+		<item>"http://diseg.pu.ufrj.br/img/CAMERA_PREFEITURA.jpg"</item>
+		<item>"http://diseg.pu.ufrj.br/img/CAMERA_HOSPITAL.jpg"</item>
+		<item>"http://diseg.pu.ufrj.br/img/CAMERA_TERMINAL.jpg"</item>
 	</string-array>
-	
+
 	<string name="max_retry_connection">3</string>
 
 	<string name="main_quit">Sair</string>
