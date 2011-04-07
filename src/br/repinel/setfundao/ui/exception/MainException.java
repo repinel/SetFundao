@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Roque
+ * Copyright (C) 2011 Roque Pinel
  *
  * This file is part of SetFundao.
  *
@@ -17,7 +17,7 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.repinel;
+package br.repinel.setfundao.ui.exception;
 
 /**
  * Application Exception. 

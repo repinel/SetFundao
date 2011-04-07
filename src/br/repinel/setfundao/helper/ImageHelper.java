@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Roque
+ * Copyright (C) 2011 Roque Pinel
  *
  * This file is part of SetFundao.
  *
@@ -17,7 +17,7 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.repinel;
+package br.repinel.setfundao.helper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +26,9 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownServiceException;
+
+import br.repinel.setfundao.R;
+import br.repinel.setfundao.ui.exception.MainException;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -51,7 +54,7 @@ public class ImageHelper {
 	public static Bitmap downloadImage(String imageUrl, Resources res) throws MainException {
 		int connectionCounter = 0;
 
-		int maxRetryConnection = Integer.parseInt(res.getText(R.string.max_retry_connection).toString());
+		int maxRetryConnection = res.getInteger(R.integer.max_retry_connection);
 
 		Bitmap bmImg = null;
 

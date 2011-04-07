@@ -19,13 +19,12 @@
 	-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<item android:id="@+id/main_quit"
-		android:title="@string/main_quit"
-		android:icon="@android:drawable/ic_menu_close_clear_cancel"/>
+	<item android:title="@string/settings" android:id="@+id/item_settings"
+		android:icon="@android:drawable/ic_menu_preferences"/>
 
-    <item
-        android:id="@+id/main_about"
-        android:title="@string/main_about"
-        android:icon="@android:drawable/ic_menu_help" />
+	<item
+		android:id="@+id/main_about"
+		android:title="@string/main_about"
+		android:icon="@android:drawable/ic_menu_help" />
 
 </menu>

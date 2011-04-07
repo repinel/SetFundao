@@ -19,9 +19,9 @@
 	-->
 <resources>
 	<string name="app_name">SetFundao</string>
-	<string name="app_name_version">SetFundao 1.5</string>
+	<string name="app_name_version">SetFundao 2.0</string>
 	<string name="app_descrip">"Monitor de câmeras do CET Fundão http://diseg.pu.ufrj.br"</string>
-	<string name="app_credits">"Sob GPLv3 http://www.gnu.org/licenses/gpl-3.0.txt\n\nCopyright © 2011. Roque Pinel. Todos os direitos reservados."</string>
+	<string name="app_credits">"Sob GPLv3 http://www.gnu.org/licenses/gpl-3.0.txt\n\nCopyright © 2011. Roque Pinel. Todos os direitos reservados.\n\nContribuições: Flávio Costa."</string>
 
 	<string-array name="tab_names">
 		<item>Linha Amarela</item>
@@ -37,14 +37,29 @@
 		<item>"http://diseg.pu.ufrj.br/img/CAMERA_TERMINAL.jpg"</item>
 	</string-array>
 
-	<string name="max_retry_connection">3</string>
-
-	<string name="main_quit">Sair</string>
-	<string name="main_about">Sobre</string>
-
 	<string name="error_url">URL inválida</string>
 	<string name="error_io">Erro ao estabelecer conexão</string>
 	<string name="error_illegal_state">Erro ao estabelecer conexão</string>
 	<string name="error_timeout">Tempo para estabelecer conexão expirado</string>
 	<string name="error_unknow_service">Protocolo não suporta entrada</string>
+
+
+	<string name="main_about">Sobre</string>
+	<string name="settings">Settings</string>
+	<string name="update_interval_">Intervalo de Atualização</string>
+	<string name="update_interval_hint">Período menor usará mais bateria e conexão.</string>
+
+	<string-array name="update_interval">
+		<item>Manualmente</item>
+		<item>0.1 segundo</item>
+		<item>0.2 segundo</item>
+		<item>0.3 segundo</item>
+		<item>0.4 segundo</item>
+		<item>0.5 segundo</item>
+		<item>0.6 segundo</item>
+		<item>0.7 segundo</item>
+		<item>0.8 segundo</item>
+		<item>0.9 segundo</item>
+		<item>1.0 segundo</item>
+	</string-array>
 </resources>

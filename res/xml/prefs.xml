@@ -17,23 +17,11 @@
 		copy of the GNU General Public License along with this program; If
 		not, see <http://www.gnu.org/licenses/>.
 	-->
-<LinearLayout
-	android:id="@+id/LinearLayout01"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:orientation="vertical"
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res/br.repinel.setfundao">
- 
-	<ImageView
-		android:id="@+id/cameraImage"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"/>
-
-	<com.google.ads.AdView android:id="@+id/adView"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		app:adUnitId="a14d9d08b0c6a5a"
-		app:adSize="BANNER"/>
-</LinearLayout>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:title="@string/settings">
+		<ListPreference android:key="update_interval"
+			android:title="@string/update_interval_" android:summary="@string/update_interval_hint"
+			android:entries="@array/update_interval" android:entryValues="@array/update_interval_values"
+			android:defaultValue="1000" />
+	</PreferenceCategory>
+</PreferenceScreen>

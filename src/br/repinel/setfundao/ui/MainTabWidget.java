@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Roque
+ * Copyright (C) 2011 Roque Pinel
  *
  * This file is part of SetFundao.
  *
@@ -17,8 +17,10 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.repinel;
+package br.repinel.setfundao.ui;
 
+import br.repinel.setfundao.R;
+import br.repinel.setfundao.ui.prefs.Preferences;
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.ComponentName;
@@ -30,6 +32,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -59,8 +62,7 @@ public class MainTabWidget extends TabActivity {
 		for (int i = 0; i < TABS.length; i++) {
 			TabHost.TabSpec tab = tabHost.newTabSpec(TABS[i]);
 
-			ComponentName tabActivity = new ComponentName("br.repinel", "br.repinel." + TABS[i] + "Activity");
-			System.out.println("br.repinel." + TABS[i] + "Activity");
+			ComponentName tabActivity = new ComponentName("br.repinel.setfundao", "br.repinel.setfundao.ui.tab." + TABS[i] + "Activity");
 
 			tab.setContent(new Intent().setComponent(tabActivity));
 			// tab.setIndicator(tabNames[i], res.getDrawable(R.drawable.ic_tab_1));
@@ -91,11 +93,9 @@ public class MainTabWidget extends TabActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.main_quit: {
-				Log.i(MainTabWidget.class.getName(), "onOptionsItemSelected:quit");
-				MainTabWidget.this.finish();
+			case R.id.item_settings:
+				this.startActivity(new Intent(this, Preferences.class));
 				return true;
-			}
 			case R.id.main_about: {
 				Log.i(MainTabWidget.class.getName(), "onOptionsItemSelected:about");
 				showAbout();

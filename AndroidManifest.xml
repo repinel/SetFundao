@@ -18,30 +18,32 @@
 		not, see <http://www.gnu.org/licenses/>.
 	-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="br.repinel"
-	android:versionName="1.5" android:versionCode="5">
+	package="br.repinel.setfundao"
+	android:versionName="2.0" android:versionCode="6">
 
 	<!-- android:debuggable="true" -->
 	<application android:icon="@drawable/app_icon" android:label="@string/app_name">
 
 		<activity
-			android:name=".Tab1Activity"
+			android:name=".ui.tab.Tab1Activity"
 			android:label="@string/app_name"/>
 
 		<activity
-			android:name=".Tab2Activity"
+			android:name=".ui.tab.Tab2Activity"
 			android:label="@string/app_name"/>
 
 		<activity
-			android:name=".Tab3Activity"
+			android:name=".ui.tab.Tab3Activity"
 			android:label="@string/app_name"/>
 
 		<activity
-			android:name=".Tab4Activity"
+			android:name=".ui.tab.Tab4Activity"
 			android:label="@string/app_name"/>
 
+		<activity android:name=".ui.prefs.Preferences" />
+
 		<activity
-			android:name="MainTabWidget"
+			android:name=".ui.MainTabWidget"
 			android:label="@string/app_name" android:theme="@style/TabTheme">
 
 			<intent-filter>
@@ -50,9 +52,17 @@
 			</intent-filter>
 		</activity>
 
+
+		<!-- Ads settings -->
+		<activity android:name="com.google.ads.AdActivity"
+			android:configChanges="keyboard|keyboardHidden|orientation"/>
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />
 
-	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+	<uses-permission android:name="android.permission.INTERNET"/>
+
+	<!-- Ads SDK permissions -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 </manifest> 
