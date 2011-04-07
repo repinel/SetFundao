@@ -27,7 +27,7 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownServiceException;
 
-import br.repinel.setfundao.R;
+import br.repinel.R;
 import br.repinel.setfundao.ui.exception.MainException;
 
 import android.content.res.Resources;

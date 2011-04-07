@@ -19,7 +19,7 @@
 
 package br.repinel.setfundao.ui.tab;
 
-import br.repinel.setfundao.R;
+import br.repinel.R;
 import android.os.Bundle;
 
 /**

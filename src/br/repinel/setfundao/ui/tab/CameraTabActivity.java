@@ -21,7 +21,7 @@ package br.repinel.setfundao.ui.tab;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 
-import br.repinel.setfundao.R;
+import br.repinel.R;
 import br.repinel.setfundao.helper.ImageHelper;
 import br.repinel.setfundao.ui.exception.MainException;
 import br.repinel.setfundao.ui.prefs.Preferences;
@@ -87,7 +87,7 @@ public class CameraTabActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		stopUpdate();
 
-		this.stopScheduling = true;
+		this.stopScheduling = false;
 
 		fetchImage();
 
@@ -136,7 +136,7 @@ public class CameraTabActivity extends Activity implements OnClickListener {
 			showMessage(e.getMessage());
 
 			// stop scheduling
-			this.stopScheduling = false;
+			this.stopScheduling = true;
 		} finally {
 			imgView.setOnClickListener(this);
 		}
@@ -160,7 +160,7 @@ public class CameraTabActivity extends Activity implements OnClickListener {
 		public void run() {
 			fetchImage();
 
-			if (stopScheduling)
+			if (!stopScheduling)
 				scheduleUpdate();
 		}
 	}

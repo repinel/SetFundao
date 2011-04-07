@@ -18,32 +18,33 @@
 		not, see <http://www.gnu.org/licenses/>.
 	-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="br.repinel.setfundao"
+	package="br.repinel"
 	android:versionName="2.0" android:versionCode="6">
 
 	<!-- android:debuggable="true" -->
 	<application android:icon="@drawable/app_icon" android:label="@string/app_name">
 
 		<activity
-			android:name=".ui.tab.Tab1Activity"
+			android:name=".setfundao.ui.tab.Tab1Activity"
 			android:label="@string/app_name"/>
 
 		<activity
-			android:name=".ui.tab.Tab2Activity"
+			android:name=".setfundao.ui.tab.Tab2Activity"
 			android:label="@string/app_name"/>
 
 		<activity
-			android:name=".ui.tab.Tab3Activity"
+			android:name=".setfundao.ui.tab.Tab3Activity"
 			android:label="@string/app_name"/>
 
 		<activity
-			android:name=".ui.tab.Tab4Activity"
+			android:name=".setfundao.ui.tab.Tab4Activity"
 			android:label="@string/app_name"/>
 
-		<activity android:name=".ui.prefs.Preferences" />
+		<activity
+			android:name=".setfundao.ui.prefs.Preferences" />
 
 		<activity
-			android:name=".ui.MainTabWidget"
+			android:name=".setfundao.ui.MainTabWidget"
 			android:label="@string/app_name" android:theme="@style/TabTheme">
 
 			<intent-filter>

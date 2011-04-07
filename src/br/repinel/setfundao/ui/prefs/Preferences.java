@@ -22,7 +22,7 @@ package br.repinel.setfundao.ui.prefs;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import br.repinel.setfundao.R;
+import br.repinel.R;
 
 /**
  * Preferences.

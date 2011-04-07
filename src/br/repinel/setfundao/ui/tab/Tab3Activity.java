@@ -20,7 +20,7 @@
 package br.repinel.setfundao.ui.tab;
 
 import android.os.Bundle;
-import br.repinel.setfundao.R;
+import br.repinel.R;
 
 /**
  * Third tab.
