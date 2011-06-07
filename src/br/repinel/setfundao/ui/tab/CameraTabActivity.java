@@ -29,6 +29,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -61,7 +62,9 @@ public class CameraTabActivity extends Activity implements OnClickListener {
 
 		setContentView(R.layout.tab);
 
-		fetchImage();
+		new ImageFetcher().execute();
+
+		findViewById(R.id.cameraImage).setOnClickListener(this);
 
 		// Ads
 		AdView adView = (AdView) this.findViewById(R.id.adView);
@@ -89,7 +92,7 @@ public class CameraTabActivity extends Activity implements OnClickListener {
 
 		this.stopScheduling = false;
 
-		fetchImage();
+		new ImageFetcher().execute();
 
 		scheduleUpdate();
 	}
@@ -117,31 +120,6 @@ public class CameraTabActivity extends Activity implements OnClickListener {
 		builder.show();
 	}
 
-	private void fetchImage() {
-		Log.i(getClass().getName(), "fetching image: " + photoURL);
-
-		ImageView imgView = (ImageView) findViewById(R.id.cameraImage);
-
-		try {
-			Bitmap bmImg = ImageHelper.downloadImage(photoURL, getResources());
-
-			if (bmImg != null) {
-				imgView.setImageBitmap(bmImg);
-			} else {
-				imgView.setImageResource(R.drawable.sem_imagem);
-			}
-		} catch (MainException e) {
-			imgView.setImageResource(R.drawable.sem_imagem);
-
-			showMessage(e.getMessage());
-
-			// stop scheduling
-			this.stopScheduling = true;
-		} finally {
-			imgView.setOnClickListener(this);
-		}
-	}
-
 	private void scheduleUpdate() {
 		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -158,10 +136,60 @@ public class CameraTabActivity extends Activity implements OnClickListener {
 
 	private class TabImageUpdater implements Runnable {
 		public void run() {
-			fetchImage();
+			new ImageFetcher().execute();
 
 			if (!stopScheduling)
 				scheduleUpdate();
 		}
+	}
+
+	public boolean isStopScheduling() {
+		return stopScheduling;
+	}
+
+	public void setStopScheduling(boolean paramStopScheduling) {
+		stopScheduling = paramStopScheduling;
+	}
+
+	/**
+	 * ImageFetcher.
+	 * 
+	 * Async image download.
+	 * 
+	 * @author Leonardo Marques
+	 *
+	 */
+	private class ImageFetcher extends AsyncTask<Void, Void, Bitmap> {
+
+		@Override
+		protected Bitmap doInBackground(Void... voids) {
+			Log.i(getClass().getName(), "fetching image: " + photoURL);
+
+			Bitmap bmImg = null;
+
+			try {
+				bmImg = ImageHelper.downloadImage(photoURL, getResources());
+			} catch (MainException e) {
+				bmImg = null;
+				
+				showMessage(e.getMessage());
+
+				// stop scheduling
+				setStopScheduling(true);
+			}
+			
+			return bmImg;
+		}
+
+		@Override
+		protected void onPostExecute(Bitmap image) {
+			ImageView imgView = (ImageView) findViewById(R.id.cameraImage);
+			if (image != null) {
+				imgView.setImageBitmap(image);
+			} else {
+				imgView.setImageResource(R.drawable.sem_imagem);
+			}
+		}
+		
 	}
 }
