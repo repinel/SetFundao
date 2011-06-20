@@ -19,7 +19,7 @@
 	-->
 <resources>
 	<string name="app_name">SetFundao</string>
-	<string name="app_name_version">SetFundao 2.1</string>
+	<string name="app_name_version">SetFundao 2.2</string>
 	<string name="app_descrip">"Monitor de câmeras do CET Fundão http://diseg.pu.ufrj.br"</string>
 	<string name="app_credits">"Sob GPLv3 http://www.gnu.org/licenses/gpl-3.0.txt\n\nCopyright © 2011. Roque Pinel. Todos os direitos reservados.\n\nContribuições: Flávio Costa e Leonardo Marques."</string>
 

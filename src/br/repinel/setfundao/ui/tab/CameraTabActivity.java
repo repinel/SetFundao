@@ -43,6 +43,8 @@ import android.widget.TextView;
  * Camera Tab.
  * 
  * @author Flávio Costa
+ * @author Leonardo Marques
+ * @author Roque Pinel
  *
  */
 public class CameraTabActivity extends Activity implements OnClickListener {
@@ -74,8 +76,8 @@ public class CameraTabActivity extends Activity implements OnClickListener {
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
+	protected void onResume() {
+		super.onResume();
 
 		scheduleUpdate();
 	}
@@ -171,8 +173,12 @@ public class CameraTabActivity extends Activity implements OnClickListener {
 				bmImg = ImageHelper.downloadImage(photoURL, getResources());
 			} catch (MainException e) {
 				bmImg = null;
-				
-				showMessage(e.getMessage());
+
+				try {
+					showMessage(e.getMessage());
+				} catch (Exception e1) {
+					// empty
+				}
 
 				// stop scheduling
 				setStopScheduling(true);
