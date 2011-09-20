@@ -18,24 +18,11 @@
 		not, see <http://www.gnu.org/licenses/>.
 	-->
 <resources>
-	<integer name="max_retry_connection">3</integer>
+	<color name="bar_text">#000000</color>
+	<color name="bar_separator">#40ffffff</color>
 
-	<!-- the default is an empty string -->
-	<string name="default_last_fetch_date"></string>
+	<color name="home_text_foreground">#d9d9d9</color>
 
-	<string name="default_update_interval">1000</string>
-
-	<string-array name="update_interval_values">
-		<item>0</item>
-		<item>100</item>
-		<item>200</item>
-		<item>300</item>
-		<item>400</item>
-		<item>500</item>
-		<item>600</item>
-		<item>700</item>
-		<item>800</item>
-		<item>900</item>
-		<item>1000</item>
-	</string-array>
+	<color name="text_foreground">#ffffff</color>
+	<color name="text_background">#000000</color>
 </resources>

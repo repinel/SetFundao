@@ -20,7 +20,7 @@
 package br.repinel.setfundao.ui.exception;
 
 /**
- * Application Exception. 
+ * Application Exception.
  * 
  * @author Roque Pinel
  *

@@ -19,42 +19,46 @@
 	-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="br.repinel"
-	android:versionName="2.2" android:versionCode="8">
+	android:versionCode="9"
+	android:versionName="3.0-beta1" >
 
 	<!-- android:debuggable="true" -->
-	<application android:icon="@drawable/app_icon" android:label="@string/app_name">
+	<application android:icon="@drawable/app_icon" android:label="@string/app_name" android:debuggable="true">
 
 		<activity
-			android:name=".setfundao.ui.tab.Tab1Activity"
-			android:label="@string/app_name"/>
-
-		<activity
-			android:name=".setfundao.ui.tab.Tab2Activity"
-			android:label="@string/app_name"/>
-
-		<activity
-			android:name=".setfundao.ui.tab.Tab3Activity"
-			android:label="@string/app_name"/>
-
-		<activity
-			android:name=".setfundao.ui.tab.Tab4Activity"
-			android:label="@string/app_name"/>
-
-		<activity
-			android:name=".setfundao.ui.prefs.Preferences" />
-
-		<activity
-			android:name=".setfundao.ui.MainTabWidget"
-			android:label="@string/app_name" android:theme="@style/TabTheme">
-
+			android:name=".setfundao.ui.HomeActivity"
+			android:theme="@style/Theme.SetFundao"
+			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
 
+		<activity
+			android:name=".setfundao.ui.tab.Tab1Activity"
+			android:theme="@style/Theme.SetFundao"
+			android:label="@string/title_camera1"/>
 
-		<!-- Ads settings -->
+		<activity
+			android:name=".setfundao.ui.tab.Tab2Activity"
+			android:theme="@style/Theme.SetFundao"
+			android:label="@string/title_camera2"/>
+
+		<activity
+			android:name=".setfundao.ui.tab.Tab3Activity"
+			android:theme="@style/Theme.SetFundao"
+			android:label="@string/title_camera3"/>
+
+		<activity
+			android:name=".setfundao.ui.tab.Tab4Activity"
+			android:theme="@style/Theme.SetFundao"
+			android:label="@string/title_camera4"/>
+
+		<activity
+			android:name=".setfundao.ui.prefs.Preferences" />
+
+		<!-- AdMob Ads -->
 		<activity android:name="com.google.ads.AdActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation"/>
 	</application>
@@ -62,6 +66,9 @@
 	<uses-sdk android:minSdkVersion="7" />
 
 	<uses-permission android:name="android.permission.INTERNET"/>
+
+	<!-- Google Analytics -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 	<!-- Ads SDK permissions -->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!--
+		Copyright (C) 2011 Roque Pinel
+	-->
+	<!--
+		This file is part of SetFundao. This program is free software; you
+		can redistribute it and/or modify it under the terms of the GNU
+		General Public License as published by the Free Software Foundation;
+		either version 3 of the License, or (at your option) any later
+		version.
+	-->
+	<!--
+		This program is distributed in the hope that it will be useful, but
+		WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+		General Public License for more details. You should have received a
+		copy of the GNU General Public License along with this program; If
+		not, see <http://www.gnu.org/licenses/>.
+	-->
+<LinearLayout
+	android:id="@+id/home_root"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/br.repinel"
+	xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+	android:background="@drawable/background">
+
+	<LinearLayout style="@style/Bar">
+		<ImageView style="@style/BarLogo"
+			android:contentDescription="@string/description_logo"
+			android:src="@drawable/title_logo" />
+
+		<View style="@style/BarEmptySpace" />
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:padding="6dip">
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1">
+
+			<Button android:id="@+id/home_btn_schedule"
+				style="@style/HomeButton"
+				android:onClick="onCamera1Click"
+				android:text="@string/btn_camera1"
+				android:drawableTop="@drawable/home_btn_camera1"/>
+
+			<Button android:id="@+id/home_btn_sessions"
+				style="@style/HomeButton"
+				android:onClick="onCamera2Click"
+				android:text="@string/btn_camera2"
+				android:drawableTop="@drawable/home_btn_camera2"/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1">
+
+			<Button android:id="@+id/home_btn_starred"
+				style="@style/HomeButton"
+				android:onClick="onCamera3Click"
+				android:text="@string/btn_camera3"
+				android:drawableTop="@drawable/home_btn_camera3"/>
+
+			<Button android:id="@+id/home_btn_notes"
+				style="@style/HomeButton"
+				android:onClick="onCamera4Click"
+				android:text="@string/btn_camera4"
+				android:drawableTop="@drawable/home_btn_camera4"/>
+		</LinearLayout>
+	</LinearLayout>
+
+	<com.google.ads.AdView android:id="@+id/adView"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		ads:adUnitId="a14d9d08b0c6a5a"
+		ads:adSize="BANNER"
+		ads:loadAdOnCreate="true"/>
+</LinearLayout>

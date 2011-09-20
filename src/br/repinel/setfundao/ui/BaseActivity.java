@@ -19,58 +19,47 @@
 
 package br.repinel.setfundao.ui;
 
-import br.repinel.R;
-import br.repinel.setfundao.ui.prefs.Preferences;
+import sheetrock.panda.changelog.ChangeLog;
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.TabActivity;
-import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TabHost;
 import android.widget.TextView;
+import br.repinel.R;
+import br.repinel.setfundao.helper.AnalyticsHelper;
+import br.repinel.setfundao.ui.prefs.Preferences;
 
 /**
- * The main activity. It shows the tabs and the first image. Also responsable
- * for the menu.
+ * Base class to all activities.
  * 
  * @author Roque Pinel
- * 
+ *
  */
-public class MainTabWidget extends TabActivity {
-
-	private static final String[] TABS = {"Tab1", "Tab2", "Tab3", "Tab4"};
+public class BaseActivity extends Activity {
+	/**
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	}
 
 	/**
-	 * @see android.app.ActivityGroup#onCreate(android.os.Bundle)
+	 * @see android.app.Activity#onDestroy()
 	 */
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 
-		Resources res = getResources();
-		TabHost tabHost = getTabHost();
-
-		String[] tabNames = res.getStringArray(R.array.tab_names);
-
-		for (int i = 0; i < TABS.length; i++) {
-			TabHost.TabSpec tab = tabHost.newTabSpec(TABS[i]);
-
-			ComponentName tabActivity = new ComponentName("br.repinel", "br.repinel.setfundao.ui.tab." + TABS[i] + "Activity");
-
-			tab.setContent(new Intent().setComponent(tabActivity));
-			// tab.setIndicator(tabNames[i], res.getDrawable(R.drawable.ic_tab_1));
-			tab.setIndicator(tabNames[i]);
-
-			tabHost.addTab(tab);
-
-			Log.i(MainTabWidget.class.getName(), "creating " + TABS[i]);
-		}
+		AnalyticsHelper.getInstance(getActivity()).stopSession();
 	}
 
 	/**
@@ -81,7 +70,7 @@ public class MainTabWidget extends TabActivity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 
-		Log.i(MainTabWidget.class.getName(), "onCreateOptionsMenu");
+		Log.i(getClass().getName(), "onCreateOptionsMenu");
 
 		return true;
 	}
@@ -92,11 +81,18 @@ public class MainTabWidget extends TabActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+			case R.id.full_log:
+				AnalyticsHelper.getInstance(getActivity()).trackEvent(getClass().getName(), "Click", "FullLog", 0);
+				ChangeLog changeLog = new ChangeLog(this);
+				changeLog.getFullLogDialog().show();
+				return true;
 			case R.id.item_settings:
+				AnalyticsHelper.getInstance(getActivity()).trackEvent(getClass().getName(), "Click", "Settings", 0);
 				this.startActivity(new Intent(this, Preferences.class));
 				return true;
 			case R.id.main_about: {
-				Log.i(MainTabWidget.class.getName(), "onOptionsItemSelected:about");
+				AnalyticsHelper.getInstance(getActivity()).trackEvent(getClass().getName(), "Click", "About", 0);
+				Log.i(getClass().getName(), "onOptionsItemSelected:about");
 				showAbout();
 				return true;
 			}
@@ -120,5 +116,29 @@ public class MainTabWidget extends TabActivity {
 		builder.setView(messageView);
 		builder.create();
 		builder.show();
+	}
+
+	/**
+	 * @return <code>true</code> if the orientation is portrait.
+	 */
+	protected boolean isPortrait() {
+		return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+	}
+
+	/**
+	 * @return The current Activity. The own class.
+	 */
+	protected Activity getActivity() {
+		return this;
+	}
+
+	/**
+	 * @return <code>true</code> if the network is available.
+	 */
+	protected boolean isOnline() {
+		 ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		 if (cm == null || cm.getActiveNetworkInfo() == null)
+			 return false;
+		 return cm.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
 }

@@ -17,10 +17,18 @@
 		copy of the GNU General Public License along with this program; If
 		not, see <http://www.gnu.org/licenses/>.
 	-->
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+	xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<item android:title="@string/settings" android:id="@+id/item_settings"
-		android:icon="@android:drawable/ic_menu_preferences"/>
+	<item
+		android:id="@+id/full_log"
+		android:title="@string/full_log"
+		android:icon="@android:drawable/ic_menu_info_details" />
+
+	<item
+		android:id="@+id/item_settings"
+		android:title="@string/settings" 
+		android:icon="@android:drawable/ic_menu_preferences" />
 
 	<item
 		android:id="@+id/main_about"

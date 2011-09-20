@@ -19,7 +19,6 @@
 
 package br.repinel.setfundao.ui.tab;
 
-import br.repinel.R;
 import android.os.Bundle;
 
 /**
@@ -29,13 +28,12 @@ import android.os.Bundle;
  *
  */
 public class Tab2Activity extends CameraTabActivity {
-
 	/**
 	 * @see br.repinel.setfundao.ui.tab.CameraTabActivity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		photoURL = getResources().getStringArray(R.array.urls)[1];
+		index = 1;
 
 		super.onCreate(savedInstanceState);
 	}

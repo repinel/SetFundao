@@ -18,8 +18,104 @@
 		not, see <http://www.gnu.org/licenses/>.
 	-->
 <resources>
-	<style name="TabTheme" parent="@android:style/Theme.Light.NoTitleBar">
-		<item name="android:windowBackground">@android:color/black</item>
-		<item name="android:textColor">@android:color/white</item>
+	<style name="Theme.SetFundao" parent="android:style/Theme.Light">
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+	</style>
+
+	<style name="HomeButton">
+		<item name="android:layout_gravity">center_vertical</item>
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:gravity">center_horizontal</item>
+		<item name="android:textSize">@dimen/text_size_medium</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textColor">@color/home_text_foreground</item>
+		<item name="android:background">@null</item>
+	</style>
+
+	<!-- Horizontal Bar -->
+
+	<style name="Bar">
+		<item name="android:id">@id/bar_container</item>
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">@dimen/bar_height</item>
+		<item name="android:orientation">horizontal</item>
+		<item name="android:background">@drawable/title_background</item>
+	</style>
+
+	<style name="BarAction">
+		<item name="android:layout_width">@dimen/bar_height</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:background">@drawable/title_button</item>
+	</style>
+
+	<style name="BarProgressIndicator" parent="@android:style/Widget.ProgressBar.Small">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginLeft">14dip</item>
+		<item name="android:layout_marginRight">15dip</item>
+		<item name="android:layout_marginTop">14dip</item>
+		<item name="android:indeterminate">true</item> 
+	</style>
+
+	<style name="BarSeparator">
+		<item name="android:layout_width">1px</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:background">@color/bar_separator</item>
+	</style>
+
+	<style name="BarLogo">
+		<item name="android:id">@id/bar_logo</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:clickable">true</item>
+	</style>
+
+	<style name="BarEmptySpace">
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:layout_weight">1</item>
+	</style>
+
+	<style name="BarText">
+		<item name="android:id">@id/bar_text</item>
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:textSize">@dimen/text_size_medium</item>
+		<item name="android:paddingLeft">12dip</item>
+		<item name="android:paddingRight">12dip</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textColor">@color/bar_text</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:ellipsize">end</item>
+	</style>
+
+	<!-- Vertical Bar -->
+
+	<style name="BarVertical" parent="@style/Bar">
+		<item name="android:layout_width">@dimen/bar_height</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:orientation">vertical</item>
+	</style>
+
+	<style name="BarActionVertical" parent="@style/BarAction">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">@dimen/bar_height</item>
+	</style>
+
+	<style name="BarProgressIndicatorVertical" parent="@style/BarProgressIndicator">
+		<item name="android:layout_marginTop">14dip</item>
+		<item name="android:layout_marginBottom">15dip</item>
+		<item name="android:layout_marginLeft">14dip</item>
+		<item name="android:layout_marginRight">0dip</item>
+	</style>
+
+	<style name="BarSeparatorVertical" parent="@style/BarSeparator">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">1px</item>
 	</style>
 </resources>

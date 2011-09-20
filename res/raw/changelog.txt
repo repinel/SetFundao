@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<style type='text/css'>
+			a {
+				color:#a0a0e0
+				}
+			div.title {
+				color:#C0F0C0; 
+				font-size:1.2em; 
+				font-weight:bold; 
+				margin-top:1em; 
+				margin-bottom:0.5em; 
+				text-align:center
+			}
+			div.subtitle {
+				color:#C0F0C0; 
+				font-size:0.8em; 
+				margin-bottom:1em; 
+				text-align:center
+			}
+			div.freetext {
+				color:#F0F0F0
+			}
+			div.list {
+				color:#C0C0F0
+			}
+		</style>
+	</head>
+	<body>
+$ 3.0-beta1
+	% Versão 3.0-beta1
+	_ 2011-09-19
+	! Versão beta. Por favor reportar bug pela <a href="http://code.google.com/p/setfundao/issues/list">página do projeto</a>!
+		* Adição de barra de atalhos
+		* Adição de Change Log
+		* Adição de tela inicial
+		* Armazenamento da última imagem obtida
+		* Correção de exibição de mensagens
+		* Exibição aumentada quando em modo paisagem
+		* Exibição da última data de atualização
+$ 2.2
+	% Versão 2.2
+	_ 2011-06-19
+		* Correção de problemas de conexão
+$ 2.0
+	% Versão 2.0
+	_ 2011-04-06
+		* Adição de Ads
+		* Atualização automática de imagens
+$ 1.5
+	% Versão 1.5
+	_ 2011-03-05
+		* Adição de câmera do Terminal
+		* Adição de Copyright 2011
+		* Adição de licença GPLv3
+$ 1.4
+	% Versão 1.4
+	_ 2010-10-16
+		* Validando a obtenção de imagens
+$ END_OF_CHANGE_LOG
+	</body>
+</html>
