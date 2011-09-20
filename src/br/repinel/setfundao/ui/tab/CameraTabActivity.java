@@ -294,8 +294,8 @@ public class CameraTabActivity extends BaseActivity implements OnClickListener {
 	 * @param working If it is updating or not.
 	 */
 	private void updateRefreshStatus(boolean working) {
-		View refreshView = findViewById(R.id.btn_title_refresh);
-		View refreshProgressView = findViewById(R.id.title_refresh_progress);
+		View refreshView = findViewById(R.id.btn_refresh);
+		View refreshProgressView = findViewById(R.id.refresh_progress);
 
 		if (refreshView != null && refreshProgressView != null) {
 			refreshView.setVisibility(working ? View.GONE : View.VISIBLE);

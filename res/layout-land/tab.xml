@@ -36,12 +36,12 @@
 
 		<ImageView style="@style/BarSeparatorVertical" />
 		<ImageButton style="@style/BarActionVertical"
-			android:id="@+id/btn_title_refresh"
+			android:id="@+id/btn_refresh"
 			android:contentDescription="@string/description_refresh"
 			android:src="@drawable/ic_refresh"
 			android:onClick="onRefreshClick" />
 		<ProgressBar style="@style/BarProgressIndicatorVertical"
-			android:id="@+id/title_refresh_progress"
+			android:id="@+id/refresh_progress"
 			android:visibility="gone" />
 	</LinearLayout>
 

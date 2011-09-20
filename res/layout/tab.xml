@@ -43,7 +43,7 @@
 			android:src="@drawable/ic_refresh"
 			android:onClick="onRefreshClick" />
 		<ProgressBar style="@style/BarProgressIndicator"
-			android:id="@+id/title_refresh_progress"
+			android:id="@+id/refresh_progress"
 			android:visibility="gone" />
 	</LinearLayout>
 
