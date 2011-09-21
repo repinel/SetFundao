@@ -106,7 +106,7 @@ public class BaseActivity extends Activity {
 	private void showAbout() {
 		View messageView = getLayoutInflater().inflate(R.layout.about, null, false);
 
-		TextView textView = (TextView) messageView.findViewById(R.id.about_credits);
+		TextView textView = (TextView) messageView.findViewById(R.id.about_description);
 		int defaultColor = textView.getTextColors().getDefaultColor();
 		textView.setTextColor(defaultColor);
 
