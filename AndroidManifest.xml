@@ -53,10 +53,7 @@
 
 	<uses-permission android:name="android.permission.INTERNET"/>
 
-	<!-- Google Analytics -->
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-	<!-- Ads SDK permissions -->
+	<!-- AdMob and Google Analytics permissions -->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 </manifest> 
