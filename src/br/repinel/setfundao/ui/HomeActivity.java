@@ -48,16 +48,6 @@ public class HomeActivity extends BaseActivity {
 		AnalyticsHelper.getInstance(this).trackPageView("/Home");
 
 		/*
-		 * AdMob Ads
-		 */
-		AdView adView = (AdView) findViewById(R.id.adView);
-		if (adView != null) {
-			AdRequest adRequest = new AdRequest();
-			//adRequest.setTesting(true);
-			adView.loadAd(adRequest);
-		}
-
-		/*
 		 * Android Change Log
 		 */
 		ChangeLog changeLog = new ChangeLog(this);
