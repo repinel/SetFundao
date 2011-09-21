@@ -119,26 +119,9 @@ public class BaseActivity extends Activity {
 	}
 
 	/**
-	 * @return <code>true</code> if the orientation is portrait.
-	 */
-	protected boolean isPortrait() {
-		return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-	}
-
-	/**
 	 * @return The current Activity. The own class.
 	 */
 	protected Activity getActivity() {
 		return this;
-	}
-
-	/**
-	 * @return <code>true</code> if the network is available.
-	 */
-	protected boolean isOnline() {
-		 ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		 if (cm == null || cm.getActiveNetworkInfo() == null)
-			 return false;
-		 return cm.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
 }

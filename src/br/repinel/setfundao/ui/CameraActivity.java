@@ -35,6 +35,7 @@ import android.widget.TextView;
 import br.repinel.R;
 import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.ImageHelper;
+import br.repinel.setfundao.helper.UIHelper;
 import br.repinel.setfundao.ui.exception.MainException;
 import br.repinel.setfundao.ui.prefs.Preferences;
 
@@ -83,7 +84,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		new ImageFetcher().execute();
 
 		TextView titleView = (TextView) findViewById(R.id.bar_text);
-		if (titleView != null && isPortrait()) {
+		if (titleView != null && UIHelper.isPortrait(this)) {
 			titleView.setText(getResources().getStringArray(R.array.camera_names)[index]);
 		}
 
@@ -347,7 +348,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 
 			// fetch new image
 			try {
-				if (!isOnline())
+				if (!UIHelper.isOnline(getActivity()))
 					throw new MainException(getResources().getText(R.string.error_network));
 
 				image = ImageHelper.downloadImage(photoURL, getResources());
