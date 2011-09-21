@@ -36,8 +36,13 @@ import android.util.Log;
  *
  */
 public class AnalyticsHelper {
+	/**
+	 * Development mode.
+	 */
+	private static final boolean DEV_MODE = false;
+
 	// Google Analytics code
-	private static final String UACODE = "UA-21761105-8";
+	private static final String UACODE = "UA-21761105-9";
 
 	private static final String PREFS_FIRST_RUN_KEY = "first_run";
 
@@ -65,6 +70,10 @@ public class AnalyticsHelper {
 	 * @param context The activity context
 	 */
 	private AnalyticsHelper(Context context) {
+		System.out.println(">> " + Build.VERSION.RELEASE);
+		if (DEV_MODE)
+			return;
+
 		tracker = GoogleAnalyticsTracker.getInstance();
 
 		tracker.startNewSession(UACODE, 20, context);
@@ -76,7 +85,7 @@ public class AnalyticsHelper {
 		if (firstRun) {
 			Log.d(getClass().getName(), "Analytics firstRun");
 
-			String apiLevel = Integer.toString(Build.VERSION.SDK_INT);
+			String apiLevel = Build.VERSION.RELEASE;
 			String model = Build.MODEL;
 			tracker.setCustomVar(1, "apiLevel", apiLevel, VISITOR_SCOPE);
 			tracker.setCustomVar(2, "model", model, VISITOR_SCOPE);
@@ -89,6 +98,9 @@ public class AnalyticsHelper {
 	 * Stops the sesseion.
 	 */
 	public void stopSession() {
+		if (DEV_MODE)
+			return;
+
 		tracker.stopSession();
 	}
 
@@ -101,6 +113,9 @@ public class AnalyticsHelper {
 	 * @param value
 	 */
 	public void trackEvent(final String category, final String action, final String label, final int value) {
+		if (DEV_MODE)
+			return;
+
 		new AsyncTask<Void, Void, Void>() {
 
 			/**
@@ -127,6 +142,9 @@ public class AnalyticsHelper {
 	 * @param path
 	 */
 	public void trackPageView(final String path) {
+		if (DEV_MODE)
+			return;
+
 		new AsyncTask<Void, Void, Void>() {
 
 			/**
