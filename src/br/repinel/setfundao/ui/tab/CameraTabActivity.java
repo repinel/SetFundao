@@ -53,7 +53,9 @@ import com.google.ads.AdView;
  */
 public class CameraTabActivity extends BaseActivity implements OnClickListener {
 
-	protected int index = -1;
+	public static String BUNDLE_INDEX = "index";
+
+	private int index = -1;
 
 	protected String photoURL;
 	protected String photoFilename;
@@ -72,6 +74,8 @@ public class CameraTabActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab);
+
+		index = this.getIntent().getExtras().getInt(BUNDLE_INDEX);
 
 		AnalyticsHelper.getInstance(getActivity()).trackPageView(
 			"/" + getResources().getStringArray(R.array.camera_names)[index]);

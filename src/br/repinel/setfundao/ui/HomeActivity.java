@@ -25,10 +25,7 @@ import android.os.Bundle;
 import android.view.View;
 import br.repinel.R;
 import br.repinel.setfundao.helper.AnalyticsHelper;
-import br.repinel.setfundao.ui.tab.Tab1Activity;
-import br.repinel.setfundao.ui.tab.Tab2Activity;
-import br.repinel.setfundao.ui.tab.Tab3Activity;
-import br.repinel.setfundao.ui.tab.Tab4Activity;
+import br.repinel.setfundao.ui.tab.CameraTabActivity;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
@@ -74,7 +71,9 @@ public class HomeActivity extends BaseActivity {
 	 * @param v The View
 	 */
 	public void onCamera1Click(View v) {
-		startActivity(new Intent(this, Tab1Activity.class));
+		Intent intent = new Intent(this, CameraTabActivity.class);
+		intent.putExtra(CameraTabActivity.BUNDLE_INDEX, 0);
+		startActivity(intent);
 	}
 
 	/**
@@ -83,7 +82,9 @@ public class HomeActivity extends BaseActivity {
 	 * @param v The View
 	 */
 	public void onCamera2Click(View v) {
-		startActivity(new Intent(this, Tab2Activity.class));
+		Intent intent = new Intent(this, CameraTabActivity.class);
+		intent.putExtra(CameraTabActivity.BUNDLE_INDEX, 1);
+		startActivity(intent);
 	}
 
 	/**
@@ -92,7 +93,9 @@ public class HomeActivity extends BaseActivity {
 	 * @param v The View
 	 */
 	public void onCamera3Click(View v) {
-		startActivity(new Intent(this, Tab3Activity.class));
+		Intent intent = new Intent(this, CameraTabActivity.class);
+		intent.putExtra(CameraTabActivity.BUNDLE_INDEX, 2);
+		startActivity(intent);
 	}
 
 	/**
@@ -101,6 +104,8 @@ public class HomeActivity extends BaseActivity {
 	 * @param v The View
 	 */
 	public void onCamera4Click(View v) {
-		startActivity(new Intent(this, Tab4Activity.class));
+		Intent intent = new Intent(this, CameraTabActivity.class);
+		intent.putExtra(CameraTabActivity.BUNDLE_INDEX, 3);
+		startActivity(intent);
 	}
 }
