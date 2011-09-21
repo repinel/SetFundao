@@ -38,8 +38,9 @@ import android.util.Log;
 public class AnalyticsHelper {
 	/**
 	 * Development mode.
+	 * TODO: change to false before release a new version
 	 */
-	private static final boolean DEV_MODE = false;
+	private static final boolean DEV_MODE = true;
 
 	// Google Analytics code
 	private static final String UACODE = "UA-21761105-9";
