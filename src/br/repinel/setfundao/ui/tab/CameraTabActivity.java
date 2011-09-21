@@ -40,9 +40,6 @@ import br.repinel.setfundao.ui.HomeActivity;
 import br.repinel.setfundao.ui.exception.MainException;
 import br.repinel.setfundao.ui.prefs.Preferences;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
-
 /**
  * Camera Tab.
  * 
@@ -75,27 +72,21 @@ public class CameraTabActivity extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab);
 
-		index = this.getIntent().getExtras().getInt(BUNDLE_INDEX);
+		this.firstTime = true;
+		this.stopScheduling = false;
+		this.index = this.getIntent().getExtras().getInt(BUNDLE_INDEX);
 
 		AnalyticsHelper.getInstance(getActivity()).trackPageView(
 			"/" + getResources().getStringArray(R.array.camera_names)[index]);
 
-		this.firstTime = true;
-
-		this.stopScheduling = false;
-
-		photoURL = getResources().getStringArray(R.array.photo_urls)[index];
-		photoFilename = getResources().getStringArray(R.array.photo_filenames)[index];
+		this.photoURL = getResources().getStringArray(R.array.photo_urls)[index];
+		this.photoFilename = getResources().getStringArray(R.array.photo_filenames)[index];
 
 		new ImageFetcher().execute();
 
 		TextView titleView = (TextView) findViewById(R.id.bar_text);
-
-		if (titleView != null) {
-			String title = getTitle().toString();
-
-			if (isPortrait())
-				titleView.setText(title);
+		if (titleView != null && isPortrait()) {
+			titleView.setText(getResources().getStringArray(R.array.camera_names)[index]);
 		}
 
 		findViewById(R.id.cameraImage).setOnClickListener(this);

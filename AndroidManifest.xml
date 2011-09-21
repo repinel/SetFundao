@@ -39,8 +39,7 @@
 
 		<activity
 			android:name=".setfundao.ui.tab.CameraTabActivity"
-			android:theme="@style/Theme.SetFundao"
-			android:label="@string/title_camera1"/>
+			android:theme="@style/Theme.SetFundao" />
 
 		<activity
 			android:name=".setfundao.ui.prefs.Preferences" />
