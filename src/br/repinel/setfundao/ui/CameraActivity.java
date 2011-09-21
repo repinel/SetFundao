@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program; If not, see <http://www.gnu.org/licenses/>.
  */
-package br.repinel.setfundao.ui.tab;
+package br.repinel.setfundao.ui;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,8 +35,6 @@ import android.widget.TextView;
 import br.repinel.R;
 import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.ImageHelper;
-import br.repinel.setfundao.ui.BaseActivity;
-import br.repinel.setfundao.ui.HomeActivity;
 import br.repinel.setfundao.ui.exception.MainException;
 import br.repinel.setfundao.ui.prefs.Preferences;
 
@@ -48,7 +46,7 @@ import br.repinel.setfundao.ui.prefs.Preferences;
  * @author Roque Pinel
  *
  */
-public class CameraTabActivity extends BaseActivity implements OnClickListener {
+public class CameraActivity extends BaseActivity implements OnClickListener {
 
 	public static String BUNDLE_INDEX = "index";
 
