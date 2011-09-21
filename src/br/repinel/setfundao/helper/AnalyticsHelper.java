@@ -71,7 +71,6 @@ public class AnalyticsHelper {
 	 * @param context The activity context
 	 */
 	private AnalyticsHelper(Context context) {
-		System.out.println(">> " + Build.VERSION.RELEASE);
 		if (DEV_MODE)
 			return;
 
