@@ -30,8 +30,7 @@ import android.util.Log;
 
 /**
  * Google Analytics Helper
- */
-/**
+ *
  * @author Roque Pinel
  *
  */
