@@ -22,10 +22,7 @@ package br.repinel.setfundao.ui;
 import sheetrock.panda.changelog.ChangeLog;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -59,7 +56,7 @@ public class BaseActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 
-		AnalyticsHelper.getInstance(getActivity()).stopSession();
+		AnalyticsHelper.getInstance(this).stopSession();
 	}
 
 	/**
@@ -82,16 +79,16 @@ public class BaseActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.full_log:
-				AnalyticsHelper.getInstance(getActivity()).trackEvent(getClass().getName(), "Click", "FullLog", 0);
+				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "FullLog", 0);
 				ChangeLog changeLog = new ChangeLog(this);
 				changeLog.getFullLogDialog().show();
 				return true;
 			case R.id.item_settings:
-				AnalyticsHelper.getInstance(getActivity()).trackEvent(getClass().getName(), "Click", "Settings", 0);
+				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Settings", 0);
 				this.startActivity(new Intent(this, Preferences.class));
 				return true;
 			case R.id.main_about: {
-				AnalyticsHelper.getInstance(getActivity()).trackEvent(getClass().getName(), "Click", "About", 0);
+				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "About", 0);
 				Log.i(getClass().getName(), "onOptionsItemSelected:about");
 				showAbout();
 				return true;
@@ -116,12 +113,5 @@ public class BaseActivity extends Activity {
 		builder.setView(messageView);
 		builder.create();
 		builder.show();
-	}
-
-	/**
-	 * @return The current Activity. The own class.
-	 */
-	protected Activity getActivity() {
-		return this;
 	}
 }

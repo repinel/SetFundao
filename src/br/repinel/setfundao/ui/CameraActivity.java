@@ -75,7 +75,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		this.stopScheduling = false;
 		this.index = this.getIntent().getExtras().getInt(BUNDLE_INDEX);
 
-		AnalyticsHelper.getInstance(getActivity()).trackPageView(
+		AnalyticsHelper.getInstance(this).trackPageView(
 			"/" + getResources().getStringArray(R.array.camera_names)[index]);
 
 		this.photoURL = getResources().getStringArray(R.array.photo_urls)[index];
@@ -115,7 +115,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	 * @see android.view.View.OnClickListener#onClick(android.view.View)
 	 */
 	public void onClick(View v) {
-		AnalyticsHelper.getInstance(getActivity()).trackEvent(getResources().getStringArray(R.array.camera_names)[index], "Click", "Image", 0);
+		AnalyticsHelper.getInstance(this).trackEvent(getResources().getStringArray(R.array.camera_names)[index], "Click", "Image", 0);
 
 		doRefresh();
 	}
@@ -126,7 +126,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	 * @param v The view
 	 */
 	public void onHomeClick(View v) {
-		AnalyticsHelper.getInstance(getActivity()).trackEvent(getResources().getStringArray(R.array.camera_names)[index], "Click", "Home", 0);
+		AnalyticsHelper.getInstance(this).trackEvent(getResources().getStringArray(R.array.camera_names)[index], "Click", "Home", 0);
 
 		final Intent intent = new Intent(this, HomeActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -139,7 +139,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	 * @param v The view
 	 */
 	public void onRefreshClick(View v) {
-		AnalyticsHelper.getInstance(getActivity()).trackEvent(getResources().getStringArray(R.array.camera_names)[index], "Click", "Refresh", 0);
+		AnalyticsHelper.getInstance(this).trackEvent(getResources().getStringArray(R.array.camera_names)[index], "Click", "Refresh", 0);
 
 		doRefresh();
 	}
@@ -313,7 +313,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 			// load last image
 			try {
 				if (firstTime) {
-					Bitmap image = ImageHelper.loadImage(getActivity(), photoFilename);
+					Bitmap image = ImageHelper.loadImage(CameraActivity.this, photoFilename);
 	
 					if (image != null) {
 						imgView.setImageBitmap(image);
@@ -348,7 +348,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 
 			// fetch new image
 			try {
-				if (!UIHelper.isOnline(getActivity()))
+				if (!UIHelper.isOnline(CameraActivity.this))
 					throw new MainException(getResources().getText(R.string.error_network));
 
 				image = ImageHelper.downloadImage(photoURL, getResources());
@@ -380,7 +380,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 				setImageInfo(null);
 
 				try {
-					ImageHelper.saveImage(getActivity(), image, photoFilename);
+					ImageHelper.saveImage(CameraActivity.this, image, photoFilename);
 				} catch (MainException e) {
 					try {
 						showMessage(e.getMessage());
