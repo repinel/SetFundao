@@ -37,7 +37,6 @@ import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.ImageHelper;
 import br.repinel.setfundao.helper.UIHelper;
 import br.repinel.setfundao.ui.exception.MainException;
-import br.repinel.setfundao.ui.prefs.Preferences;
 
 /**
  * Camera Tab.
@@ -184,7 +183,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	 * Update the schedule time.
 	 */
 	private void scheduleUpdate() {
-		final int updateInterval = Preferences.getUpdateInterval(getApplicationContext(), getResources());
+		final int updateInterval = UIHelper.getUpdateInterval(getApplicationContext(), getResources());
 
 		if (updateInterval > 0)
 			imageHandler.postDelayed(updateTab, updateInterval);
@@ -239,7 +238,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	private void setLastFetchDate(Date date) {
 		if (date != null) {
 			SimpleDateFormat dataFormat = new SimpleDateFormat(getResources().getText(R.string.date_format).toString());
-			Preferences.setLastFetchDate(getApplicationContext(), photoFilename, dataFormat.format(date));
+			UIHelper.setLastFetchDate(getApplicationContext(), photoFilename, dataFormat.format(date));
 			setLastFetchDate(dataFormat.format(date));
 		}
 		else
@@ -318,7 +317,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 					if (image != null) {
 						imgView.setImageBitmap(image);
 		
-						final String lastFetchDate = Preferences.getLastFetchDate(getApplicationContext(), getResources(), photoFilename);
+						final String lastFetchDate = UIHelper.getLastFetchDate(getApplicationContext(), getResources(), photoFilename);
 		
 						setLastFetchDate(lastFetchDate);
 						setImageInfo(getResources().getText(R.string.image_stored_message).toString());
