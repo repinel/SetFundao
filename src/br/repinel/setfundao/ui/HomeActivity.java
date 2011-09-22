@@ -22,13 +22,9 @@ package br.repinel.setfundao.ui;
 import sheetrock.panda.changelog.ChangeLog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import br.repinel.R;
 import br.repinel.setfundao.helper.AnalyticsHelper;
-import br.repinel.setfundao.helper.UIHelper;
-import br.repinel.setfundao.ui.prefs.Preferences;
 
 /**
  * The Home Activity.
@@ -63,33 +59,6 @@ public class HomeActivity extends BaseActivity {
 		super.onDestroy();
 
 		AnalyticsHelper.getInstance(this).stopSession();
-	}
-
-	/**
-	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-	 */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.full_log:
-				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "FullLog", 0);
-				Log.d(getClass().getName(), "onOptionsItemSelected:log");
-				ChangeLog changeLog = new ChangeLog(this);
-				changeLog.getFullLogDialog().show();
-				return true;
-			case R.id.item_settings:
-				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Settings", 0);
-				Log.d(getClass().getName(), "onOptionsItemSelected:preferences");
-				this.startActivity(new Intent(this, Preferences.class));
-				return true;
-			case R.id.main_about: {
-				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "About", 0);
-				Log.d(getClass().getName(), "onOptionsItemSelected:about");
-				UIHelper.showAbout(this);
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**

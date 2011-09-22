@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import sheetrock.panda.changelog.ChangeLog;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Tweet;
@@ -42,19 +43,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import br.repinel.R;
 import br.repinel.setfundao.data.TwItem;
 import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.ImageHelper;
 import br.repinel.setfundao.helper.UIHelper;
 import br.repinel.setfundao.ui.exception.MainException;
+import br.repinel.setfundao.ui.prefs.Preferences;
 
 /**
  * @author Roque Pinel
@@ -64,6 +66,9 @@ public class TwListActivity extends ListActivity {
 
 	private ArrayList<TwItem> items = new ArrayList<TwItem>();
 
+	/**
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -102,21 +107,45 @@ public class TwListActivity extends ListActivity {
 		return true;
 	}
 
+	/**
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.full_log:
+				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "FullLog", 0);
+				Log.d(getClass().getName(), "onOptionsItemSelected:log");
+				ChangeLog changeLog = new ChangeLog(this);
+				changeLog.getFullLogDialog().show();
+				return true;
+			case R.id.item_settings:
+				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Settings", 0);
+				Log.d(getClass().getName(), "onOptionsItemSelected:preferences");
+				this.startActivity(new Intent(this, Preferences.class));
+				return true;
+			case R.id.main_about: {
+				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "About", 0);
+				Log.d(getClass().getName(), "onOptionsItemSelected:about");
+				UIHelper.showAbout(this);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
+	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-
-		// Get the item that was clicked
-		Object o = this.getListAdapter().getItem(position);
-		String keyword = o.toString();
-		Toast.makeText(this, "You selected: " + keyword, Toast.LENGTH_LONG).show();
 	}
 
 	/**
 	 * Called when Home is clicked.
 	 * 
-	 * @param view
-	 *            The view
+	 * @param view The view
 	 */
 	public void onHomeClick(View view) {
 		AnalyticsHelper.getInstance(this).trackEvent(getTitle().toString(), "Click", "Home", 0);
@@ -126,6 +155,14 @@ public class TwListActivity extends ListActivity {
 		startActivity(intent);
 	}
 
+	/**
+	 * TwFetcher.
+	 * 
+	 * Async news download.
+	 * 
+	 * @author Roque Pinel
+	 *
+	 */
 	private class TwFetcher extends AsyncTask<Void, Void, Void> {
 
 		private ProgressDialog progressDialog;
@@ -162,17 +199,20 @@ public class TwListActivity extends ListActivity {
 				for (Tweet tweet : result.getTweets()) {
 					Log.d(TwListActivity.class.getName(), tweet.getFromUser() + ": " + tweet.getText());
 
+					URL profileImageURL;
+
+					if (imageURLCache.containsKey(tweet.getFromUser())) {
+						profileImageURL = imageURLCache.get(tweet.getFromUser());
+					} else {
+						User user = twitter.showUser(tweet.getFromUser());
+						profileImageURL = user.getProfileImageURL();
+						imageURLCache.put(tweet.getFromUser(), profileImageURL);
+					}
+
 					TwItem twItem = new TwItem();
 					twItem.username = tweet.getFromUser();
 					twItem.text = tweet.getText();
-
-					if (imageURLCache.containsKey(twItem.username)) {
-						twItem.profileImageURL = imageURLCache.get(twItem.username);
-					} else {
-						User user = twitter.showUser(twItem.username);
-						twItem.profileImageURL = user.getProfileImageURL();
-						imageURLCache.put(twItem.username, twItem.profileImageURL);
-					}
+					twItem.profileImageURL = profileImageURL;
 
 					items.add(twItem);
 				}
@@ -208,6 +248,8 @@ public class TwListActivity extends ListActivity {
 		private LayoutInflater mInflater;
 
 		private ArrayList<TwItem> items;
+
+		private Map<String, Bitmap> imageCache = new HashMap<String, Bitmap>();
 
 		/**
 		 * @param context
@@ -255,8 +297,15 @@ public class TwListActivity extends ListActivity {
 
 				try {
 					if (twItem.profileImageURL != null) {
-						Bitmap image = ImageHelper.realDownloadImage(twItem.profileImageURL, getResources());
-	
+						Bitmap image;
+
+						if (imageCache.containsKey(twItem.username)) {
+							image = imageCache.get(twItem.username);
+						} else {
+							image = ImageHelper.realDownloadImage(twItem.profileImageURL, getResources());
+							imageCache.put(twItem.username, image);
+						}
+
 						holder.imageView.setImageBitmap(image);
 					}
 				} catch (MainException e) {
