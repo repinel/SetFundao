@@ -19,10 +19,12 @@
 	-->
 <resources>
 	<color name="bar_text">#000000</color>
-	<color name="bar_separator">#40ffffff</color>
+	<color name="bar_separator">#40FFFFFF</color>
 
-	<color name="home_text_foreground">#d9d9d9</color>
+	<color name="home_text_foreground">#D9D9D9</color>
 
-	<color name="text_foreground">#ffffff</color>
+	<color name="text_foreground">#FFFFFF</color>
 	<color name="text_background">#000000</color>
+
+	<color name="text_foreground2">#2FC2EF</color>
 </resources>

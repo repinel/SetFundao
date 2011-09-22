@@ -42,6 +42,11 @@
 			android:theme="@style/Theme.SetFundao" />
 
 		<activity
+			android:name=".setfundao.ui.TwListActivity"
+			android:theme="@style/Theme.SetFundao"
+			android:label="@string/title_tw_list" />
+
+		<activity
 			android:name=".setfundao.ui.prefs.Preferences" />
 
 		<!-- AdMob Ads -->
