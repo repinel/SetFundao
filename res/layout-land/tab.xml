@@ -24,10 +24,11 @@
 	android:orientation="horizontal"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res/br.repinel"
-	android:background="@drawable/background">
+	android:background="@drawable/background" >
 
 	<LinearLayout style="@style/BarVertical">
-		<ImageButton style="@style/BarActionVertical"
+		<ImageButton
+			style="@style/BarActionVertical"
 			android:contentDescription="@string/description_home"
 			android:src="@drawable/ic_home"
 			android:onClick="onHomeClick" />
@@ -35,12 +36,14 @@
 		<View style="@style/BarEmptySpace" />
 
 		<ImageView style="@style/BarSeparatorVertical" />
-		<ImageButton style="@style/BarActionVertical"
+		<ImageButton
+			style="@style/BarActionVertical"
 			android:id="@+id/btn_refresh"
 			android:contentDescription="@string/description_refresh"
 			android:src="@drawable/ic_refresh"
 			android:onClick="onRefreshClick" />
-		<ProgressBar style="@style/BarProgressIndicatorVertical"
+		<ProgressBar
+			style="@style/BarProgressIndicatorVertical"
 			android:id="@+id/refresh_progress"
 			android:visibility="gone" />
 	</LinearLayout>
@@ -51,5 +54,5 @@
 		android:layout_height="fill_parent"
 		android:scaleType="fitCenter"
 		android:layout_weight="1"
-		android:layout_gravity="center"/>
+		android:layout_gravity="center" />
 </LinearLayout>

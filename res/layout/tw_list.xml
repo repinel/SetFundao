@@ -18,17 +18,18 @@
 		not, see <http://www.gnu.org/licenses/>.
 	-->
 <LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/br.repinel"
+	xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
 	android:id="@+id/camera"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:orientation="vertical"
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res/br.repinel"
-	xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-	android:background="@drawable/background">
+	android:background="@drawable/background" >
 
 	<LinearLayout style="@style/Bar">
-		<ImageButton style="@style/BarAction"
+		<ImageButton
+			style="@style/BarAction"
 			android:contentDescription="@string/description_home"
 			android:src="@drawable/ic_home"
 			android:onClick="onHomeClick" />
@@ -45,10 +46,11 @@
 		android:scrollingCache="true"
 		android:fastScrollEnabled="true" />
 
-	<com.google.ads.AdView android:id="@+id/adView"
+	<com.google.ads.AdView
+		android:id="@+id/adView"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		ads:adUnitId="a14d9d08b0c6a5a"
 		ads:adSize="BANNER"
-		ads:loadAdOnCreate="true"/>
+		ads:loadAdOnCreate="true" />
 </LinearLayout>

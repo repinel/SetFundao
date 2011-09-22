@@ -17,12 +17,12 @@
 		copy of the GNU General Public License along with this program; If
 		not, see <http://www.gnu.org/licenses/>.
 	-->
-<LinearLayout 
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android" 
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:orientation="vertical"
-	android:padding="20dip"
-	xmlns:android="http://schemas.android.com/apk/res/android">
+	android:padding="20dip" >
 
 	<TextView
 		android:id="@+id/about_description"
