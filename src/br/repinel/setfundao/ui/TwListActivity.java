@@ -19,7 +19,10 @@
 
 package br.repinel.setfundao.ui;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -27,24 +30,31 @@ import twitter4j.Tweet;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.User;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.repinel.R;
 import br.repinel.setfundao.data.TwItem;
 import br.repinel.setfundao.helper.AnalyticsHelper;
+import br.repinel.setfundao.helper.ImageHelper;
 import br.repinel.setfundao.helper.UIHelper;
+import br.repinel.setfundao.ui.exception.MainException;
 
 /**
  * @author Roque Pinel
@@ -66,13 +76,30 @@ public class TwListActivity extends ListActivity {
 			titleView.setText(getTitle());
 		}
 
-		TwItem twItem = new TwItem();
-		twItem.username = "TranstornoRJ";
-		twItem.text = "Caminhão enguiçado prejudica trânsito na Avenida Brasil http://t.co/MjOieVla @LeiSecaRJ";
-
-		items.add(twItem);
+//		TwItem twItem = new TwItem();
+//		twItem.username = "TranstornoRJ";
+//		twItem.text = "Caminhão enguiçado prejudica trânsito na Avenida Brasil http://t.co/MjOieVla @LeiSecaRJ";
+//		try {
+//			twItem.profileImageURL = new URL("https://si0.twimg.com/profile_images/746475730/Rio_de_Janeiro1_normal.jpg");
+//		} catch (MalformedURLException e) {
+//			e.printStackTrace();
+//		}
+//		items.add(twItem);
 
 		new TwFetcher().execute();
+	}
+
+	/**
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+
+		Log.i(getClass().getName(), "onCreateOptionsMenu");
+
+		return true;
 	}
 
 	@Override
@@ -118,6 +145,11 @@ public class TwListActivity extends ListActivity {
 		protected Void doInBackground(Void... arg0) {
 			Log.d(TwListActivity.class.getName(), "Fetching tweets...");
 
+//			if (true)
+//				return null;
+
+			Map<String, URL> imageURLCache = new HashMap<String, URL>();
+
 			Twitter twitter = new TwitterFactory().getInstance();
 
 			String queryFilter = "fundao OR brasil OR vermelha OR amarela OR #AvBrasil OR #LinhaAmarela OR #LinhaVermelha from:CETRIO_ONLINE OR from:TranstornoRJ OR from:transitorj";
@@ -134,10 +166,23 @@ public class TwListActivity extends ListActivity {
 					twItem.username = tweet.getFromUser();
 					twItem.text = tweet.getText();
 
+					if (imageURLCache.containsKey(twItem.username)) {
+						twItem.profileImageURL = imageURLCache.get(twItem.username);
+					} else {
+						User user = twitter.showUser(twItem.username);
+						twItem.profileImageURL = user.getProfileImageURL();
+						imageURLCache.put(twItem.username, twItem.profileImageURL);
+					}
+
 					items.add(twItem);
 				}
 			} catch (TwitterException e) {
-				e.printStackTrace();
+				try {
+					Log.e(TwListActivity.class.getName(), e.getMessage());
+					UIHelper.showMessage(TwListActivity.this, getResources().getText(R.string.error_tw).toString());
+				} catch (Exception e1) {
+					// empty
+				}
 			}
 
 			return null;
@@ -195,8 +240,7 @@ public class TwListActivity extends ListActivity {
 
 				holder = new ViewHolder();
 
-				// holder.imageView = (ImageView)
-				// convertView.findViewById(R.id.tw_image);
+				holder.imageView = (ImageView) convertView.findViewById(R.id.tw_image);
 				holder.usernameView = (TextView) convertView.findViewById(R.id.tw_username);
 				holder.textView = (TextView) convertView.findViewById(R.id.tw_text);
 
@@ -208,6 +252,21 @@ public class TwListActivity extends ListActivity {
 			if (twItem != null) {
 				holder.usernameView.setText(twItem.username);
 				holder.textView.setText(twItem.text);
+
+				try {
+					if (twItem.profileImageURL != null) {
+						Bitmap image = ImageHelper.realDownloadImage(twItem.profileImageURL, getResources());
+	
+						holder.imageView.setImageBitmap(image);
+					}
+				} catch (MainException e) {
+					try {
+						Log.e(TwListActivity.class.getName(), e.getMessage());
+						UIHelper.showMessage(TwListActivity.this, e.getMessage());
+					} catch (Exception e1) {
+						// empty
+					}
+				}
 			}
 
 			return convertView;
@@ -219,7 +278,7 @@ public class TwListActivity extends ListActivity {
 	 * 
 	 */
 	public static class ViewHolder {
-		// public ImageView imageView;
+		public ImageView imageView;
 		public TextView usernameView;
 		public TextView textView;
 	}

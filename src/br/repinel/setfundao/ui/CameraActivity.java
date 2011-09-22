@@ -21,7 +21,6 @@ package br.repinel.setfundao.ui;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -154,29 +153,6 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		new ImageFetcher().execute();
 
 		scheduleUpdate();
-	}
-
-	/**
-	 * Show a message dialog.
-	 * 
-	 * @param message The message to be shown.
-	 */
-	protected void showMessage(String message) {
-		View messageView = getLayoutInflater().inflate(R.layout.message, null, false);
-
-		TextView textView = (TextView) messageView.findViewById(R.id.message);
-		int defaultColor = textView.getTextColors().getDefaultColor();
-		textView.setTextColor(defaultColor);
-		textView.setText(message);
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setIcon(R.drawable.app_icon);
-		builder.setTitle(R.string.app_name);
-		builder.setView(messageView);
-		builder.setCancelable(false);
-		builder.setPositiveButton(getResources().getText(R.string.btn_message_box_ok).toString(), null);
-		builder.create();
-		builder.show();
 	}
 
 	/**
@@ -382,7 +358,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 					ImageHelper.saveImage(CameraActivity.this, image, photoFilename);
 				} catch (MainException e) {
 					try {
-						showMessage(e.getMessage());
+						UIHelper.showMessage(CameraActivity.this, e.getMessage());
 					} catch (Exception e1) {
 						// empty
 					}
@@ -390,7 +366,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 			} else if (message != null) {
 				try {
 					setImageInfo(getResources().getText(R.string.image_stored_message).toString());
-					showMessage(message);
+					UIHelper.showMessage(CameraActivity.this, message);
 				} catch (Exception e1) {
 					// empty
 				}

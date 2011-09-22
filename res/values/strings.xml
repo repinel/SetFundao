@@ -50,11 +50,13 @@
 
 	<!-- Menu -->
 
-	<string name="settings">Settings</string>
+	<string name="settings">Preferências</string>
 	<string name="main_about">Sobre</string>
 	<string name="full_log">Log</string>
 
 	<!-- Preferences -->
+
+	<string name="settings_image">Imagem</string>
 
 	<string name="update_interval_">Intervalo de Atualização</string>
 	<string name="update_interval_hint">Período menor usará mais bateria e conexão.</string>
@@ -72,6 +74,21 @@
 		<item>0.9 segundo</item>
 		<item>1.0 segundo</item>
 	</string-array>
+
+	<string name="settings_tw">Twitter</string>
+
+	<string name="words_filter_">Filtro por Palavras</string>
+	<string name="words_filter_hint">Procura pelas palavras listadas</string>
+
+	<string name="hashtags_filter_">Filtro por Hashtags</string>
+	<string name="hashtags_filter_hint">Procura pelas hashtags listadas</string>
+
+	<string name="users_filter_">Filtro por Usuários</string>
+	<string name="users_filter_hint">Procura dentre os tweets dos usuários listados</string>
+
+	<string name="add">Adicionar</string>
+
+	<string name="settings_advanced">Avançado</string>
 
 	<!-- UI -->
 
@@ -108,6 +125,7 @@
 	<string name="error_file_not_found">Não foi possível salvar a imagem</string>
 	<string name="error_input_output">Não foi possível salvar a imagem</string>
 	<string name="error_network">Ative a rede de dados para atualizar a imagem</string>
+	<string name="error_tw">Não foi possível obter os Tweets</string>
 
 	<!-- Android Change Log Lib -->
 

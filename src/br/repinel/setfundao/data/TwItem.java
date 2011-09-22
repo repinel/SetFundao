@@ -19,6 +19,8 @@
 
 package br.repinel.setfundao.data;
 
+import java.net.URL;
+
 /**
  * Tw Item. Used to list news.
  * 
@@ -26,6 +28,8 @@ package br.repinel.setfundao.data;
  *
  */
 public class TwItem {
+
+	public URL profileImageURL;
 
 	public String username;
 

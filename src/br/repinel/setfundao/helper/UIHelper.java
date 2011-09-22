@@ -3,12 +3,15 @@ package br.repinel.setfundao.helper;
 import br.repinel.R;
 import br.repinel.setfundao.ui.prefs.Preferences;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * UI Helper
@@ -17,6 +20,48 @@ import android.preference.PreferenceManager;
  *
  */
 public class UIHelper {
+
+	/**
+	 * Show an about dialog that cites data sources.
+	 */
+	public static void showAbout(Activity activity) {
+		View messageView = activity.getLayoutInflater().inflate(R.layout.about, null, false);
+
+		TextView textView = (TextView) messageView.findViewById(R.id.about_description);
+		int defaultColor = textView.getTextColors().getDefaultColor();
+		textView.setTextColor(defaultColor);
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setIcon(R.drawable.app_icon);
+		builder.setTitle(R.string.app_name_version);
+		builder.setView(messageView);
+		builder.create();
+		builder.show();
+	}
+
+	/**
+	 * Show a message dialog.
+	 * 
+	 * @param message The message to be shown.
+	 */
+	public static void showMessage(Activity activity, String message) {
+		View messageView = activity.getLayoutInflater().inflate(R.layout.message, null, false);
+
+		TextView textView = (TextView) messageView.findViewById(R.id.message);
+		int defaultColor = textView.getTextColors().getDefaultColor();
+		textView.setTextColor(defaultColor);
+		textView.setText(message);
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setIcon(R.drawable.app_icon);
+		builder.setTitle(R.string.app_name);
+		builder.setView(messageView);
+		builder.setCancelable(false);
+		builder.setPositiveButton(activity.getResources().getText(R.string.btn_message_box_ok).toString(), null);
+		builder.create();
+		builder.show();
+	}
+
 	/**
 	 * @return <code>true</code> if the orientation is portrait.
 	 */

@@ -17,10 +17,11 @@
 		copy of the GNU General Public License along with this program; If
 		not, see <http://www.gnu.org/licenses/>.
 	-->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="br.repinel"
-	android:versionCode="9"
-	android:versionName="3.0-beta1" >
+	android:versionCode="10"
+	android:versionName="3.0-beta2" >
 
 	<!-- android:debuggable="true" -->
 	<application
@@ -48,9 +49,13 @@
 
 		<activity
 			android:name=".setfundao.ui.prefs.Preferences" />
-
+<!--
+		<activity
+			android:name=".setfundao.ui.prefs.TwWords" />
+-->
 		<!-- AdMob Ads -->
-		<activity android:name="com.google.ads.AdActivity"
+		<activity
+			android:name="com.google.ads.AdActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation"/>
 	</application>
 

@@ -88,9 +88,7 @@ public class ImageHelper {
 	 * @return The image.
 	 * @throws MainException
 	 */
-	private static Bitmap realDownloadImage(String imageUrl, Resources res) throws MainException {
-		Bitmap image = null;
-
+	public static Bitmap realDownloadImage(String imageUrl, Resources res) throws MainException {
 		URL myFileUrl = null;
 
 		try {
@@ -98,6 +96,20 @@ public class ImageHelper {
 		} catch (MalformedURLException e) {
 			throw new MainException(res.getText(R.string.error_url));
 		}
+
+		return realDownloadImage(myFileUrl, res);
+	}
+
+	/**
+	 * Responsable for the real download.
+	 * 
+	 * @param myFileUrl The URL of the image.
+	 * @param res The resource.
+	 * @return The image.
+	 * @throws MainException
+	 */
+	public static Bitmap realDownloadImage(URL myFileUrl, Resources res) throws MainException {
+		Bitmap image = null;
 
 		try {
 			HttpURLConnection conn = (HttpURLConnection) myFileUrl.openConnection();

@@ -21,17 +21,15 @@ package br.repinel.setfundao.ui;
 
 import sheetrock.panda.changelog.ChangeLog;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 import br.repinel.R;
 import br.repinel.setfundao.helper.AnalyticsHelper;
+import br.repinel.setfundao.helper.UIHelper;
 import br.repinel.setfundao.ui.prefs.Preferences;
 
 /**
@@ -55,8 +53,6 @@ public class BaseActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-
-		AnalyticsHelper.getInstance(this).stopSession();
 	}
 
 	/**
@@ -80,38 +76,22 @@ public class BaseActivity extends Activity {
 		switch (item.getItemId()) {
 			case R.id.full_log:
 				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "FullLog", 0);
+				Log.d(getClass().getName(), "onOptionsItemSelected:log");
 				ChangeLog changeLog = new ChangeLog(this);
 				changeLog.getFullLogDialog().show();
 				return true;
 			case R.id.item_settings:
 				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Settings", 0);
+				Log.d(getClass().getName(), "onOptionsItemSelected:preferences");
 				this.startActivity(new Intent(this, Preferences.class));
 				return true;
 			case R.id.main_about: {
 				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "About", 0);
-				Log.i(getClass().getName(), "onOptionsItemSelected:about");
-				showAbout();
+				Log.d(getClass().getName(), "onOptionsItemSelected:about");
+				UIHelper.showAbout(this);
 				return true;
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * Show an about dialog that cites data sources.
-	 */
-	private void showAbout() {
-		View messageView = getLayoutInflater().inflate(R.layout.about, null, false);
-
-		TextView textView = (TextView) messageView.findViewById(R.id.about_description);
-		int defaultColor = textView.getTextColors().getDefaultColor();
-		textView.setTextColor(defaultColor);
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setIcon(R.drawable.app_icon);
-		builder.setTitle(R.string.app_name_version);
-		builder.setView(messageView);
-		builder.create();
-		builder.show();
 	}
 }
