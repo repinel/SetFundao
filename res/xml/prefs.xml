@@ -30,7 +30,7 @@
 			android:entryValues="@array/update_interval_values"
 			android:defaultValue="1000" />
 	</PreferenceCategory>
-<!--
+
 	<PreferenceCategory android:title="@string/settings_tw" >
 
 		<PreferenceScreen
@@ -40,7 +40,10 @@
 			<intent
 				android:action="android.intent.action.MAIN"
 				android:targetPackage="br.repinel"
-				android:targetClass="br.repinel.setfundao.ui.prefs.TwWords" />
+				android:targetClass="br.repinel.setfundao.ui.prefs.TwFilters" >
+
+				<extra android:name="@string/tw_bundle_type" android:value="@string/tw_words_filter" />
+			</intent>
 		</PreferenceScreen>
 		<PreferenceScreen
 			android:title="@string/hashtags_filter_"
@@ -48,8 +51,11 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetPackage="br.repinel.setfundao"
-				android:targetClass="br.repinel.setfundao.ui.prefs.Rules" />
+				android:targetPackage="br.repinel"
+				android:targetClass="br.repinel.setfundao.ui.prefs.TwFilters" >
+
+				<extra android:name="@string/tw_bundle_type" android:value="@string/tw_hashtags_filter" />
+			</intent>
 		</PreferenceScreen>
 		<PreferenceScreen
 			android:title="@string/users_filter_"
@@ -57,14 +63,15 @@
 
 			<intent
 				android:action="android.intent.action.MAIN"
-				android:targetPackage="br.repinel.setfundao"
-				android:targetClass="br.repinel.setfundao.ui.prefs.Rules" />
+				android:targetPackage="br.repinel"
+				android:targetClass="br.repinel.setfundao.ui.prefs.TwFilters" >
+
+				<extra android:name="@string/tw_bundle_type" android:value="@string/tw_users_filter" />
+			</intent>
 		</PreferenceScreen>
 	</PreferenceCategory>
 
 	<PreferenceCategory android:title="@string/settings_advanced" >
 
-
 	</PreferenceCategory>
- -->
 </PreferenceScreen>

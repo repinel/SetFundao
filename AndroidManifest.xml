@@ -49,10 +49,10 @@
 
 		<activity
 			android:name=".setfundao.ui.prefs.Preferences" />
-<!--
+
 		<activity
-			android:name=".setfundao.ui.prefs.TwWords" />
--->
+			android:name=".setfundao.ui.prefs.TwFilters" />
+
 		<!-- AdMob Ads -->
 		<activity
 			android:name="com.google.ads.AdActivity"

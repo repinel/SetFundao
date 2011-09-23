@@ -79,14 +79,19 @@
 
 	<string name="words_filter_">Filtro por Palavras</string>
 	<string name="words_filter_hint">Procura pelas palavras listadas</string>
+	<string name="word">Palavra</string>
 
 	<string name="hashtags_filter_">Filtro por Hashtags</string>
 	<string name="hashtags_filter_hint">Procura pelas hashtags listadas</string>
+	<string name="hashtag">Hashtag</string>
 
 	<string name="users_filter_">Filtro por Usuários</string>
 	<string name="users_filter_hint">Procura dentre os tweets dos usuários listados</string>
+	<string name="user">Usuário</string>
 
+	<string name="ok">OK</string>
 	<string name="add">Adicionar</string>
+	<string name="cancel">Cancelar</string>
 
 	<string name="settings_advanced">Avançado</string>
 
@@ -126,6 +131,10 @@
 	<string name="error_input_output">Não foi possível salvar a imagem</string>
 	<string name="error_network">Ative a rede de dados para atualizar a imagem</string>
 	<string name="error_tw">Não foi possível obter os Tweets</string>
+
+	<string name="error_tw_word_already_stored">Palavra já inserida</string>
+	<string name="error_tw_hashtag_already_stored">Hashtag já inserida</string>
+	<string name="error_tw_user_already_stored">Usuário já inserida</string>
 
 	<!-- Android Change Log Lib -->
 

@@ -38,4 +38,28 @@
 		<item>900</item>
 		<item>1000</item>
 	</string-array>
+
+	<string-array name="default_tw_filter_words">
+		<item>fundao</item>
+		<item>brasil</item>
+		<item>vermelha</item>
+		<item>amarela</item>
+	</string-array>
+
+	<string-array name="default_tw_filter_hashtags">
+		<item>#AvBrasil</item>
+		<item>#LinhaAmarela</item>
+		<item>#LinhaVermelha</item>
+	</string-array>
+
+	<string-array name="default_tw_filter_users">
+		<item>CETRIO_ONLINE</item>
+		<item>TranstornoRJ</item>
+		<item>transitorj</item>
+	</string-array>
+
+	<string name="tw_bundle_type">bundle_type</string>
+	<string name="tw_words_filter">tw_words_filter</string>
+	<string name="tw_hashtags_filter">tw_hashtags_filter</string>
+	<string name="tw_users_filter">tw_filter_users</string>
 </resources>

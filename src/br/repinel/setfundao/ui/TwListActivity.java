@@ -22,6 +22,7 @@ package br.repinel.setfundao.ui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import sheetrock.panda.changelog.ChangeLog;
@@ -51,6 +52,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import br.repinel.R;
+import br.repinel.setfundao.data.DataProvider;
 import br.repinel.setfundao.data.TwItem;
 import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.ImageHelper;
@@ -189,7 +191,9 @@ public class TwListActivity extends ListActivity {
 
 			Twitter twitter = new TwitterFactory().getInstance();
 
-			String queryFilter = "fundao OR brasil OR vermelha OR amarela OR #AvBrasil OR #LinhaAmarela OR #LinhaVermelha from:CETRIO_ONLINE OR from:TranstornoRJ OR from:transitorj";
+			//String queryFilter = "fundao OR brasil OR vermelha OR amarela OR #AvBrasil OR #LinhaAmarela OR #LinhaVermelha from:CETRIO_ONLINE OR from:TranstornoRJ OR from:transitorj";
+			String queryFilter = getQueryFilter();
+			Log.i(TwListActivity.class.getName(), queryFilter);
 
 			Query query = new Query(queryFilter);
 
@@ -236,6 +240,44 @@ public class TwListActivity extends ListActivity {
 			progressDialog.dismiss();
 
 			setListAdapter(new TWListAdapter(TwListActivity.this, R.layout.tw_list_item, items));
+		}
+
+		private String getQueryFilter() {
+			DataProvider dataProvider = new DataProvider(TwListActivity.this);
+
+			List<String> words = dataProvider.selectAllTwFilterWords();
+			List<String> hashtags = dataProvider.selectAllTwFilterHashtags();
+			List<String> users = dataProvider.selectAllTwFilterUsers();
+
+			StringBuilder sb = new StringBuilder();
+
+			boolean isFirst = true;
+			for (String word : words) {
+				if (!isFirst)
+					sb.append(" OR");
+				sb.append(" ");
+				sb.append(word);
+				isFirst = false;
+			}
+
+			for (String hastag : hashtags) {
+				if (!isFirst)
+					sb.append(" OR");
+				sb.append(" ");
+				sb.append(hastag);
+				isFirst = false;
+			}
+
+			isFirst = true;
+			for (String user : users) {
+				if (!isFirst)
+					sb.append(" OR");
+				sb.append(" from:");
+				sb.append(user);
+				isFirst = false;
+			}
+
+			return sb.toString();
 		}
 	}
 
