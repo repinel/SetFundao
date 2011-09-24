@@ -61,6 +61,9 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 
 	private boolean stopScheduling;
 
+	private Bitmap image;
+	private Date lastFetchDate;
+
 	/**
 	 * @see br.repinel.setfundao.ui.BaseActivity#onCreate(android.os.Bundle)
 	 */
@@ -71,6 +74,8 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 
 		this.firstTime = true;
 		this.stopScheduling = false;
+		this.image = null;
+
 		this.index = this.getIntent().getExtras().getInt(BUNDLE_INDEX);
 
 		AnalyticsHelper.getInstance(this).trackPageView(
@@ -87,6 +92,28 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		}
 
 		findViewById(R.id.cameraImage).setOnClickListener(this);
+	}
+
+	/**
+	 * @see android.app.Activity#onDestroy()
+	 */
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		try {
+			if (image != null)
+				ImageHelper.saveImage(CameraActivity.this, image, photoFilename);
+
+				SimpleDateFormat dataFormat = new SimpleDateFormat(getResources().getText(R.string.date_format).toString());
+				UIHelper.setLastFetchDate(getApplicationContext(), photoFilename, dataFormat.format(lastFetchDate));
+		} catch (Exception e) {
+			try {
+				UIHelper.showMessage(CameraActivity.this, e.getMessage());
+			} catch (Exception e1) {
+				// empty
+			}
+		}
 	}
 
 	/**
@@ -214,7 +241,6 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	private void setLastFetchDate(Date date) {
 		if (date != null) {
 			SimpleDateFormat dataFormat = new SimpleDateFormat(getResources().getText(R.string.date_format).toString());
-			UIHelper.setLastFetchDate(getApplicationContext(), photoFilename, dataFormat.format(date));
 			setLastFetchDate(dataFormat.format(date));
 		}
 		else
@@ -319,14 +345,13 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		protected Bitmap doInBackground(Void... voids) {
 			Log.i(getClass().getName(), "fetching image: " + photoURL);
 
-			Bitmap image = null;
-
 			// fetch new image
 			try {
 				if (!UIHelper.isOnline(CameraActivity.this))
 					throw new MainException(getResources().getText(R.string.error_network));
 
 				image = ImageHelper.downloadImage(photoURL, getResources());
+				lastFetchDate = new Date();
 			} catch (MainException e) {
 				message = e.getMessage();
 
@@ -351,18 +376,8 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 			if (image != null) {
 				imgView.setImageBitmap(image);
 
-				setLastFetchDate(new Date());
+				setLastFetchDate(lastFetchDate);
 				setImageInfo(null);
-
-				try {
-					ImageHelper.saveImage(CameraActivity.this, image, photoFilename);
-				} catch (MainException e) {
-					try {
-						UIHelper.showMessage(CameraActivity.this, e.getMessage());
-					} catch (Exception e1) {
-						// empty
-					}
-				}
 			} else if (message != null) {
 				try {
 					setImageInfo(getResources().getText(R.string.image_stored_message).toString());
