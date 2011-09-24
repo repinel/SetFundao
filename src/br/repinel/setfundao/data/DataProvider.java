@@ -260,14 +260,9 @@ public class DataProvider {
 	}
 
 	public void deleteTwFilterWord(String value) {
-		long id = getTwFilterWord(value);
-
-		if (id <= 0)
-			return;
-
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		db.execSQL("DELETE FROM " + TwFilterWordData.TABLE_NAME
-			+ "WHERE " + TwFilterWordData.ID + " = " + id);
+			+ " WHERE " + TwFilterWordData.WORD + " = '" + value + "'");
 	}
 
 	public List<String> selectAllTwFilterWords() {
@@ -305,14 +300,9 @@ public class DataProvider {
 	}
 
 	public void deleteTwFilterHashtag(String value) {
-		long id = getTwFilterHashtag(value);
-
-		if (id <= 0)
-			return;
-
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		db.execSQL("DELETE FROM " + TwFilterHashtagData.TABLE_NAME
-			+ "WHERE " + TwFilterHashtagData.ID + " = " + id);
+			+ " WHERE " + TwFilterHashtagData.HASHTAG + " = '" + value + "'");
 	}
 
 	public List<String> selectAllTwFilterHashtags() {
@@ -350,14 +340,9 @@ public class DataProvider {
 	}
 
 	public void deleteTwFilterUser(String value) {
-		long id = getTwFilterHashtag(value);
-
-		if (id <= 0)
-			return;
-
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		db.execSQL("DELETE FROM " + TwFilterUserData.TABLE_NAME
-			+ "WHERE " + TwFilterUserData.ID + " = " + id);
+			+ " WHERE " + TwFilterUserData.USERNAME + " = '" + value + "'");
 	}
 
 	public List<String> selectAllTwFilterUsers() {

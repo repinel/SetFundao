@@ -19,9 +19,11 @@
 
 package br.repinel.setfundao.ui.prefs;
 
+import java.util.Comparator;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -166,6 +168,11 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 
 							if (changed) {
 								adapter.add(value);
+								adapter.sort(new Comparator<String>() {
+									public int compare(String object1, String object2) {
+										return object1.compareTo(object2);
+									};
+								});
 								adapter.notifyDataSetChanged();
 							}
 						}
@@ -199,7 +206,44 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 	 */
 	public final boolean onItemLongClick(final AdapterView<?> parent, final View view, final int position, final long id) {
 
-		// TODO Auto-generated method stub
+		final Builder builder = new Builder(this);
+		builder.setItems(R.array.dialog_delete,
+			new android.content.DialogInterface.OnClickListener() {
+				public void onClick(final DialogInterface dialog, final int which) {
+					switch (which) {
+						case 0:
+							String value = adapter.getItem(position);
+
+							DataProvider dataProvider = new DataProvider(TwFilters.this);
+							boolean changed = false;
+
+							if (type.equals(getString(R.string.tw_words_filter))) {
+								dataProvider.deleteTwFilterWord(value);
+								Log.i(TwFilters.TAG, "Word deleted: " + value);
+								changed = true;
+							} else if (type.equals(getString(R.string.tw_hashtags_filter))) {
+								dataProvider.deleteTwFilterHashtag(value);
+								Log.i(TwFilters.TAG, "Hashtag deleted: " + value);
+								changed = true;
+							} else if (type.equals(getString(R.string.tw_users_filter))) {
+								dataProvider.deleteTwFilterUser(value);
+								Log.i(TwFilters.TAG, "User deleted: " + value);
+								changed = true;
+							}
+
+							if (changed) {
+								adapter.remove(value);
+								adapter.notifyDataSetChanged();
+							}
+
+							break;
+						default:
+							break;
+					}
+				}
+			});
+		builder.setNegativeButton(android.R.string.cancel, null);
+		builder.show();
 
 		return false;
 	}

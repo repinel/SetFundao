@@ -99,6 +99,10 @@
 	<string name="reset_settings_hint">Restaura as configurações para o padrão</string>
 	<string name="reset_settings_message">As configurações foram restauradas</string>
 
+	<string-array name="dialog_delete">
+		<item>Delete</item>
+	</string-array>
+
 	<!-- UI -->
 
 	<string name="description_logo">SetFundao</string>
