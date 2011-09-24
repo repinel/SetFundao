@@ -63,7 +63,7 @@ public class BaseActivity extends Activity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 
-		Log.i(getClass().getName(), "onCreateOptionsMenu");
+		Log.d(getClass().getName(), "onCreateOptionsMenu");
 
 		return true;
 	}

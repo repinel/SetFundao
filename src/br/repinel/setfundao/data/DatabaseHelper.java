@@ -19,47 +19,49 @@
 
 package br.repinel.setfundao.data;
 
-import br.repinel.R;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * Database Helper.
+ * 
+ * @author Roque Pinel
+ *
+ */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private Context context;
 
+	/**
+	 * @param context
+	 */
 	public DatabaseHelper(Context context) {
 		super(context, DataProvider.DATABASE_NAME, null, DataProvider.DATABASE_VERSION);
 		this.context = context;
 	}
 
+	/**
+	 * @see android.database.sqlite.SQLiteOpenHelper#onCreate(android.database.sqlite.SQLiteDatabase)
+	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		DataProvider.TwUserData.onCreate(db);
 		DataProvider.TwItemData.onCreate(db);
-		DataProvider.TwFilterWordData.onCreate(db);
-		DataProvider.TwFilterHashtagData.onCreate(db);
-		DataProvider.TwFilterUserData.onCreate(db);
-
-		String[] words = this.context.getResources().getStringArray(R.array.default_tw_filter_words);
-		for (int i = 0; i < words.length; i++)
-			DataProvider.TwFilterWordData.insertWord(db, words[i]);
-
-		String[] hashtags = this.context.getResources().getStringArray(R.array.default_tw_filter_hashtags);
-		for (int i = 0; i < hashtags.length; i++)
-			DataProvider.TwFilterHashtagData.insertHashtag(db, hashtags[i]);
-
-		String[] users = this.context.getResources().getStringArray(R.array.default_tw_filter_users);
-		for (int i = 0; i < users.length; i++)
-			DataProvider.TwFilterUserData.insertUser(db, users[i]);
+		DataProvider.TwFilterWordData.onCreate(context, db);
+		DataProvider.TwFilterHashtagData.onCreate(context, db);
+		DataProvider.TwFilterUserData.onCreate(context, db);
 	}
 
+	/**
+	 * @see android.database.sqlite.SQLiteOpenHelper#onUpgrade(android.database.sqlite.SQLiteDatabase, int, int)
+	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		DataProvider.TwUserData.onUpgrade(db, oldVersion, newVersion);
 		DataProvider.TwItemData.onUpgrade(db, oldVersion, newVersion);
-		DataProvider.TwFilterWordData.onUpgrade(db, oldVersion, newVersion);
-		DataProvider.TwFilterHashtagData.onUpgrade(db, oldVersion, newVersion);
-		DataProvider.TwFilterUserData.onUpgrade(db, oldVersion, newVersion);
+		DataProvider.TwFilterWordData.onUpgrade(context, db, oldVersion, newVersion);
+		DataProvider.TwFilterHashtagData.onUpgrade(context, db, oldVersion, newVersion);
+		DataProvider.TwFilterUserData.onUpgrade(context, db, oldVersion, newVersion);
 	}
 }

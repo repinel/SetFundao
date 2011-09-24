@@ -108,8 +108,16 @@ public class TwListActivity extends ListActivity {
 		super.onDestroy();
 
 		ArrayList<TwItem> items = this.twListAdapter.items;
+
+		DataProvider dataProvider = new DataProvider(this);
+
+		Log.d(getClass().getName(), "TwItem. Deleting all items");
+		dataProvider.deleteAllTwItems();
+
+		Log.d(getClass().getName(), "TwItem. Storing " + items.size() + " new TwItems");
+
 		for (TwItem item : items) {
-			System.out.println("> " + item.text);
+			dataProvider.insertTwItem(item);
 		}
 	}
 
@@ -121,7 +129,7 @@ public class TwListActivity extends ListActivity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 
-		Log.i(getClass().getName(), "onCreateOptionsMenu");
+		Log.d(getClass().getName(), "onCreateOptionsMenu");
 
 		return true;
 	}
@@ -210,7 +218,7 @@ public class TwListActivity extends ListActivity {
 
 			//String queryFilter = "fundao OR brasil OR vermelha OR amarela OR #AvBrasil OR #LinhaAmarela OR #LinhaVermelha from:CETRIO_ONLINE OR from:TranstornoRJ OR from:transitorj";
 			String queryFilter = getQueryFilter();
-			Log.i(TwListActivity.class.getName(), queryFilter);
+			Log.d(TwListActivity.class.getName(), queryFilter);
 
 			Query query = new Query(queryFilter);
 
@@ -305,7 +313,7 @@ public class TwListActivity extends ListActivity {
 				isFirst = false;
 			}
 
-			return sb.toString();
+			return sb.toString().trim();
 		}
 	}
 

@@ -22,6 +22,8 @@ package br.repinel.setfundao.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.repinel.R;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -33,7 +35,7 @@ public class DataProvider {
 	public static final String AUTHORITY = PACKAGE + ".provider";
 
 	public  static final String DATABASE_NAME = "setfundao.db";
-	public static final int DATABASE_VERSION = 3;
+	public static final int DATABASE_VERSION = 10;
 
 	public static final class TwUserData {
 		private static final String TAG = "TwUserData";
@@ -70,13 +72,15 @@ public class DataProvider {
 		public static final String ID = "id";
 		public static final String USER_ID = "user_id";
 		public static final String TEXT = "text";
+		public static final String CREATED_AD = "created_at";
 
 		public static void onCreate(final SQLiteDatabase db) {
 			db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 			db.execSQL("CREATE TABLE " + TABLE_NAME + " ("
 					+ ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ USER_ID + " INTEGER,"
-					+ TEXT + " TEXT"
+					+ TEXT + " TEXT,"
+					+ CREATED_AD + " LONG"
 					+ ");");
 		}
 
@@ -96,18 +100,24 @@ public class DataProvider {
 		public static final String ID = "id";
 		public static final String WORD = "word";
 
-		public static void onCreate(final SQLiteDatabase db) {
+		public static void onCreate(final Context context, final SQLiteDatabase db) {
 			db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 			db.execSQL("CREATE TABLE " + TABLE_NAME + " ("
 					+ ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ WORD + " TEXT"
 					+ ");");
+
+			String[] words = context.getResources().getStringArray(R.array.default_tw_filter_words);
+			for (int i = 0; i < words.length; i++) {
+				DataProvider.TwFilterWordData.insertWord(db, words[i]);
+				Log.d(DataProvider.class.getName(), "TwFilterWord: " + words[i]);
+			}
 		}
 
-		public static void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
+		public static void onUpgrade(final Context context, final SQLiteDatabase db, final int oldVersion, final int newVersion) {
 			Log.w(TAG, "Upgrading database, this will drop tables and recreate.");
 			db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-			onCreate(db);
+			onCreate(context, db);
 		}
 
 		public static long insertWord (final SQLiteDatabase db, final String value) {
@@ -130,18 +140,24 @@ public class DataProvider {
 		public static final String ID = "id";
 		public static final String HASHTAG = "hashtag";
 
-		public static void onCreate(final SQLiteDatabase db) {
+		public static void onCreate(final Context context, final SQLiteDatabase db) {
 			db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 			db.execSQL("CREATE TABLE " + TABLE_NAME + " ("
 					+ ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ HASHTAG + " TEXT"
 					+ ");");
+
+			String[] hashtags = context.getResources().getStringArray(R.array.default_tw_filter_hashtags);
+			for (int i = 0; i < hashtags.length; i++) {
+				DataProvider.TwFilterHashtagData.insertHashtag(db, hashtags[i]);
+				Log.d(DataProvider.class.getName(), "TwFilterHashtag: " + hashtags[i]);
+			}
 		}
 
-		public static void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
+		public static void onUpgrade(final Context context, final SQLiteDatabase db, final int oldVersion, final int newVersion) {
 			Log.w(TAG, "Upgrading database, this will drop tables and recreate.");
 			db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-			onCreate(db);
+			onCreate(context, db);
 		}
 
 		public static long insertHashtag(final SQLiteDatabase db, final String value) {
@@ -164,18 +180,24 @@ public class DataProvider {
 		public static final String ID = "id";
 		public static final String USERNAME = "username";
 
-		public static void onCreate(final SQLiteDatabase db) {
+		public static void onCreate(final Context context, final SQLiteDatabase db) {
 			db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 			db.execSQL("CREATE TABLE " + TABLE_NAME + " ("
 					+ ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ USERNAME + " TEXT"
 					+ ");");
+
+			String[] users = context.getResources().getStringArray(R.array.default_tw_filter_users);
+			for (int i = 0; i < users.length; i++) {
+				DataProvider.TwFilterUserData.insertUser(db, users[i]);
+				Log.d(DataProvider.class.getName(), "TwFilterUser: " + users[i]);
+			}
 		}
 
-		public static void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
+		public static void onUpgrade(final Context context, final SQLiteDatabase db, final int oldVersion, final int newVersion) {
 			Log.w(TAG, "Upgrading database, this will drop tables and recreate.");
 			db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-			onCreate(db);
+			onCreate(context, db);
 		}
 
 		public static long insertUser(final SQLiteDatabase db, final String value) {
@@ -189,14 +211,10 @@ public class DataProvider {
 		}
 	}
 
-	//private Context context;
 	private DatabaseHelper databaseHelper;
-	//private SQLiteDatabase db;
 
 	public DataProvider(Context context) {
-		//this.context = context;
 		this.databaseHelper = new DatabaseHelper(context);
-		//this.db = databaseHelper.getWritableDatabase();
 	}
 
 	/**
@@ -208,15 +226,16 @@ public class DataProvider {
 		databaseHelper.onCreate(db);
 	}
 
-	public long insertTwItem(String username, String text, String profileImageURL) {
+	public long insertTwItem(TwItem twItem) {
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
 		SQLiteStatement insertStmt = db.compileStatement(
 				"INSERT INTO " + TwUserData.TABLE_NAME
-				+ "(" + TwUserData.USERNAME + "," + TwUserData.PROFILE_IMAGE_URL + ") values (?,?)");
+				+ "(" + TwUserData.USERNAME + "," + TwUserData.PROFILE_IMAGE_URL
+				+ ") values (?,?)");
 
-			insertStmt.bindString(1, username);
-			insertStmt.bindString(2, profileImageURL);
+			insertStmt.bindString(1, twItem.username);
+			insertStmt.bindString(2, twItem.profileImageURL.toString());
 
 		long userId = insertStmt.executeInsert();
 
@@ -225,10 +244,12 @@ public class DataProvider {
 
 		insertStmt = db.compileStatement(
 			"INSERT INTO " + TwItemData.TABLE_NAME
-			+ "(" + TwItemData.USER_ID + "," + TwItemData.TEXT + ") values (?,?)");
+			+ "(" + TwItemData.USER_ID + "," + TwItemData.TEXT + "," + TwItemData.CREATED_AD
+			+ ") values (?,?,?)");
 
 		insertStmt.bindLong(1, userId);
-		insertStmt.bindString(2, text);
+		insertStmt.bindString(2, twItem.text);
+		insertStmt.bindLong(3, twItem.createdAt.getTime());
 
 		return insertStmt.executeInsert();
 	}

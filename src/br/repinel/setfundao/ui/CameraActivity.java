@@ -307,7 +307,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		protected void onPreExecute() {
 			updateRefreshStatus(true);
 
-			Log.i(getClass().getName(), "restoring image: " + photoFilename);
+			Log.d(getClass().getName(), "restoring image: " + photoFilename);
 
 			ImageView imgView = (ImageView) findViewById(R.id.cameraImage);
 
@@ -343,7 +343,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		 */
 		@Override
 		protected Bitmap doInBackground(Void... voids) {
-			Log.i(getClass().getName(), "fetching image: " + photoURL);
+			Log.d(getClass().getName(), "fetching image: " + photoURL);
 
 			// fetch new image
 			try {

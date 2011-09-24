@@ -219,15 +219,15 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 
 							if (type.equals(getString(R.string.tw_words_filter))) {
 								dataProvider.deleteTwFilterWord(value);
-								Log.i(TwFilters.TAG, "Word deleted: " + value);
+								Log.d(TwFilters.TAG, "Word deleted: " + value);
 								changed = true;
 							} else if (type.equals(getString(R.string.tw_hashtags_filter))) {
 								dataProvider.deleteTwFilterHashtag(value);
-								Log.i(TwFilters.TAG, "Hashtag deleted: " + value);
+								Log.d(TwFilters.TAG, "Hashtag deleted: " + value);
 								changed = true;
 							} else if (type.equals(getString(R.string.tw_users_filter))) {
 								dataProvider.deleteTwFilterUser(value);
-								Log.i(TwFilters.TAG, "User deleted: " + value);
+								Log.d(TwFilters.TAG, "User deleted: " + value);
 								changed = true;
 							}
 
