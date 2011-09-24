@@ -21,8 +21,12 @@ package br.repinel.setfundao.ui.prefs;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.util.Log;
 import br.repinel.R;
+import br.repinel.setfundao.data.DataProvider;
+import br.repinel.setfundao.helper.UIHelper;
 
 /**
  * Preferences.
@@ -44,6 +48,17 @@ public class Preferences extends PreferenceActivity implements
 		super.onCreate(savedInstanceState);
 
 		this.addPreferencesFromResource(R.xml.prefs);
+
+		Preference p = this.findPreference("reset_settings");
+		if (p != null) {
+			p.setOnPreferenceClickListener(// .
+					new Preference.OnPreferenceClickListener() {
+						public boolean onPreferenceClick(final Preference preference) {
+							resetSettingsDialog();
+							return true;
+						}
+					});
+		}
 	}
 
 	/**
@@ -51,5 +66,17 @@ public class Preferences extends PreferenceActivity implements
 	 */
 	public void onSharedPreferenceChanged(SharedPreferences arg0, String arg1) {
 		
+	}
+
+	/**
+	 * Reset all settings.
+	 */
+	private void resetSettingsDialog() {
+		Log.w(Preferences.class.getName(), "Resetting settings...");
+
+		DataProvider dataProvider = new DataProvider(this);
+		dataProvider.resetData();
+
+		UIHelper.showMessage(this, this.getString(R.string.reset_settings_message));
 	}
 }

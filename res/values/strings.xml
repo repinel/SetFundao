@@ -95,6 +95,10 @@
 
 	<string name="settings_advanced">Avançado</string>
 
+	<string name="reset_settings_">Restaurar Configurações</string>
+	<string name="reset_settings_hint">Restaura as configurações para o padrão</string>
+	<string name="reset_settings_message">As configurações foram restauradas</string>
+
 	<!-- UI -->
 
 	<string name="description_logo">SetFundao</string>

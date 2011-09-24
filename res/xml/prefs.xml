@@ -72,6 +72,7 @@
 	</PreferenceCategory>
 
 	<PreferenceCategory android:title="@string/settings_advanced" >
-
+		<PreferenceScreen android:key="reset_settings"
+			android:title="@string/reset_settings_" android:summary="@string/reset_settings_hint" />
 	</PreferenceCategory>
 </PreferenceScreen>

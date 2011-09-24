@@ -199,6 +199,15 @@ public class DataProvider {
 		//this.db = databaseHelper.getWritableDatabase();
 	}
 
+	/**
+	 * Reset all data.
+	 */
+	public void resetData() {
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+		databaseHelper.onCreate(db);
+	}
+
 	public long insertTwItem(String username, String text, String profileImageURL) {
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
