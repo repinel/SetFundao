@@ -20,6 +20,7 @@
 package br.repinel.setfundao.data;
 
 import java.net.URL;
+import java.util.Date;
 
 /**
  * Tw Item. Used to list news.
@@ -34,4 +35,6 @@ public class TwItem {
 	public String username;
 
 	public String text;
+
+	public Date createdAt;
 }

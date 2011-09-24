@@ -43,17 +43,23 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="@dimen/text_size_small"
-			android:textColor="@color/text_foreground2" >
-		</TextView>
+			android:textColor="@color/text_foreground2" />
 
 		<TextView
 			android:id="@+id/tw_text"
 			android:text="@string/empty"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textSize="@dimen/text_size_xsmall"
+			android:textSize="@dimen/text_size_small"
 			android:textColor="@color/text_foreground"
-			android:autoLink="web" >
-		</TextView>
+			android:autoLink="web" />
+
+		<TextView
+			android:id="@+id/tw_createdAt"
+			android:text="@string/empty"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="@dimen/text_size_xsmall"
+			android:textColor="@color/text_foreground3" />
 	</LinearLayout>
 </LinearLayout>

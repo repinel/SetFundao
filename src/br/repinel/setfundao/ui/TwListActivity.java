@@ -20,6 +20,7 @@
 package br.repinel.setfundao.ui;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,7 +67,7 @@ import br.repinel.setfundao.ui.prefs.Preferences;
  */
 public class TwListActivity extends ListActivity {
 
-	private ArrayList<TwItem> items = new ArrayList<TwItem>();
+	private TWListAdapter twListAdapter;
 
 	/**
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -83,6 +84,9 @@ public class TwListActivity extends ListActivity {
 			titleView.setText(getTitle());
 		}
 
+		this.twListAdapter = new TWListAdapter(TwListActivity.this, R.layout.tw_list_item, new ArrayList<TwItem>());
+		setListAdapter(twListAdapter);
+
 //		TwItem twItem = new TwItem();
 //		twItem.username = "TranstornoRJ";
 //		twItem.text = "Caminhão enguiçado prejudica trânsito na Avenida Brasil http://t.co/MjOieVla @LeiSecaRJ";
@@ -94,6 +98,19 @@ public class TwListActivity extends ListActivity {
 //		items.add(twItem);
 
 		new TwFetcher().execute();
+	}
+
+	/**
+	 * @see android.app.Activity#onDestroy()
+	 */
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		ArrayList<TwItem> items = this.twListAdapter.items;
+		for (TwItem item : items) {
+			System.out.println("> " + item.text);
+		}
 	}
 
 	/**
@@ -198,6 +215,9 @@ public class TwListActivity extends ListActivity {
 			Query query = new Query(queryFilter);
 
 			try {
+				if (!UIHelper.isOnline(TwListActivity.this))
+					throw new MainException(getResources().getText(R.string.error_network));
+
 				QueryResult result = twitter.search(query);
 
 				for (Tweet tweet : result.getTweets()) {
@@ -216,14 +236,22 @@ public class TwListActivity extends ListActivity {
 					TwItem twItem = new TwItem();
 					twItem.username = tweet.getFromUser();
 					twItem.text = tweet.getText();
+					twItem.createdAt = tweet.getCreatedAt();
 					twItem.profileImageURL = profileImageURL;
 
-					items.add(twItem);
+					twListAdapter.add(twItem);
 				}
 			} catch (TwitterException e) {
 				try {
 					Log.e(TwListActivity.class.getName(), e.getMessage());
 					UIHelper.showMessage(TwListActivity.this, getResources().getText(R.string.error_tw).toString());
+				} catch (Exception e1) {
+					// empty
+				}
+			} catch (Exception e) {
+				try {
+					Log.e(TwListActivity.class.getName(), e.getMessage());
+					UIHelper.showMessage(TwListActivity.this, getResources().getText(R.string.error_network).toString());
 				} catch (Exception e1) {
 					// empty
 				}
@@ -239,7 +267,7 @@ public class TwListActivity extends ListActivity {
 		protected void onPostExecute(Void result) {
 			progressDialog.dismiss();
 
-			setListAdapter(new TWListAdapter(TwListActivity.this, R.layout.tw_list_item, items));
+			twListAdapter.notifyDataSetChanged();
 		}
 
 		private String getQueryFilter() {
@@ -327,6 +355,7 @@ public class TwListActivity extends ListActivity {
 				holder.imageView = (ImageView) convertView.findViewById(R.id.tw_image);
 				holder.usernameView = (TextView) convertView.findViewById(R.id.tw_username);
 				holder.textView = (TextView) convertView.findViewById(R.id.tw_text);
+				holder.createAtView = (TextView) convertView.findViewById(R.id.tw_createdAt);
 
 				convertView.setTag(holder);
 			} else {
@@ -334,8 +363,11 @@ public class TwListActivity extends ListActivity {
 			}
 
 			if (twItem != null) {
+				SimpleDateFormat dataFormat = new SimpleDateFormat(getResources().getText(R.string.date_format).toString());
+
 				holder.usernameView.setText(twItem.username);
 				holder.textView.setText(twItem.text);
+				holder.createAtView.setText(dataFormat.format(twItem.createdAt));
 
 				try {
 					if (twItem.profileImageURL != null) {
@@ -372,5 +404,6 @@ public class TwListActivity extends ListActivity {
 		public ImageView imageView;
 		public TextView usernameView;
 		public TextView textView;
+		public TextView createAtView;
 	}
 }
