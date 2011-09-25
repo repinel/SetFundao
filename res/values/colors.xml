@@ -28,4 +28,6 @@
 
 	<color name="text_foreground2">#2FC2EF</color>
 	<color name="text_foreground3">#01CFB4</color>
+
+	<color name="dialog_text_foreground">#000000</color>	
 </resources>

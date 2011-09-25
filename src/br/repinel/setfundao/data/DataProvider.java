@@ -35,7 +35,7 @@ public class DataProvider {
 	public static final String AUTHORITY = PACKAGE + ".provider";
 
 	public  static final String DATABASE_NAME = "setfundao.db";
-	public static final int DATABASE_VERSION = 13;
+	public static final int DATABASE_VERSION = 14;
 
 	protected DatabaseHelper databaseHelper;
 

@@ -47,9 +47,9 @@
 	</string-array>
 
 	<string-array name="default_tw_filter_hashtags">
-		<item>#AvBrasil</item>
-		<item>#LinhaAmarela</item>
-		<item>#LinhaVermelha</item>
+		<item>AvBrasil</item>
+		<item>LinhaAmarela</item>
+		<item>LinhaVermelha</item>
 	</string-array>
 
 	<string-array name="default_tw_filter_users">

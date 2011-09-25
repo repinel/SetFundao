@@ -117,8 +117,6 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 				View addView = getLayoutInflater().inflate(R.layout.input_ok_cancel, null, false);
 
 				TextView entryLabel = (TextView) addView.findViewById(R.id.entry_label);
-				//int defaultColor = textView.getTextColors().getDefaultColor();
-				//textView.setTextColor(defaultColor);
 
 				if (this.type.equals(this.getString(R.string.tw_words_filter)))
 					entryLabel.setText(this.getString(R.string.word));

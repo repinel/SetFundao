@@ -228,7 +228,7 @@ public class TwListActivity extends ListActivity {
 		for (String hastag : hashtags) {
 			if (!isFirst)
 				sb.append(" OR");
-			sb.append(" ");
+			sb.append(" #");
 			sb.append(hastag);
 			isFirst = false;
 		}

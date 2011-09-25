@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,8 +29,6 @@ public class UIHelper {
 		View messageView = activity.getLayoutInflater().inflate(R.layout.about, null, false);
 
 		TextView textView = (TextView) messageView.findViewById(R.id.about_description);
-		int defaultColor = textView.getTextColors().getDefaultColor();
-		textView.setTextColor(defaultColor);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setIcon(R.drawable.app_icon);
@@ -48,11 +47,11 @@ public class UIHelper {
 		View messageView = activity.getLayoutInflater().inflate(R.layout.message, null, false);
 
 		TextView textView = (TextView) messageView.findViewById(R.id.message);
-		int defaultColor = textView.getTextColors().getDefaultColor();
-		textView.setTextColor(defaultColor);
 		textView.setText(message);
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		ContextThemeWrapper ctw = new ContextThemeWrapper(activity, R.style.Theme_SetFundao );
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(ctw);
 		builder.setIcon(R.drawable.app_icon);
 		builder.setTitle(R.string.app_name);
 		builder.setView(messageView);
