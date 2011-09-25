@@ -38,6 +38,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import br.repinel.R;
 import br.repinel.setfundao.data.TwFilterFacade;
+import br.repinel.setfundao.helper.UIHelper;
 
 /**
  * Allow the user to change the Tw Filters: words, hashtags and users.
@@ -47,12 +48,10 @@ import br.repinel.setfundao.data.TwFilterFacade;
  */
 public class TwFilters extends ListActivity implements OnClickListener, OnItemClickListener, OnItemLongClickListener {
 
-	private static String TAG = "TwFilters";
-	
 	private String type;
 
 	private ArrayAdapter<String> adapter;
-	
+
 	/**
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -134,6 +133,10 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							AlertDialog alertDialog = (AlertDialog) dialog;
+
+							if (alertDialog == null || alertDialog.getCurrentFocus() == null)
+								return;
+
 							EditText entry = (EditText) alertDialog.getCurrentFocus().findViewById(R.id.entry);
 							String value = entry.getText().toString().trim();
 
@@ -145,24 +148,24 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 									twFilterFacade.insertTwFilterWord(value);
 									changed = true;
 								} else {
-									Log.w(TwFilters.TAG, "Word already stored.");
-									//UIHelper.showMessage(TwFilters.this, getString(R.string.error_tw_word_already_stored));
+									Log.w(TwFilters.class.getName(), "Word already stored.");
+									UIHelper.showMessage(TwFilters.this, getString(R.string.error_tw_word_already_stored));
 								}
 							} else if (type.equals(getString(R.string.tw_hashtags_filter))) {
 								if (twFilterFacade.getTwFilterHashtagId(value) < 1) {
 									twFilterFacade.insertTwFilterHashtag(value);
 									changed = true;
 								} else {
-									Log.w(TwFilters.TAG, "Hashtag already stored.");
-									//UIHelper.showMessage(TwFilters.this, getString(R.string.error_tw_hashtag_already_stored));
+									Log.w(TwFilters.class.getName(), "Hashtag already stored.");
+									UIHelper.showMessage(TwFilters.this, getString(R.string.error_tw_hashtag_already_stored));
 								}
 							} else if (type.equals(getString(R.string.tw_users_filter))) {
 								if (twFilterFacade.getTwFilterUserId(value) < 1) {
 									twFilterFacade.insertTwFilterUser(value);
 									changed = true;
 								} else {
-									Log.w(TwFilters.TAG, "User already stored.");
-									//UIHelper.showMessage(TwFilters.this, getString(R.string.error_tw_user_already_stored));
+									Log.w(TwFilters.class.getName(), "User already stored.");
+									UIHelper.showMessage(TwFilters.this, getString(R.string.error_tw_user_already_stored));
 								}
 							}
 
@@ -219,15 +222,15 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 
 							if (type.equals(getString(R.string.tw_words_filter))) {
 								twFilterFacade.deleteTwFilterWord(value);
-								Log.d(TwFilters.TAG, "Word deleted: " + value);
+								Log.d(TwFilters.class.getName(), "Word deleted: " + value);
 								changed = true;
 							} else if (type.equals(getString(R.string.tw_hashtags_filter))) {
 								twFilterFacade.deleteTwFilterHashtag(value);
-								Log.d(TwFilters.TAG, "Hashtag deleted: " + value);
+								Log.d(TwFilters.class.getName(), "Hashtag deleted: " + value);
 								changed = true;
 							} else if (type.equals(getString(R.string.tw_users_filter))) {
 								twFilterFacade.deleteTwFilterUser(value);
-								Log.d(TwFilters.TAG, "User deleted: " + value);
+								Log.d(TwFilters.class.getName(), "User deleted: " + value);
 								changed = true;
 							}
 

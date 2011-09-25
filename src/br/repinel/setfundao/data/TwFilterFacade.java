@@ -50,7 +50,7 @@ public class TwFilterFacade {
 
 	public long getTwFilterWordId(String word) {
 		return this.dataProvider.getId(TwFilterWordData.TABLE_NAME,
-			new String[] { TwFilterWordData.ID }, TwFilterWordData.WORD + " = ?",
+			new String[] { TwFilterWordData.ID }, TwFilterWordData.WORD + " like ?",
 			new String[] { word });
 	}
 
@@ -73,7 +73,7 @@ public class TwFilterFacade {
 
 	public long getTwFilterHashtagId(String hashtag) {
 		return this.dataProvider.getId(TwFilterHashtagData.TABLE_NAME,
-			new String[] { TwFilterHashtagData.ID }, TwFilterHashtagData.HASHTAG + " = ?",
+			new String[] { TwFilterHashtagData.ID }, TwFilterHashtagData.HASHTAG + " like ?",
 			new String[] { hashtag });
 	}
 
@@ -96,7 +96,7 @@ public class TwFilterFacade {
 
 	public long getTwFilterUserId(String username) {
 		return this.dataProvider.getId(TwFilterUserData.TABLE_NAME,
-			new String[] { TwFilterUserData.ID }, TwFilterUserData.USERNAME + " = ?",
+			new String[] { TwFilterUserData.ID }, TwFilterUserData.USERNAME + " like ?",
 			new String[] { username });
 	}
 
