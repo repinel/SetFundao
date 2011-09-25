@@ -105,8 +105,8 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 			if (image != null)
 				ImageHelper.saveImage(CameraActivity.this, image, photoFilename);
 
-				SimpleDateFormat dataFormat = new SimpleDateFormat(getResources().getText(R.string.date_format).toString());
-				UIHelper.setLastFetchDate(getApplicationContext(), photoFilename, dataFormat.format(lastFetchDate));
+				SimpleDateFormat dateFormat = new SimpleDateFormat(getResources().getString(R.string.date_format));
+				UIHelper.setLastFetchDate(getApplicationContext(), photoFilename, dateFormat.format(lastFetchDate));
 		} catch (Exception e) {
 			try {
 				UIHelper.showMessage(CameraActivity.this, e.getMessage());
@@ -240,8 +240,8 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	 */
 	private void setLastFetchDate(Date date) {
 		if (date != null) {
-			SimpleDateFormat dataFormat = new SimpleDateFormat(getResources().getText(R.string.date_format).toString());
-			setLastFetchDate(dataFormat.format(date));
+			SimpleDateFormat dateFormat = new SimpleDateFormat(getResources().getString(R.string.date_format));
+			setLastFetchDate(dateFormat.format(date));
 		}
 		else
 			setLastFetchDate("");
@@ -322,7 +322,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 						final String lastFetchDate = UIHelper.getLastFetchDate(getApplicationContext(), getResources(), photoFilename);
 		
 						setLastFetchDate(lastFetchDate);
-						setImageInfo(getResources().getText(R.string.image_stored_message).toString());
+						setImageInfo(getResources().getString(R.string.image_stored_message));
 					}
 
 					firstTime = false;
@@ -348,7 +348,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 			// fetch new image
 			try {
 				if (!UIHelper.isOnline(CameraActivity.this))
-					throw new MainException(getResources().getText(R.string.error_network));
+					throw new MainException(getResources().getString(R.string.error_network));
 
 				image = ImageHelper.downloadImage(photoURL, getResources());
 				lastFetchDate = new Date();
@@ -380,7 +380,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 				setImageInfo(null);
 			} else if (message != null) {
 				try {
-					setImageInfo(getResources().getText(R.string.image_stored_message).toString());
+					setImageInfo(getResources().getString(R.string.image_stored_message));
 					UIHelper.showMessage(CameraActivity.this, message);
 				} catch (Exception e1) {
 					// empty

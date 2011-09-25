@@ -57,7 +57,7 @@ public class UIHelper {
 		builder.setTitle(R.string.app_name);
 		builder.setView(messageView);
 		builder.setCancelable(false);
-		builder.setPositiveButton(activity.getResources().getText(R.string.btn_message_box_ok).toString(), null);
+		builder.setPositiveButton(activity.getResources().getString(R.string.btn_message_box_ok), null);
 		builder.create();
 		builder.show();
 	}
