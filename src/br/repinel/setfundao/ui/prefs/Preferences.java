@@ -77,6 +77,8 @@ public class Preferences extends PreferenceActivity implements
 		DataProvider dataProvider = new DataProvider(this);
 		dataProvider.resetData();
 
-		UIHelper.showMessage(this, this.getString(R.string.reset_settings_message));
+		UIHelper.setUpdateInterval(this, getString(R.string.default_update_interval));
+
+		UIHelper.showMessage(this, getString(R.string.reset_settings_message));
 	}
 }

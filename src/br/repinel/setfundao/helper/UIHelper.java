@@ -96,6 +96,20 @@ public class UIHelper {
 	}
 
 	/**
+	 * Set the time interval to update the image.
+	 * 
+	 * @param context The activity context
+	 * @param value The value to be setted
+	 */
+	public static void setUpdateInterval(Context context, String value) {
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+
+		SharedPreferences.Editor editor = pref.edit();
+		editor.putString(Preferences.PREFS_UPDATE_INTERVAL, value);
+		editor.commit();
+	}
+
+	/**
 	 * Get the date of the last fetched image of a camera.
 	 * 
 	 * @param context The activity context

@@ -28,7 +28,7 @@
 			android:summary="@string/update_interval_hint"
 			android:entries="@array/update_interval"
 			android:entryValues="@array/update_interval_values"
-			android:defaultValue="1000" />
+			android:defaultValue="@string/default_update_interval" />
 	</PreferenceCategory>
 
 	<PreferenceCategory android:title="@string/settings_tw" >
