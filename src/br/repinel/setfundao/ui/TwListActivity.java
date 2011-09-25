@@ -35,7 +35,6 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.User;
 import android.app.ListActivity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -70,6 +69,8 @@ public class TwListActivity extends ListActivity {
 
 	private TWListAdapter twListAdapter;
 
+	private boolean loadSaved;
+
 	/**
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -85,6 +86,10 @@ public class TwListActivity extends ListActivity {
 			titleView.setText(getTitle());
 		}
 
+		twListAdapter = new TWListAdapter(TwListActivity.this, R.layout.tw_list_item, new ArrayList<TwItem>());
+		setListAdapter(twListAdapter);
+
+		loadSaved = true;
 		new TwFetcher().execute();
 	}
 
@@ -178,6 +183,7 @@ public class TwListActivity extends ListActivity {
 	public void onRefreshClick(View v) {
 		AnalyticsHelper.getInstance(this).trackEvent(getTitle().toString(), "Click", "Refresh", 0);
 
+		loadSaved = false;
 		new TwFetcher().execute();
 	}
 
@@ -249,8 +255,6 @@ public class TwListActivity extends ListActivity {
 	 */
 	private class TwFetcher extends AsyncTask<Void, Void, Void> {
 
-//		private ProgressDialog progressDialog;
-
 		ArrayList<TwItem> items;
 
 		/**
@@ -259,18 +263,24 @@ public class TwListActivity extends ListActivity {
 		@Override
 		protected void onPreExecute() {
 			updateRefreshStatus(true);
-//			progressDialog = ProgressDialog.show(TwListActivity.this,
-//					getResources().getString(R.string.empty),
-//					getResources().getString(R.string.tw_loading), true);
 
 			TwItemFacade TwItemFacade = new TwItemFacade(TwListActivity.this);
 
-			Log.d(getClass().getName(), "TwItem. Loading all items");
+			if (loadSaved) {
+				Log.d(getClass().getName(), "TwItem. Loading all items");
 
-			items = (ArrayList<TwItem>) TwItemFacade.selectAllTwItems();
-
-			twListAdapter = new TWListAdapter(TwListActivity.this, R.layout.tw_list_item, items);
-			setListAdapter(twListAdapter);
+				items = (ArrayList<TwItem>) TwItemFacade.selectAllTwItems();
+	
+				if (!items.isEmpty()) {
+					twListAdapter.clear();
+	
+					for (TwItem twItem : items) {
+						twListAdapter.add(twItem);
+					}
+	
+					twListAdapter.notifyDataSetChanged();
+				}
+			}
 		}
 
 		/**
@@ -346,7 +356,6 @@ public class TwListActivity extends ListActivity {
 		@Override
 		protected void onPostExecute(Void result) {
 			updateRefreshStatus(false);
-//			progressDialog.dismiss();
 
 			if (!items.isEmpty()) {
 				twListAdapter.clear();
