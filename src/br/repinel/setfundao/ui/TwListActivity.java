@@ -19,9 +19,9 @@
 
 package br.repinel.setfundao.ui;
 
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +38,6 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,8 +52,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import br.repinel.R;
-import br.repinel.setfundao.data.DataProvider;
-import br.repinel.setfundao.data.TwItem;
+import br.repinel.setfundao.core.TwItem;
+import br.repinel.setfundao.core.TwUser;
+import br.repinel.setfundao.data.TwFilterFacade;
+import br.repinel.setfundao.data.TwItemFacade;
 import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.ImageHelper;
 import br.repinel.setfundao.helper.UIHelper;
@@ -84,19 +85,6 @@ public class TwListActivity extends ListActivity {
 			titleView.setText(getTitle());
 		}
 
-		this.twListAdapter = new TWListAdapter(TwListActivity.this, R.layout.tw_list_item, new ArrayList<TwItem>());
-		setListAdapter(twListAdapter);
-
-//		TwItem twItem = new TwItem();
-//		twItem.username = "TranstornoRJ";
-//		twItem.text = "Caminhão enguiçado prejudica trânsito na Avenida Brasil http://t.co/MjOieVla @LeiSecaRJ";
-//		try {
-//			twItem.profileImageURL = new URL("https://si0.twimg.com/profile_images/746475730/Rio_de_Janeiro1_normal.jpg");
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//		}
-//		items.add(twItem);
-
 		new TwFetcher().execute();
 	}
 
@@ -109,15 +97,15 @@ public class TwListActivity extends ListActivity {
 
 		ArrayList<TwItem> items = this.twListAdapter.items;
 
-		DataProvider dataProvider = new DataProvider(this);
+		TwItemFacade TwItemFacade = new TwItemFacade(this);
 
 		Log.d(getClass().getName(), "TwItem. Deleting all items");
-		dataProvider.deleteAllTwItems();
+		TwItemFacade.deleteAllTwItems();
 
-		Log.d(getClass().getName(), "TwItem. Storing " + items.size() + " new TwItems");
+		Log.d(getClass().getName(), "TwItem. Saving " + items.size() + " new items");
 
 		for (TwItem item : items) {
-			dataProvider.insertTwItem(item);
+			TwItemFacade.insertTwItem(item);
 		}
 	}
 
@@ -183,6 +171,75 @@ public class TwListActivity extends ListActivity {
 	}
 
 	/**
+	 * Called when Refresh is clicked.
+	 * 
+	 * @param v The view
+	 */
+	public void onRefreshClick(View v) {
+		AnalyticsHelper.getInstance(this).trackEvent(getTitle().toString(), "Click", "Refresh", 0);
+
+		new TwFetcher().execute();
+	}
+
+	/**
+	 * Update the refresh status. Show a progress circle when updating the image.
+	 * 
+	 * @param working If it is updating or not.
+	 */
+	private void updateRefreshStatus(boolean working) {
+		View refreshView = findViewById(R.id.btn_refresh);
+		View refreshProgressView = findViewById(R.id.refresh_progress);
+
+		if (refreshView != null && refreshProgressView != null) {
+			refreshView.setVisibility(working ? View.GONE : View.VISIBLE);
+			refreshProgressView.setVisibility(working ? View.VISIBLE : View.GONE);
+		}
+	}
+
+	/**
+	 * Put all filters together and build the query.
+	 * 
+	 * @return The query built
+	 */
+	private String getQueryFilter() {
+		TwFilterFacade twFilterFacade = new TwFilterFacade(TwListActivity.this);
+
+		List<String> words = twFilterFacade.selectAllTwFilterWords();
+		List<String> hashtags = twFilterFacade.selectAllTwFilterHashtags();
+		List<String> users = twFilterFacade.selectAllTwFilterUsers();
+
+		StringBuilder sb = new StringBuilder();
+
+		boolean isFirst = true;
+		for (String word : words) {
+			if (!isFirst)
+				sb.append(" OR");
+			sb.append(" ");
+			sb.append(word);
+			isFirst = false;
+		}
+
+		for (String hastag : hashtags) {
+			if (!isFirst)
+				sb.append(" OR");
+			sb.append(" ");
+			sb.append(hastag);
+			isFirst = false;
+		}
+
+		isFirst = true;
+		for (String user : users) {
+			if (!isFirst)
+				sb.append(" OR");
+			sb.append(" from:");
+			sb.append(user);
+			isFirst = false;
+		}
+
+		return sb.toString().trim();
+	}
+
+	/**
 	 * TwFetcher.
 	 * 
 	 * Async news download.
@@ -192,14 +249,28 @@ public class TwListActivity extends ListActivity {
 	 */
 	private class TwFetcher extends AsyncTask<Void, Void, Void> {
 
-		private ProgressDialog progressDialog;
+//		private ProgressDialog progressDialog;
+
+		ArrayList<TwItem> items;
 
 		/**
 		 * @see android.os.AsyncTask#onPreExecute()
 		 */
 		@Override
 		protected void onPreExecute() {
-			progressDialog = ProgressDialog.show(TwListActivity.this, "", getResources().getText(R.string.tw_loading).toString(), true);
+			updateRefreshStatus(true);
+//			progressDialog = ProgressDialog.show(TwListActivity.this,
+//					getResources().getString(R.string.empty),
+//					getResources().getString(R.string.tw_loading), true);
+
+			TwItemFacade TwItemFacade = new TwItemFacade(TwListActivity.this);
+
+			Log.d(getClass().getName(), "TwItem. Loading all items");
+
+			items = (ArrayList<TwItem>) TwItemFacade.selectAllTwItems();
+
+			twListAdapter = new TWListAdapter(TwListActivity.this, R.layout.tw_list_item, items);
+			setListAdapter(twListAdapter);
 		}
 
 		/**
@@ -209,57 +280,58 @@ public class TwListActivity extends ListActivity {
 		protected Void doInBackground(Void... arg0) {
 			Log.d(TwListActivity.class.getName(), "Fetching tweets...");
 
-//			if (true)
-//				return null;
-
-			Map<String, URL> imageURLCache = new HashMap<String, URL>();
+			Map<String, TwUser> userCache = new HashMap<String, TwUser>();
 
 			Twitter twitter = new TwitterFactory().getInstance();
 
-			//String queryFilter = "fundao OR brasil OR vermelha OR amarela OR #AvBrasil OR #LinhaAmarela OR #LinhaVermelha from:CETRIO_ONLINE OR from:TranstornoRJ OR from:transitorj";
 			String queryFilter = getQueryFilter();
 			Log.d(TwListActivity.class.getName(), queryFilter);
 
 			Query query = new Query(queryFilter);
 
 			try {
+				items = new ArrayList<TwItem>();
+
 				if (!UIHelper.isOnline(TwListActivity.this))
-					throw new MainException(getResources().getText(R.string.error_network));
+					throw new MainException(getResources().getString(R.string.error_network));
 
 				QueryResult result = twitter.search(query);
 
 				for (Tweet tweet : result.getTweets()) {
 					Log.d(TwListActivity.class.getName(), tweet.getFromUser() + ": " + tweet.getText());
 
-					URL profileImageURL;
+					TwUser twUser;
 
-					if (imageURLCache.containsKey(tweet.getFromUser())) {
-						profileImageURL = imageURLCache.get(tweet.getFromUser());
+					if (userCache.containsKey(tweet.getFromUser())) {
+						twUser = userCache.get(tweet.getFromUser());
 					} else {
 						User user = twitter.showUser(tweet.getFromUser());
-						profileImageURL = user.getProfileImageURL();
-						imageURLCache.put(tweet.getFromUser(), profileImageURL);
+
+						twUser = new TwUser();
+						twUser.username = tweet.getFromUser();
+						twUser.profileImageURL = user.getProfileImageURL();
+
+						userCache.put(tweet.getFromUser(), twUser);
 					}
 
 					TwItem twItem = new TwItem();
-					twItem.username = tweet.getFromUser();
 					twItem.text = tweet.getText();
 					twItem.createdAt = tweet.getCreatedAt();
-					twItem.profileImageURL = profileImageURL;
+					twItem.user = twUser;
 
-					twListAdapter.add(twItem);
+					items.add(twItem);
 				}
 			} catch (TwitterException e) {
 				try {
 					Log.e(TwListActivity.class.getName(), e.getMessage());
-					UIHelper.showMessage(TwListActivity.this, getResources().getText(R.string.error_tw).toString());
+					UIHelper.showMessage(TwListActivity.this, getResources().getString(R.string.error_tw));
 				} catch (Exception e1) {
 					// empty
 				}
 			} catch (Exception e) {
 				try {
 					Log.e(TwListActivity.class.getName(), e.getMessage());
-					UIHelper.showMessage(TwListActivity.this, getResources().getText(R.string.error_network).toString());
+					UIHelper.showMessage(TwListActivity.this, getResources().getString(R.string.error_network));
 				} catch (Exception e1) {
 					// empty
 				}
@@ -273,47 +345,18 @@ public class TwListActivity extends ListActivity {
 		 */
 		@Override
 		protected void onPostExecute(Void result) {
-			progressDialog.dismiss();
+			updateRefreshStatus(false);
+//			progressDialog.dismiss();
 
-			twListAdapter.notifyDataSetChanged();
-		}
+			if (!items.isEmpty()) {
+				twListAdapter.clear();
 
-		private String getQueryFilter() {
-			DataProvider dataProvider = new DataProvider(TwListActivity.this);
+				for (TwItem twItem : items) {
+					twListAdapter.add(twItem);
+				}
 
-			List<String> words = dataProvider.selectAllTwFilterWords();
-			List<String> hashtags = dataProvider.selectAllTwFilterHashtags();
-			List<String> users = dataProvider.selectAllTwFilterUsers();
-
-			StringBuilder sb = new StringBuilder();
-
-			boolean isFirst = true;
-			for (String word : words) {
-				if (!isFirst)
-					sb.append(" OR");
-				sb.append(" ");
-				sb.append(word);
-				isFirst = false;
+				twListAdapter.notifyDataSetChanged();
 			}
-
-			for (String hastag : hashtags) {
-				if (!isFirst)
-					sb.append(" OR");
-				sb.append(" ");
-				sb.append(hastag);
-				isFirst = false;
-			}
-
-			isFirst = true;
-			for (String user : users) {
-				if (!isFirst)
-					sb.append(" OR");
-				sb.append(" from:");
-				sb.append(user);
-				isFirst = false;
-			}
-
-			return sb.toString().trim();
 		}
 	}
 
@@ -326,8 +369,6 @@ public class TwListActivity extends ListActivity {
 		private LayoutInflater mInflater;
 
 		private ArrayList<TwItem> items;
-
-		private Map<String, Bitmap> imageCache = new HashMap<String, Bitmap>();
 
 		/**
 		 * @param context
@@ -363,7 +404,7 @@ public class TwListActivity extends ListActivity {
 				holder.imageView = (ImageView) convertView.findViewById(R.id.tw_image);
 				holder.usernameView = (TextView) convertView.findViewById(R.id.tw_username);
 				holder.textView = (TextView) convertView.findViewById(R.id.tw_text);
-				holder.createAtView = (TextView) convertView.findViewById(R.id.tw_createdAt);
+				holder.createdAtView = (TextView) convertView.findViewById(R.id.tw_createdAt);
 
 				convertView.setTag(holder);
 			} else {
@@ -371,25 +412,34 @@ public class TwListActivity extends ListActivity {
 			}
 
 			if (twItem != null) {
-				SimpleDateFormat dataFormat = new SimpleDateFormat(getResources().getText(R.string.date_format).toString());
+				SimpleDateFormat dateFormat = new SimpleDateFormat(getResources().getString(R.string.date_format));
 
-				holder.usernameView.setText(twItem.username);
+				if (twItem.user != null)
+					holder.usernameView.setText(twItem.user.username);
+
 				holder.textView.setText(twItem.text);
-				holder.createAtView.setText(dataFormat.format(twItem.createdAt));
+
+				long diffHours = (new Date().getTime() - twItem.createdAt.getTime()) / (60 * 60 * 1000);
+
+				String createdAtStr;
+				if (diffHours > 1)
+					createdAtStr = getResources().getString(R.string.tw_date_and_hours_ago, dateFormat.format(twItem.createdAt), diffHours);
+				else 
+					createdAtStr = getResources().getString(R.string.tw_date_and_hour_ago, dateFormat.format(twItem.createdAt), diffHours);
+
+				holder.createdAtView.setText(createdAtStr);
 
 				try {
-					if (twItem.profileImageURL != null) {
-						Bitmap image;
-
-						if (imageCache.containsKey(twItem.username)) {
-							image = imageCache.get(twItem.username);
-						} else {
-							image = ImageHelper.realDownloadImage(twItem.profileImageURL, getResources());
-							imageCache.put(twItem.username, image);
+					if (twItem.user != null && twItem.user.profileImageURL != null) {
+						if (twItem.user.profileImage == null) {
+							twItem.user.profileImage = ImageHelper.realDownloadImage(twItem.user.profileImageURL, getResources());
 						}
 
-						holder.imageView.setImageBitmap(image);
+						holder.imageView.setImageBitmap(twItem.user.profileImage);
 					}
+
+					if (twItem.user.profileImage != null)
+						holder.imageView.setImageBitmap(twItem.user.profileImage);
 				} catch (MainException e) {
 					try {
 						Log.e(TwListActivity.class.getName(), e.getMessage());
@@ -412,6 +462,6 @@ public class TwListActivity extends ListActivity {
 		public ImageView imageView;
 		public TextView usernameView;
 		public TextView textView;
-		public TextView createAtView;
+		public TextView createdAtView;
 	}
 }

@@ -37,7 +37,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 import br.repinel.R;
-import br.repinel.setfundao.data.DataProvider;
+import br.repinel.setfundao.data.TwFilterFacade;
 
 /**
  * Allow the user to change the Tw Filters: words, hashtags and users.
@@ -93,16 +93,16 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 	 * Load the data to be shown.
 	 */
 	private void loadData() {
-		DataProvider dataProvider = new DataProvider(this);
+		TwFilterFacade twFilterFacade = new TwFilterFacade(this);
 
 		List<String> values = null;
 
 		if (this.type.equals(this.getString(R.string.tw_words_filter)))
-			values = dataProvider.selectAllTwFilterWords();
+			values = twFilterFacade.selectAllTwFilterWords();
 		else if (this.type.equals(this.getString(R.string.tw_hashtags_filter)))
-			values = dataProvider.selectAllTwFilterHashtags();
+			values = twFilterFacade.selectAllTwFilterHashtags();
 		else if (this.type.equals(this.getString(R.string.tw_users_filter)))
-			values = dataProvider.selectAllTwFilterUsers();
+			values = twFilterFacade.selectAllTwFilterUsers();
 
 		this.adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
 
@@ -137,28 +137,28 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 							EditText entry = (EditText) alertDialog.getCurrentFocus().findViewById(R.id.entry);
 							String value = entry.getText().toString().trim();
 
-							DataProvider dataProvider = new DataProvider(TwFilters.this);
+							TwFilterFacade twFilterFacade = new TwFilterFacade(TwFilters.this);
 							boolean changed = false;
 
 							if (type.equals(getString(R.string.tw_words_filter))) {
-								if (dataProvider.getTwFilterWord(value) <= 0) {
-									dataProvider.insertTwFilterWord(value);
+								if (twFilterFacade.getTwFilterWordId(value) < 1) {
+									twFilterFacade.insertTwFilterWord(value);
 									changed = true;
 								} else {
 									Log.w(TwFilters.TAG, "Word already stored.");
 									//UIHelper.showMessage(TwFilters.this, getString(R.string.error_tw_word_already_stored));
 								}
 							} else if (type.equals(getString(R.string.tw_hashtags_filter))) {
-								if (dataProvider.getTwFilterHashtag(value) <= 0) {
-									dataProvider.insertTwFilterHashtag(value);
+								if (twFilterFacade.getTwFilterHashtagId(value) < 1) {
+									twFilterFacade.insertTwFilterHashtag(value);
 									changed = true;
 								} else {
 									Log.w(TwFilters.TAG, "Hashtag already stored.");
 									//UIHelper.showMessage(TwFilters.this, getString(R.string.error_tw_hashtag_already_stored));
 								}
 							} else if (type.equals(getString(R.string.tw_users_filter))) {
-								if (dataProvider.getTwFilterUser(value) <= 0) {
-									dataProvider.insertTwFilterUser(value);
+								if (twFilterFacade.getTwFilterUserId(value) < 1) {
+									twFilterFacade.insertTwFilterUser(value);
 									changed = true;
 								} else {
 									Log.w(TwFilters.TAG, "User already stored.");
@@ -214,19 +214,19 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 						case 0:
 							String value = adapter.getItem(position);
 
-							DataProvider dataProvider = new DataProvider(TwFilters.this);
+							TwFilterFacade twFilterFacade = new TwFilterFacade(TwFilters.this);
 							boolean changed = false;
 
 							if (type.equals(getString(R.string.tw_words_filter))) {
-								dataProvider.deleteTwFilterWord(value);
+								twFilterFacade.deleteTwFilterWord(value);
 								Log.d(TwFilters.TAG, "Word deleted: " + value);
 								changed = true;
 							} else if (type.equals(getString(R.string.tw_hashtags_filter))) {
-								dataProvider.deleteTwFilterHashtag(value);
+								twFilterFacade.deleteTwFilterHashtag(value);
 								Log.d(TwFilters.TAG, "Hashtag deleted: " + value);
 								changed = true;
 							} else if (type.equals(getString(R.string.tw_users_filter))) {
-								dataProvider.deleteTwFilterUser(value);
+								twFilterFacade.deleteTwFilterUser(value);
 								Log.d(TwFilters.TAG, "User deleted: " + value);
 								changed = true;
 							}

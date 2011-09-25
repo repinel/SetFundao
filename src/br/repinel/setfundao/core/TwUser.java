@@ -17,24 +17,21 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.repinel.setfundao.data;
+package br.repinel.setfundao.core;
 
 import java.net.URL;
-import java.util.Date;
+
+import android.graphics.Bitmap;
 
 /**
- * Tw Item. Used to list news.
+ * Tw User.
  * 
  * @author Roque Pinel
  *
  */
-public class TwItem {
-
-	public URL profileImageURL;
-
+public class TwUser {
 	public String username;
 
-	public String text;
-
-	public Date createdAt;
+	public URL profileImageURL;
+	public Bitmap profileImage;
 }

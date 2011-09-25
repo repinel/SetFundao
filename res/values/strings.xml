@@ -17,7 +17,7 @@
 		copy of the GNU General Public License along with this program; If
 		not, see <http://www.gnu.org/licenses/>.
 	-->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
 	<!-- Application -->
 
@@ -127,6 +127,8 @@
 	<string name="empty"></string>
 
 	<string name="tw_loading">Loading. Please wait...</string>
+	<string name="tw_date_and_hour_ago"><xliff:g id="date">%s</xliff:g> - <xliff:g id="hours">%d</xliff:g> hora atrás</string>
+	<string name="tw_date_and_hours_ago"><xliff:g id="date">%s</xliff:g> - <xliff:g id="hours">%d</xliff:g> horas atrás</string>
 
 	<!-- Errors -->
 

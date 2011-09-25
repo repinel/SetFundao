@@ -36,6 +36,18 @@
 
 		<ImageView style="@style/BarSeparator" />
 		<TextView style="@style/BarText" />
+
+		<ImageView style="@style/BarSeparator" />
+		<ImageButton
+			style="@style/BarAction"
+			android:id="@+id/btn_refresh"
+			android:contentDescription="@string/description_refresh"
+			android:src="@drawable/ic_refresh"
+			android:onClick="onRefreshClick" />
+		<ProgressBar
+			style="@style/BarProgressIndicator"
+			android:id="@+id/refresh_progress"
+			android:visibility="gone" />
 	</LinearLayout>
 
 	<ListView

@@ -46,11 +46,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		DataProvider.TwUserData.onCreate(db);
-		DataProvider.TwItemData.onCreate(db);
-		DataProvider.TwFilterWordData.onCreate(context, db);
-		DataProvider.TwFilterHashtagData.onCreate(context, db);
-		DataProvider.TwFilterUserData.onCreate(context, db);
+		TwUserData.onCreate(db);
+		TwItemData.onCreate(db);
+		TwFilterWordData.onCreate(context, db);
+		TwFilterHashtagData.onCreate(context, db);
+		TwFilterUserData.onCreate(context, db);
 	}
 
 	/**
@@ -58,10 +58,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		DataProvider.TwUserData.onUpgrade(db, oldVersion, newVersion);
-		DataProvider.TwItemData.onUpgrade(db, oldVersion, newVersion);
-		DataProvider.TwFilterWordData.onUpgrade(context, db, oldVersion, newVersion);
-		DataProvider.TwFilterHashtagData.onUpgrade(context, db, oldVersion, newVersion);
-		DataProvider.TwFilterUserData.onUpgrade(context, db, oldVersion, newVersion);
+		TwUserData.onUpgrade(db, oldVersion, newVersion);
+		TwItemData.onUpgrade(db, oldVersion, newVersion);
+		TwFilterWordData.onUpgrade(context, db, oldVersion, newVersion);
+		TwFilterHashtagData.onUpgrade(context, db, oldVersion, newVersion);
+		TwFilterUserData.onUpgrade(context, db, oldVersion, newVersion);
 	}
 }
