@@ -48,6 +48,13 @@
 			style="@style/BarProgressIndicator"
 			android:id="@+id/refresh_progress"
 			android:visibility="gone" />
+
+		<ImageView style="@style/BarSeparator" />
+		<ImageButton
+			style="@style/BarAction"
+			android:contentDescription="@string/description_tw"
+			android:src="@drawable/ic_tw"
+			android:onClick="onTwClick" />
 	</LinearLayout>
 
 	<ImageView

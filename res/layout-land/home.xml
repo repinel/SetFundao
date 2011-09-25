@@ -34,6 +34,13 @@
 			android:src="@drawable/title_logo" />
 
 		<View style="@style/BarEmptySpace" />
+
+		<ImageView style="@style/BarSeparator" />
+		<ImageButton
+			style="@style/BarAction"
+			android:contentDescription="@string/description_tw"
+			android:src="@drawable/ic_tw"
+			android:onClick="onTwClick" />
 	</LinearLayout>
 
 	<LinearLayout

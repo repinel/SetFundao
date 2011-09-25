@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import br.repinel.R;
 import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.UIHelper;
@@ -93,5 +94,15 @@ public class BaseActivity extends Activity {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Open the Tw view.
+	 * 
+	 * @param v The view.
+	 */
+	public void onTwClick(View v) {
+		Intent intent = new Intent(this, TwListActivity.class);
+		startActivity(intent);
 	}
 }

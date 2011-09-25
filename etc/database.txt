@@ -1,0 +1,11 @@
+adb -s emulator-5554 shell
+
+sqlite3 /data/data/br.repinel/databases/setfundao.db
+
+select * from tw_filter_word;
+select * from tw_filter_hashtag;
+select * from tw_filter_user;
+
+select * from tw_item;
+select * from tw_user;
+

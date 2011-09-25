@@ -70,7 +70,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.tab);
+		setContentView(R.layout.main_image);
 
 		this.firstTime = true;
 		this.stopScheduling = false;

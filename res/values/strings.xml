@@ -108,6 +108,7 @@
 	<string name="description_logo">SetFundao</string>
 	<string name="description_home">Home</string>
 	<string name="description_refresh">Refresh</string>
+	<string name="description_tw">Últimos Tweets</string>
 
 	<string name="title_tw_list">Últimos Tweets</string>
 
@@ -115,8 +116,6 @@
 	<string name="btn_camera2">Prefeitura</string>
 	<string name="btn_camera3">H.U.</string>
 	<string name="btn_camera4">Terminal</string>
-
-	<string name="btn_tw">Últimos Tweets</string>
 
 	<string name="btn_message_box_ok">Ok</string>
 

@@ -104,9 +104,4 @@ public class HomeActivity extends BaseActivity {
 		intent.putExtra(CameraActivity.BUNDLE_INDEX, 3);
 		startActivity(intent);
 	}
-
-	public void onTwitterClick(View v) {
-		Intent intent = new Intent(this, TwListActivity.class);
-		startActivity(intent);
-	}
 }
