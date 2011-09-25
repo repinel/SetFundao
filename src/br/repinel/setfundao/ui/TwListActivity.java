@@ -48,7 +48,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import br.repinel.R;
 import br.repinel.setfundao.core.TwItem;
@@ -152,14 +151,6 @@ public class TwListActivity extends ListActivity {
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
-	 */
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
 	}
 
 	/**

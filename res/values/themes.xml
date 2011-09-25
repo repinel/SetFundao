@@ -21,7 +21,7 @@
 	<style name="Theme.SetFundao" parent="android:style/Theme.Light">
 		<item name="android:windowNoTitle">true</item>
 		<item name="android:windowContentOverlay">@null</item>
-		<item name="android:alertDialogStyle">@style/dialog</item>
+		<item name="android:alertDialogStyle">@style/Dialog</item>
 	</style>
 
 	<style name="HomeButton">
@@ -38,19 +38,7 @@
 
 	<!-- Dialog -->
 
-	<style name="base">
-		<item name="android:padding">10dp</item>
-	</style>
-	<style name="title" parent="@style/base">
-		<item name="android:textColor">#FFFFFF</item>
-		<item name="android:textSize">16sp</item>
-		<item name="android:textStyle">bold</item>
-	</style>
-	<style name="body" parent="@style/base">
-		<item name="android:textColor">#000000</item>
-		<item name="android:textStyle">normal</item>
-	</style>
-	<style name="dialog">
+	<style name="Dialog">
 		<item name="android:fullDark">@drawable/dialog_body</item>
 		<item name="android:topDark">@drawable/dialog_title</item>
 		<item name="android:centerDark">@drawable/dialog_body</item>

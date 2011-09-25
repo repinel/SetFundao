@@ -56,7 +56,11 @@
 		android:layout_height="fill_parent"
 		android:drawSelectorOnTop="false"
 		android:scrollingCache="true"
-		android:fastScrollEnabled="true" />
+		android:fastScrollEnabled="true"
+		android:focusable="false"
+		android:focusableInTouchMode="false"
+		android:clickable="false"
+		android:cacheColorHint="#00000000" />
 
 	<com.google.ads.AdView
 		android:id="@+id/adView"
