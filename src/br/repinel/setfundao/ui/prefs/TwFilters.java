@@ -242,7 +242,7 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 					}
 				}
 			});
-		builder.setNegativeButton(android.R.string.cancel, null);
+		//builder.setNegativeButton(android.R.string.cancel, null);
 		builder.show();
 
 		return false;
