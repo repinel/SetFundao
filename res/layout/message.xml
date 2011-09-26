@@ -31,5 +31,5 @@
 		android:paddingTop="20dip"
 		android:textSize="16sp"
 		android:autoLink="web"
-		android:textColor="@color/dialog_text_foreground" />
+		android:textColor="@color/dialog_message_foreground" />
 </LinearLayout>

@@ -43,7 +43,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="@dimen/text_size_small"
-			android:textColor="@color/text_foreground2" />
+			android:textColor="@color/tw_username_foreground" />
 
 		<TextView
 			android:id="@+id/tw_text"
@@ -51,8 +51,9 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="@dimen/text_size_small"
-			android:textColor="@color/text_foreground"
-			android:autoLink="web" />
+			android:textColor="@color/tw_text_foreground"
+			android:autoLink="web"
+			android:textColorLink="@color/tw_hyperlink_foreground" />
 
 		<TextView
 			android:id="@+id/tw_createdAt"
@@ -60,6 +61,6 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="@dimen/text_size_xsmall"
-			android:textColor="@color/text_foreground3" />
+			android:textColor="@color/tw_date_foreground" />
 	</LinearLayout>
 </LinearLayout>

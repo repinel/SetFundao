@@ -31,5 +31,6 @@
 		android:textSize="16sp"
 		android:text="@string/app_description"
 		android:autoLink="web"
-		android:textColor="?android:attr/textColorPrimaryInverse" />
+		android:textColor="@color/dialog_about_foreground"
+		android:textColorLink="@color/about_hyperlink_foreground" />
 </LinearLayout>

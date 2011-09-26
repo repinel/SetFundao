@@ -23,11 +23,15 @@
 
 	<color name="home_text_foreground">#D9D9D9</color>
 
-	<color name="text_foreground">#FFFFFF</color>
-	<color name="text_background">#000000</color>
+	<color name="image_text_foreground">#FFFFFF</color>
 
-	<color name="text_foreground2">#2FC2EF</color>
-	<color name="text_foreground3">#01CFB4</color>
+	<color name="about_hyperlink_foreground">#003399</color>
 
-	<color name="dialog_text_foreground">#000000</color>	
+	<color name="dialog_message_foreground">#000000</color>
+	<color name="dialog_about_foreground">#FFFFFF</color>
+
+	<color name="tw_username_foreground">#2FC2EF</color>
+	<color name="tw_text_foreground">#FFFFFF</color>
+	<color name="tw_date_foreground">#01CFB4</color>
+	<color name="tw_hyperlink_foreground">#2286F6</color>
 </resources>

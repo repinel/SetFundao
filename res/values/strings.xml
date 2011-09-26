@@ -138,7 +138,7 @@
 	<string name="error_unknow_service">Protocolo não suporta entrada</string>
 	<string name="error_file_not_found">Não foi possível salvar a imagem</string>
 	<string name="error_input_output">Não foi possível salvar a imagem</string>
-	<string name="error_network">Ative a rede de dados para atualizar a imagem</string>
+	<string name="error_network">Ative a rede de dados para atualizar</string>
 	<string name="error_tw">Não foi possível obter os Tweets</string>
 
 	<string name="error_tw_word_already_stored">Palavra já inserida</string>

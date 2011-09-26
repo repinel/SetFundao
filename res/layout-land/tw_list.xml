@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!--
+		Copyright (C) 2011 Roque Pinel
+	-->
+	<!--
+		This file is part of SetFundao. This program is free software; you
+		can redistribute it and/or modify it under the terms of the GNU
+		General Public License as published by the Free Software Foundation;
+		either version 3 of the License, or (at your option) any later
+		version.
+	-->
+	<!--
+		This program is distributed in the hope that it will be useful, but
+		WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+		General Public License for more details. You should have received a
+		copy of the GNU General Public License along with this program; If
+		not, see <http://www.gnu.org/licenses/>.
+	-->
+<LinearLayout
+	android:id="@+id/camera"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="horizontal"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/br.repinel"
+	android:background="@drawable/background" >
+
+	<LinearLayout style="@style/BarVertical">
+		<ImageButton
+			style="@style/BarActionVertical"
+			android:contentDescription="@string/description_home"
+			android:src="@drawable/ic_home"
+			android:onClick="onHomeClick" />
+
+		<View style="@style/BarEmptySpace" />
+
+		<ImageView style="@style/BarSeparatorVertical" />
+		<ImageButton
+			style="@style/BarActionVertical"
+			android:id="@+id/btn_refresh"
+			android:contentDescription="@string/description_refresh"
+			android:src="@drawable/ic_refresh"
+			android:onClick="onRefreshClick" />
+		<ProgressBar
+			style="@style/BarProgressIndicatorVertical"
+			android:id="@+id/refresh_progress"
+			android:visibility="gone" />
+	</LinearLayout>
+
+	<ListView
+		android:id="@id/android:list"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:drawSelectorOnTop="false"
+		android:scrollingCache="true"
+		android:fastScrollEnabled="true"
+		android:focusable="false"
+		android:focusableInTouchMode="false"
+		android:clickable="false"
+		android:cacheColorHint="#00000000" />
+</LinearLayout>

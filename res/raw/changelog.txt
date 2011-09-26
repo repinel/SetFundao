@@ -2,27 +2,27 @@
 	<head>
 		<style type='text/css'>
 			a {
-				color:#a0a0e0
+				color: #003399
 				}
 			div.title {
-				color:#C0F0C0; 
-				font-size:1.2em; 
-				font-weight:bold; 
-				margin-top:1em; 
-				margin-bottom:0.5em; 
-				text-align:center
+				color: #607860;
+				font-size: 1.2em;
+				font-weight: bold;
+				margin-top: 1em;
+				margin-bottom: 0.5em;
+				text-align: center
 			}
 			div.subtitle {
-				color:#C0F0C0; 
-				font-size:0.8em; 
-				margin-bottom:1em; 
-				text-align:center
+				color: #607860;
+				font-size: 0.8em;
+				margin-bottom: 1em;
+				text-align: center
 			}
 			div.freetext {
-				color:#F0F0F0
+				color: #000000
 			}
 			div.list {
-				color:#C0C0F0
+				color: #336699
 			}
 		</style>
 	</head>

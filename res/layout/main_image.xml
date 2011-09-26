@@ -70,7 +70,7 @@
 		android:layout_height="wrap_content"
 		android:textSize="@dimen/text_size_small"
 		android:gravity="center_horizontal"
-		android:textColor="@color/text_foreground" />
+		android:textColor="@color/image_text_foreground" />
 
 	<TextView
 		android:id="@+id/image_info"
@@ -79,7 +79,7 @@
 		android:layout_marginBottom="5dip"
 		android:textSize="@dimen/text_size_small"
 		android:gravity="center_horizontal"
-		android:textColor="@color/text_foreground" />
+		android:textColor="@color/image_text_foreground" />
 
 	<com.google.ads.AdView
 		android:id="@+id/adView"
