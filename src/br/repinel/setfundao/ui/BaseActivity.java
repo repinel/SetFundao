@@ -61,6 +61,8 @@ public class BaseActivity extends Activity {
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Menu", 0);
+
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 
@@ -102,6 +104,7 @@ public class BaseActivity extends Activity {
 	 * @param v The view.
 	 */
 	public void onTwClick(View v) {
+		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "TwList", 0);
 		Intent intent = new Intent(this, TwListActivity.class);
 		startActivity(intent);
 	}

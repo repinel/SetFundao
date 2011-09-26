@@ -118,6 +118,8 @@ public class TwListActivity extends ListActivity {
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Menu", 0);
+
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 

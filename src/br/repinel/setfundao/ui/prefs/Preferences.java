@@ -26,6 +26,7 @@ import android.preference.PreferenceActivity;
 import android.util.Log;
 import br.repinel.R;
 import br.repinel.setfundao.data.DataProvider;
+import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.UIHelper;
 
 /**
@@ -47,6 +48,8 @@ public class Preferences extends PreferenceActivity implements
 	public final void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		AnalyticsHelper.getInstance(this).trackPageView("/Preferences");
+
 		this.addPreferencesFromResource(R.xml.prefs);
 
 		Preference p = this.findPreference("reset_settings");
@@ -65,13 +68,15 @@ public class Preferences extends PreferenceActivity implements
 	 * @see android.content.SharedPreferences.OnSharedPreferenceChangeListener#onSharedPreferenceChanged(android.content.SharedPreferences, java.lang.String)
 	 */
 	public void onSharedPreferenceChanged(SharedPreferences arg0, String arg1) {
-		
+		// TODO: think about a way to alert the other activities
 	}
 
 	/**
 	 * Reset all settings.
 	 */
 	private void resetSettingsDialog() {
+		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "ResetSettings", 0);
+
 		Log.w(Preferences.class.getName(), "Resetting settings...");
 
 		DataProvider dataProvider = new DataProvider(this);
