@@ -31,7 +31,10 @@ $ 3.0-beta2
 	% Versão 3.0-beta2
 	_ 2011-09-19
 	! Versão beta. Por favor reportar bug pela <a href="http://code.google.com/p/setfundao/issues/list">página do projeto</a>!
-		* Suporte ao Twitter
+		* Acesso aos Tweets mais recentes.
+		* Filtros para buscar de Tweets.
+		* Otimização da gravação das imagens.
+		* Opção de restaurar as preferências para o padrão.
 $ 3.0-beta1
 	% Versão 3.0-beta1
 	_ 2011-09-19
