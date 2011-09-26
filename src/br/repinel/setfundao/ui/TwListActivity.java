@@ -246,7 +246,9 @@ public class TwListActivity extends ListActivity {
 	 */
 	private class TwFetcher extends AsyncTask<Void, Void, Void> {
 
-		ArrayList<TwItem> items;
+		private String message; 
+
+		private ArrayList<TwItem> items;
 
 		/**
 		 * @see android.os.AsyncTask#onPreExecute()
@@ -272,6 +274,9 @@ public class TwListActivity extends ListActivity {
 					twListAdapter.notifyDataSetChanged();
 				}
 			}
+
+			// no message
+			message = null;
 		}
 
 		/**
@@ -323,19 +328,11 @@ public class TwListActivity extends ListActivity {
 					items.add(twItem);
 				}
 			} catch (TwitterException e) {
-				try {
-					Log.e(TwListActivity.class.getName(), e.getMessage());
-					UIHelper.showMessage(TwListActivity.this, getResources().getString(R.string.error_tw));
-				} catch (Exception e1) {
-					// empty
-				}
+				Log.e(TwListActivity.class.getName(), e.getMessage());
+				message = getString(R.string.error_tw);
 			} catch (Exception e) {
-				try {
-					Log.e(TwListActivity.class.getName(), e.getMessage());
-					UIHelper.showMessage(TwListActivity.this, getResources().getString(R.string.error_network));
-				} catch (Exception e1) {
-					// empty
-				}
+				Log.e(TwListActivity.class.getName(), e.getMessage());
+				message = getString(R.string.error_network);
 			}
 
 			return null;
@@ -348,7 +345,13 @@ public class TwListActivity extends ListActivity {
 		protected void onPostExecute(Void result) {
 			updateRefreshStatus(false);
 
-			if (!items.isEmpty()) {
+			if (message != null) {
+				try {
+					UIHelper.showMessage(TwListActivity.this, message);
+				} catch (Exception e1) {
+					// empty
+				}
+			} else if (!items.isEmpty()) {
 				twListAdapter.clear();
 
 				for (TwItem twItem : items) {
