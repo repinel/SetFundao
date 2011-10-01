@@ -20,8 +20,8 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="br.repinel"
-	android:versionCode="10"
-	android:versionName="3.0-beta2" >
+	android:versionCode="11"
+	android:versionName="3.0-beta3" >
 
 	<!-- android:debuggable="true" -->
 	<application
@@ -48,10 +48,12 @@
 			android:label="@string/title_tw_list" />
 
 		<activity
-			android:name=".setfundao.ui.prefs.Preferences" />
+			android:name=".setfundao.ui.prefs.Preferences"
+			android:theme="@style/Theme.SetFundao" />
 
 		<activity
-			android:name=".setfundao.ui.prefs.TwFilters" />
+			android:name=".setfundao.ui.prefs.TwFilters"
+			android:theme="@style/Theme.SetFundao" />
 
 		<!-- AdMob Ads -->
 		<activity
