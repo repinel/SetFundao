@@ -28,7 +28,8 @@
 			android:summary="@string/update_interval_hint"
 			android:entries="@array/update_interval"
 			android:entryValues="@array/update_interval_values"
-			android:defaultValue="@string/default_update_interval" />
+			android:defaultValue="@string/default_update_interval"
+			android:dependency="fetch_image_on_create_activity" />
 
 		<CheckBoxPreference
 			android:key="fetch_image_on_create_activity"
