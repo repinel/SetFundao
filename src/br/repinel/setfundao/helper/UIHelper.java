@@ -90,20 +90,6 @@ public class UIHelper {
 	}
 
 	/**
-	 * Set the time interval to update the image.
-	 * 
-	 * @param context The activity context
-	 * @param value The value to be setted
-	 */
-	public static void setUpdateInterval(Context context, String value) {
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-
-		SharedPreferences.Editor editor = pref.edit();
-		editor.putString(Preferences.PREFS_UPDATE_INTERVAL, value);
-		editor.commit();
-	}
-
-	/**
 	 * Get the date of the last fetched image of a camera.
 	 * 
 	 * @param context The activity context
@@ -132,5 +118,37 @@ public class UIHelper {
 		SharedPreferences.Editor editor = pref.edit();
 		editor.putString(Preferences.PREFS_LAST_FETCH_DATE + camera, value);
 		editor.commit();
+	}
+
+	/**
+	 * Verify if the image has to be fetched on create.
+	 * 
+	 * @param context The activity context
+	 * @param res The resources
+	 * @return If the image has to be fetched on create
+	 */
+	public static boolean getFetchImageOnCreateActivity(Context context, Resources res) {
+		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+
+		final boolean fetchImageOnCreateActivity = pref.getBoolean(Preferences.PREFS_FETCH_IMAGE_ON_CREATE_ACTIVITY,
+				res.getBoolean(R.bool.default_fetch_image_on_create_activity));
+
+		return fetchImageOnCreateActivity;
+	}
+
+	/**
+	 * Verify if the tw has to be fetched on create.
+	 * 
+	 * @param context The activity context
+	 * @param res The resources
+	 * @return If the tw has to be fetched on create
+	 */
+	public static boolean getFetchTwOnCreateActivity(Context context, Resources res) {
+		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+
+		final boolean fetchTwOnCreateActivity = pref.getBoolean(Preferences.PREFS_FETCH_TW_ON_CREATE_ACTIVITY,
+				res.getBoolean(R.bool.default_fetch_tw_on_create_activity));
+
+		return fetchTwOnCreateActivity;
 	}
 }

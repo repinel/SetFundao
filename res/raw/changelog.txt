@@ -32,6 +32,7 @@ $ 3.0-beta3
 	_ 2011-10-01
 	! Versão beta. Por favor reportar bug pela <a href="http://code.google.com/p/setfundao/issues/list">página do projeto</a>!
 		* Corrigindo o tema das mensagens de erro em Preferências.
+		* Adicionando opção de não carregar informações automaticamente ao abrir telas.
 $ 3.0-beta2
 	% Versão 3.0-beta2
 	_ 2011-09-19

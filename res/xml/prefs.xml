@@ -29,6 +29,12 @@
 			android:entries="@array/update_interval"
 			android:entryValues="@array/update_interval_values"
 			android:defaultValue="@string/default_update_interval" />
+
+		<CheckBoxPreference
+			android:key="fetch_image_on_create_activity"
+			android:title="@string/fetch_image_on_create_activity_"
+			android:summary="@string/fetch_image_on_create_activity_hint"
+			android:defaultValue="@string/default_fetch_image_on_create_activity" />
 	</PreferenceCategory>
 
 	<PreferenceCategory android:title="@string/settings_tw" >
@@ -69,6 +75,12 @@
 				<extra android:name="@string/tw_bundle_type" android:value="@string/tw_users_filter" />
 			</intent>
 		</PreferenceScreen>
+
+		<CheckBoxPreference
+			android:key="fetch_tw_on_create_activity"
+			android:title="@string/fetch_tw_on_create_activity_"
+			android:summary="@string/fetch_tw_on_create_activity_hint"
+			android:defaultValue="@string/default_fetch_tw_on_create_activity" />
 	</PreferenceCategory>
 
 	<PreferenceCategory android:title="@string/settings_advanced" >

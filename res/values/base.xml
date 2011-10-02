@@ -62,4 +62,10 @@
 	<string name="tw_words_filter">tw_words_filter</string>
 	<string name="tw_hashtags_filter">tw_hashtags_filter</string>
 	<string name="tw_users_filter">tw_filter_users</string>
+
+	<string name="default_fetch_image_on_create_activity">true</string>
+	<bool name="default_fetch_image_on_create_activity">true</bool>
+
+	<string name="default_fetch_tw_on_create_activity">true</string>
+	<bool name="default_fetch_tw_on_create_activity">true</bool>
 </resources>

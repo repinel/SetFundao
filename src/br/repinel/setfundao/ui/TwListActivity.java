@@ -68,7 +68,7 @@ public class TwListActivity extends ListActivity {
 
 	private TWListAdapter twListAdapter;
 
-	private boolean loadSaved;
+	private boolean firstTime;
 
 	/**
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -78,6 +78,8 @@ public class TwListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tw_list);
 
+		this.firstTime = true;
+
 		AnalyticsHelper.getInstance(this).trackPageView("/TwList");
 
 		TextView titleView = (TextView) findViewById(R.id.bar_text);
@@ -85,10 +87,9 @@ public class TwListActivity extends ListActivity {
 			titleView.setText(getTitle());
 		}
 
-		twListAdapter = new TWListAdapter(TwListActivity.this, R.layout.tw_list_item, new ArrayList<TwItem>());
+		this.twListAdapter = new TWListAdapter(TwListActivity.this, R.layout.tw_list_item, new ArrayList<TwItem>());
 		setListAdapter(twListAdapter);
 
-		loadSaved = true;
 		new TwFetcher().execute();
 	}
 
@@ -176,7 +177,6 @@ public class TwListActivity extends ListActivity {
 	public void onRefreshClick(View v) {
 		AnalyticsHelper.getInstance(this).trackEvent(getTitle().toString(), "Click", "Refresh", 0);
 
-		loadSaved = false;
 		new TwFetcher().execute();
 	}
 
@@ -261,18 +261,18 @@ public class TwListActivity extends ListActivity {
 
 			TwItemFacade TwItemFacade = new TwItemFacade(TwListActivity.this);
 
-			if (loadSaved) {
+			if (firstTime) {
 				Log.d(getClass().getName(), "TwItem. Loading all items");
 
 				items = (ArrayList<TwItem>) TwItemFacade.selectAllTwItems();
-	
+
 				if (!items.isEmpty()) {
 					twListAdapter.clear();
-	
+
 					for (TwItem twItem : items) {
 						twListAdapter.add(twItem);
 					}
-	
+
 					twListAdapter.notifyDataSetChanged();
 				}
 			}
@@ -286,6 +286,14 @@ public class TwListActivity extends ListActivity {
 		 */
 		@Override
 		protected Void doInBackground(Void... arg0) {
+			if (firstTime) {
+				firstTime = false;
+
+				// fetch new information only if the user wants
+				if (!UIHelper.getFetchTwOnCreateActivity(TwListActivity.this, getResources()))
+					return null;
+			}
+
 			Log.d(TwListActivity.class.getName(), "Fetching tweets...");
 
 			Map<String, TwUser> userCache = new HashMap<String, TwUser>();

@@ -58,6 +58,9 @@
 
 	<string name="settings_image">Imagem</string>
 
+	<string name="fetch_image_on_create_activity_">Recuperar imagem ao abrir</string>
+	<string name="fetch_image_on_create_activity_hint">Obtém imagem automaticamente ao abrir a tela da câmera</string>
+
 	<string name="update_interval_">Intervalo de Atualização</string>
 	<string name="update_interval_hint">Período menor usará mais bateria e conexão.</string>
 
@@ -76,6 +79,9 @@
 	</string-array>
 
 	<string name="settings_tw">Twitter</string>
+
+	<string name="fetch_tw_on_create_activity_">Recuperar Tweets ao abrir</string>
+	<string name="fetch_tw_on_create_activity_hint">Obtém Tweets automaticamente ao abrir a tela</string>
 
 	<string name="words_filter_">Filtro por Palavras</string>
 	<string name="words_filter_hint">Procura pelas palavras listadas</string>

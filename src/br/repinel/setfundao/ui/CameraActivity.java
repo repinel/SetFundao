@@ -84,7 +84,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		this.photoURL = getResources().getStringArray(R.array.photo_urls)[index];
 		this.photoFilename = getResources().getStringArray(R.array.photo_filenames)[index];
 
-		new ImageFetcher().execute();
+		doRefresh();
 
 		TextView titleView = (TextView) findViewById(R.id.bar_text);
 		if (titleView != null && UIHelper.isPortrait(this)) {
@@ -188,7 +188,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	private void scheduleUpdate() {
 		final int updateInterval = UIHelper.getUpdateInterval(getApplicationContext(), getResources());
 
-		if (updateInterval > 0)
+		if (UIHelper.getFetchImageOnCreateActivity(this, getResources()) && updateInterval > 0)
 			imageHandler.postDelayed(updateTab, updateInterval);
 	}
 
@@ -324,8 +324,6 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 						setLastFetchDate(lastFetchDate);
 						setImageInfo(getResources().getString(R.string.image_stored_message));
 					}
-
-					firstTime = false;
 				}
 			} catch (MainException e) {
 				e.printStackTrace();
@@ -343,6 +341,14 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		 */
 		@Override
 		protected Bitmap doInBackground(Void... voids) {
+			if (firstTime) {
+				firstTime = false;
+
+				// fetch new information only if the user wants
+				if (!UIHelper.getFetchImageOnCreateActivity(CameraActivity.this, getResources()))
+					return null;
+			}
+
 			Log.d(getClass().getName(), "fetching image: " + photoURL);
 
 			// fetch new image
