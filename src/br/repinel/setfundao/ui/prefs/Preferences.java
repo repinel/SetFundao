@@ -19,6 +19,7 @@
 
 package br.repinel.setfundao.ui.prefs;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -38,12 +39,9 @@ import br.repinel.setfundao.helper.UIHelper;
 public class Preferences extends PreferenceActivity implements
 		SharedPreferences.OnSharedPreferenceChangeListener {
 
-	public static final String PREFS_UPDATE_INTERVAL = "update_interval";
+	private static String BUNDLE_RESTORE = "restore";
 
 	public static final String PREFS_LAST_FETCH_DATE = "last_fetch_date_";
-
-	public static final String PREFS_FETCH_IMAGE_ON_CREATE_ACTIVITY = "fetch_image_on_create_activity";
-	public static final String PREFS_FETCH_TW_ON_CREATE_ACTIVITY = "fetch_tw_on_create_activity";
 
 	/**
 	 * @see android.preference.PreferenceActivity#onCreate(android.os.Bundle)
@@ -53,6 +51,11 @@ public class Preferences extends PreferenceActivity implements
 		super.onCreate(savedInstanceState);
 
 		AnalyticsHelper.getInstance(this).trackPageView("/Preferences");
+
+		if (this.getIntent().getExtras() != null
+			&& this.getIntent().getExtras().get(BUNDLE_RESTORE) != null
+			&& this.getIntent().getExtras().getBoolean(BUNDLE_RESTORE))
+			UIHelper.showMessage(this, getString(R.string.reset_settings_message));
 
 		// ensuring the default value...
 		UIHelper.getFetchImageOnCreateActivity(this, getResources());
@@ -91,11 +94,14 @@ public class Preferences extends PreferenceActivity implements
 		dataProvider.resetData();
 
 		SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-		editor.remove(Preferences.PREFS_UPDATE_INTERVAL);
-		editor.remove(Preferences.PREFS_FETCH_IMAGE_ON_CREATE_ACTIVITY);
-		editor.remove(Preferences.PREFS_FETCH_TW_ON_CREATE_ACTIVITY);
+		editor.remove(getString(R.string.update_interval));
+		editor.remove(getString(R.string.fetch_image_on_create_activity));
+		editor.remove(getString(R.string.fetch_tw_on_create_activity));
 		editor.commit();
 
-		UIHelper.showMessage(this, getString(R.string.reset_settings_message));
+		Intent intent = new Intent(this, Preferences.class);
+		intent.putExtra(BUNDLE_RESTORE, true);
+		startActivity(intent);
+		finish();
 	}
 }

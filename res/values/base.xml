@@ -23,6 +23,7 @@
 	<!-- the default is an empty string -->
 	<string name="default_last_fetch_date"></string>
 
+	<string name="update_interval">update_interval</string>
 	<string name="default_update_interval">1000</string>
 
 	<string-array name="update_interval_values">
@@ -63,9 +64,9 @@
 	<string name="tw_hashtags_filter">tw_hashtags_filter</string>
 	<string name="tw_users_filter">tw_filter_users</string>
 
-	<string name="default_fetch_image_on_create_activity">true</string>
+	<string name="fetch_image_on_create_activity">fetch_image_on_create_activity</string>
 	<bool name="default_fetch_image_on_create_activity">true</bool>
 
-	<string name="default_fetch_tw_on_create_activity">true</string>
+	<string name="fetch_tw_on_create_activity">fetch_tw_on_create_activity</string>
 	<bool name="default_fetch_tw_on_create_activity">true</bool>
 </resources>

@@ -23,19 +23,19 @@
 	<PreferenceCategory android:title="@string/settings_image">
 
 		<ListPreference
-			android:key="update_interval"
+			android:key="@string/update_interval"
 			android:title="@string/update_interval_"
 			android:summary="@string/update_interval_hint"
 			android:entries="@array/update_interval"
 			android:entryValues="@array/update_interval_values"
 			android:defaultValue="@string/default_update_interval"
-			android:dependency="fetch_image_on_create_activity" />
+			android:dependency="@string/fetch_image_on_create_activity" />
 
 		<CheckBoxPreference
-			android:key="fetch_image_on_create_activity"
+			android:key="@string/fetch_image_on_create_activity"
 			android:title="@string/fetch_image_on_create_activity_"
 			android:summary="@string/fetch_image_on_create_activity_hint"
-			android:defaultValue="@string/default_fetch_image_on_create_activity" />
+			android:defaultValue="@bool/default_fetch_image_on_create_activity" />
 	</PreferenceCategory>
 
 	<PreferenceCategory android:title="@string/settings_tw" >
@@ -78,10 +78,10 @@
 		</PreferenceScreen>
 
 		<CheckBoxPreference
-			android:key="fetch_tw_on_create_activity"
+			android:key="@string/fetch_tw_on_create_activity"
 			android:title="@string/fetch_tw_on_create_activity_"
 			android:summary="@string/fetch_tw_on_create_activity_hint"
-			android:defaultValue="@string/default_fetch_tw_on_create_activity" />
+			android:defaultValue="@bool/default_fetch_tw_on_create_activity" />
 	</PreferenceCategory>
 
 	<PreferenceCategory android:title="@string/settings_advanced" >

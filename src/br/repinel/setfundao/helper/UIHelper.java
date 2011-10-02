@@ -83,7 +83,7 @@ public class UIHelper {
 	public static int getUpdateInterval(Context context, Resources res) {
 		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 
-		final int updateInterval = Integer.parseInt(pref.getString(Preferences.PREFS_UPDATE_INTERVAL,
+		final int updateInterval = Integer.parseInt(pref.getString(res.getString(R.string.update_interval),
 				res.getString(R.string.default_update_interval)));
 
 		return updateInterval;
@@ -130,7 +130,7 @@ public class UIHelper {
 	public static boolean getFetchImageOnCreateActivity(Context context, Resources res) {
 		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 
-		final boolean fetchImageOnCreateActivity = pref.getBoolean(Preferences.PREFS_FETCH_IMAGE_ON_CREATE_ACTIVITY,
+		final boolean fetchImageOnCreateActivity = pref.getBoolean(res.getString(R.string.fetch_image_on_create_activity),
 				res.getBoolean(R.bool.default_fetch_image_on_create_activity));
 
 		return fetchImageOnCreateActivity;
@@ -146,7 +146,7 @@ public class UIHelper {
 	public static boolean getFetchTwOnCreateActivity(Context context, Resources res) {
 		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 
-		final boolean fetchTwOnCreateActivity = pref.getBoolean(Preferences.PREFS_FETCH_TW_ON_CREATE_ACTIVITY,
+		final boolean fetchTwOnCreateActivity = pref.getBoolean(res.getString(R.string.fetch_tw_on_create_activity),
 				res.getBoolean(R.bool.default_fetch_tw_on_create_activity));
 
 		return fetchTwOnCreateActivity;
