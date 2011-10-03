@@ -65,12 +65,15 @@ public class TwItemFacade {
 	}
 
 	public long insertTwUser(TwUser twUser) {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		twUser.profileImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
-
 		ContentValues values = new ContentValues();
 		values.put(TwUserData.USERNAME, twUser.username);
-		values.put(TwUserData.PROFILE_IMAGE, baos.toByteArray());
+
+		if (twUser.profileImage != null) {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			twUser.profileImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+	
+			values.put(TwUserData.PROFILE_IMAGE, baos.toByteArray());
+		}
 
 		return this.dataProvider.insert(TwUserData.TABLE_NAME, values);
 	}
