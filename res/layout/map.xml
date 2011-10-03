@@ -21,10 +21,10 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res/br.repinel"
 	xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-	android:id="@+id/camera"
+	android:id="@+id/map"
+	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:orientation="vertical"
 	android:background="@drawable/background" >
 
 	<LinearLayout style="@style/Bar">
@@ -40,53 +40,20 @@
 		<ImageView style="@style/BarSeparator" />
 		<ImageButton
 			style="@style/BarAction"
-			android:id="@+id/btn_refresh"
-			android:contentDescription="@string/description_refresh"
-			android:src="@drawable/ic_refresh"
-			android:onClick="onRefreshClick" />
-		<ProgressBar
-			style="@style/BarProgressIndicator"
-			android:id="@+id/refresh_progress"
-			android:visibility="gone" />
-
-		<!--<ImageView style="@style/BarSeparator" />
-		<ImageButton
-			style="@style/BarAction"
-			android:contentDescription="@string/description_map"
-			android:src="@drawable/ic_map"
-			android:onClick="onMapClick" />-->
-
-		<ImageView style="@style/BarSeparator" />
-		<ImageButton
-			style="@style/BarAction"
 			android:contentDescription="@string/description_tw"
 			android:src="@drawable/ic_tw"
 			android:onClick="onTwClick" />
 	</LinearLayout>
 
-	<ImageView
-		android:id="@+id/cameraImage"
+	<com.google.android.maps.MapView 
+		android:id="@+id/mapView"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:scaleType="fitCenter"
-		android:layout_weight="1"/>
-
-	<TextView
-		android:id="@+id/last_fetch_date"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:textSize="@dimen/text_size_small"
-		android:gravity="center_horizontal"
-		android:textColor="@color/image_text_foreground" />
-
-	<TextView
-		android:id="@+id/image_info"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="5dip"
-		android:textSize="@dimen/text_size_small"
-		android:gravity="center_horizontal"
-		android:textColor="@color/image_text_foreground" />
+		android:layout_height="fill_parent"
+		android:enabled="true"
+		android:clickable="true"
+		android:apiKey="0JbFfNnE6HuSAUrTyoX15DHqaKtRHSslY1NReIw" />
+		<!-- SetFundao android:apiKey="0JbFfNnE6HuSAUrTyoX15DHqaKtRHSslY1NReIw" /> -->
+		<!-- Debug android:apiKey="0JbFfNnE6HuQXx5wy5U87elRO-WbV_MDOkrhs2w" /> -->
 
 	<com.google.ads.AdView
 		android:id="@+id/adView"
@@ -94,5 +61,5 @@
 		android:layout_height="wrap_content"
 		ads:adUnitId="a14d9d08b0c6a5a"
 		ads:adSize="BANNER"
-		ads:loadAdOnCreate="true"/>
+		ads:loadAdOnCreate="true" />
 </LinearLayout>

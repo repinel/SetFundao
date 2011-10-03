@@ -22,7 +22,7 @@
 	<!-- Application -->
 
 	<string name="app_name">SetFundao</string>
-	<string name="app_name_version">SetFundao 3.0-beta2</string>
+	<string name="app_name_version">SetFundao 3.0-beta3</string>
 	<string name="app_description">"Monitor de câmeras do CET Fundão http://diseg.pu.ufrj.br\n\nAs imagens exibidas estão sujeitas a disponibilidade da CET Fundão. As câmeras podem apresentar inatividade, não sendo um defeito do SetFundão.\n\nSob GPLv3 http://www.gnu.org/licenses/gpl-3.0.txt\n\nCopyright © 2011. Roque Pinel. Todos os direitos reservados.\n\nContribuições: Flávio Costa e Leonardo Marques."</string>
 
 	<!-- Cameras -->
@@ -115,8 +115,10 @@
 	<string name="description_home">Home</string>
 	<string name="description_refresh">Refresh</string>
 	<string name="description_tw">Últimos Tweets</string>
+	<string name="description_map">Mapa do Trânsito</string>
 
 	<string name="title_tw_list">Últimos Tweets</string>
+	<string name="title_map">Mapa do Trânsito</string>
 
 	<string name="btn_camera1">Linha Amarela</string>
 	<string name="btn_camera2">Prefeitura</string>

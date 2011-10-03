@@ -181,6 +181,17 @@ public class TwListActivity extends ListActivity {
 	}
 
 	/**
+	 * Open the Map view.
+	 * 
+	 * @param v The view.
+	 */
+	public void onMapClick(View v) {
+		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Map", 0);
+		Intent intent = new Intent(this, FundaoMapActivity.class);
+		startActivity(intent);
+	}
+
+	/**
 	 * Update the refresh status. Show a progress circle when updating the image.
 	 * 
 	 * @param working If it is updating or not.

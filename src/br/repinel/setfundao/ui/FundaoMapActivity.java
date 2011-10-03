@@ -20,7 +20,6 @@
 package br.repinel.setfundao.ui;
 
 import sheetrock.panda.changelog.ChangeLog;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,32 +27,61 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import br.repinel.R;
 import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.UIHelper;
 import br.repinel.setfundao.ui.prefs.Preferences;
 
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapController;
+import com.google.android.maps.MapView;
+
 /**
- * Base class to all activities.
+ * Show the traffic map near the Fundao.
  * 
  * @author Roque Pinel
  *
  */
-public class BaseActivity extends Activity {
+public class FundaoMapActivity extends MapActivity {
+
+	private MapView mapView;
+
+	private MapController mapController;
+
 	/**
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.map);
+
+		AnalyticsHelper.getInstance(this).trackPageView("/Map");
+
+		TextView titleView = (TextView) findViewById(R.id.bar_text);
+		if (titleView != null && UIHelper.isPortrait(this)) {
+			titleView.setText(getTitle());
+		}
+
+		mapView = (MapView) findViewById(R.id.mapView);
+		mapView.setBuiltInZoomControls(true);
+		mapView.setTraffic(true);
+
+		mapController = mapView.getController();
+		mapController.setZoom(14);
+
+		// set Fundao as center
+		mapController.setCenter(new GeoPoint(-22858421, -43231909));
 	}
 
 	/**
-	 * @see android.app.Activity#onDestroy()
+	 * @see com.google.android.maps.MapActivity#isRouteDisplayed()
 	 */
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+	protected boolean isRouteDisplayed() {
+		return false;
 	}
 
 	/**
@@ -99,6 +127,19 @@ public class BaseActivity extends Activity {
 	}
 
 	/**
+	 * Called when Home is clicked.
+	 * 
+	 * @param view The view
+	 */
+	public void onHomeClick(View view) {
+		AnalyticsHelper.getInstance(this).trackEvent(getTitle().toString(), "Click", "Home", 0);
+
+		final Intent intent = new Intent(this, HomeActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+	}
+
+	/**
 	 * Open the Tw view.
 	 * 
 	 * @param v The view.
@@ -106,17 +147,6 @@ public class BaseActivity extends Activity {
 	public void onTwClick(View v) {
 		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "TwList", 0);
 		Intent intent = new Intent(this, TwListActivity.class);
-		startActivity(intent);
-	}
-
-	/**
-	 * Open the Map view.
-	 * 
-	 * @param v The view.
-	 */
-	public void onMapClick(View v) {
-		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Map", 0);
-		Intent intent = new Intent(this, FundaoMapActivity.class);
 		startActivity(intent);
 	}
 }
