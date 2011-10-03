@@ -47,9 +47,16 @@
 			android:id="@+id/refresh_progress"
 			android:visibility="gone" />
 
-		<ImageView style="@style/BarSeparator" />
+		<!--<ImageView style="@style/BarSeparatorVertical" />
 		<ImageButton
-			style="@style/BarAction"
+			style="@style/BarActionVertical"
+			android:contentDescription="@string/description_map"
+			android:src="@drawable/ic_map"
+			android:onClick="onMapClick" />-->
+
+		<ImageView style="@style/BarSeparatorVertical" />
+		<ImageButton
+			style="@style/BarActionVertical"
 			android:contentDescription="@string/description_tw"
 			android:src="@drawable/ic_tw"
 			android:onClick="onTwClick" />
