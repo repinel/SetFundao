@@ -20,6 +20,7 @@ package br.repinel.setfundao.ui;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.RejectedExecutionException;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -210,10 +211,17 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		 * @see java.lang.Runnable#run()
 		 */
 		public void run() {
-			new ImageFetcher().execute();
+			try {
+				new ImageFetcher().execute();
 
-			if (!stopScheduling)
-				scheduleUpdate();
+				if (!stopScheduling)
+					scheduleUpdate();
+			} catch (RejectedExecutionException e) {
+				Log.d(getClass().getName(), "The execution was rejected. Putting it back into the queue.");
+
+				final int updateInterval = UIHelper.getUpdateInterval(getApplicationContext(), getResources());
+				imageHandler.postDelayed(this, updateInterval);
+			}
 		}
 	}
 
