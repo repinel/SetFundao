@@ -33,6 +33,7 @@ $ 3.0-beta4
 	! Versão beta. Por favor reportar bug pela <a href="http://code.google.com/p/setfundao/issues/list">página do projeto</a>!
 		* Corrigindo menu da tela de imagens em paisagem.
 		* Verificando se o usuário do Twitter realmente possui imagem no profile.
+		* Adicionando mapa.
 $ 3.0-beta3
 	% Versão 3.0-beta3
 	_ 2011-10-03

@@ -53,7 +53,7 @@
 		android:clickable="true"
 		android:apiKey="0JbFfNnE6HuSAUrTyoX15DHqaKtRHSslY1NReIw" />
 		<!-- SetFundao android:apiKey="0JbFfNnE6HuSAUrTyoX15DHqaKtRHSslY1NReIw" /> -->
-		<!-- Debug android:apiKey="0JbFfNnE6HuQXx5wy5U87elRO-WbV_MDOkrhs2w" /> -->
+		<!-- Debug android:apiKey="0JbFfNnE6HuRtrOuLWv1EO-Mjk0BRoWHvgeEtvg" /> -->
 
 	<com.google.ads.AdView
 		android:id="@+id/adView"

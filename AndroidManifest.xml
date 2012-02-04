@@ -20,8 +20,8 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="br.repinel"
-	android:versionCode="11"
-	android:versionName="3.0-beta3" >
+	android:versionCode="12"
+	android:versionName="3.0-beta4" >
 
 	<!-- android:debuggable="true" -->
 	<application
@@ -47,10 +47,10 @@
 			android:theme="@style/Theme.SetFundao"
 			android:label="@string/title_tw_list" />
 
-		<!--<activity
+		<activity
 			android:name=".setfundao.ui.FundaoMapActivity"
 			android:theme="@style/Theme.SetFundao"
-			android:label="@string/title_map" />-->
+			android:label="@string/title_map" />
 
 		<activity
 			android:name=".setfundao.ui.prefs.Preferences"
@@ -65,9 +65,9 @@
 			android:name="com.google.ads.AdActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation"/>
 
-		<!--<uses-library
+		<uses-library
 			android:name="com.google.android.maps"
-			android:required="true" />-->
+			android:required="true" />
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />

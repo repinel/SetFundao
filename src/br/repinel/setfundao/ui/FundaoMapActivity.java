@@ -48,6 +48,8 @@ public class FundaoMapActivity extends MapActivity {
 
 	private MapView mapView;
 
+	private GeoPoint gp;
+
 	private MapController mapController;
 
 	/**
@@ -69,11 +71,13 @@ public class FundaoMapActivity extends MapActivity {
 		mapView.setBuiltInZoomControls(true);
 		mapView.setTraffic(true);
 
-		mapController = mapView.getController();
-		mapController.setZoom(14);
+		gp = new GeoPoint(getResources().getInteger(R.integer.map_ufrj_lat),
+			getResources().getInteger(R.integer.map_ufrj_lon));
 
-		// set Fundao as center
-		mapController.setCenter(new GeoPoint(-22858421, -43231909));
+		mapController = mapView.getController();
+		mapController.setZoom(getResources().getInteger(R.integer.map_zoom));
+		mapController.setCenter(gp);
+		mapController.animateTo(gp);
 	}
 
 	/**

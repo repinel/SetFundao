@@ -20,6 +20,10 @@
 <resources>
 	<integer name="max_retry_connection">3</integer>
 
+	<integer name="map_ufrj_lat">-22858421</integer>
+	<integer name="map_ufrj_lon">-43231909</integer>
+	<integer name="map_zoom">14</integer>
+
 	<!-- the default is an empty string -->
 	<string name="default_last_fetch_date"></string>
 
