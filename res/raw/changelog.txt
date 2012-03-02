@@ -27,9 +27,14 @@
 		</style>
 	</head>
 	<body>
+$ 3.0
+	% Versão 3.0
+	_ 2012-03-02
+	! Por favor reportar bug pela <a href="http://code.google.com/p/setfundao/issues/list">página do projeto</a>!
+		* Corrigindo problema com carregamento de tweets.
 $ 3.0-beta4
 	% Versão 3.0-beta4
-	_ 2011-10-03
+	_ 2012-02-04
 	! Versão beta. Por favor reportar bug pela <a href="http://code.google.com/p/setfundao/issues/list">página do projeto</a>!
 		* Corrigindo menu da tela de imagens em paisagem.
 		* Verificando se o usuário do Twitter realmente possui imagem no profile.

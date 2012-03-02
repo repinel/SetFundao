@@ -109,7 +109,9 @@ public class TwItemFacade {
 
 				TwUser twUser = new TwUser();
 				twUser.username = cursor.getString(2);
-				twUser.profileImage = BitmapFactory.decodeByteArray(profileImageByte, 0, profileImageByte.length);
+
+				if (profileImageByte != null)
+					twUser.profileImage = BitmapFactory.decodeByteArray(profileImageByte, 0, profileImageByte.length);
 
 				TwItem twItem = new TwItem();
 				twItem.text = cursor.getString(0);

@@ -454,12 +454,8 @@ public class TwListActivity extends ListActivity {
 				holder.createdAtView.setText(createdAtStr);
 
 				try {
-					if (twItem.user != null && twItem.user.profileImageURL != null) {
-						if (twItem.user.profileImage == null) {
-							twItem.user.profileImage = ImageHelper.realDownloadImage(twItem.user.profileImageURL, getResources());
-						}
-
-						holder.imageView.setImageBitmap(twItem.user.profileImage);
+					if (twItem.user != null && twItem.user.profileImageURL != null && twItem.user.profileImage == null) {
+						twItem.user.profileImage = ImageHelper.realDownloadImage(twItem.user.profileImageURL, getResources());
 					}
 
 					if (twItem.user.profileImage != null)
