@@ -324,7 +324,7 @@ public class TwListActivity extends ListActivity {
 
 				QueryResult result = twitter.search(query);
 
-				for (Tweet tweet : result.getTweets()) {
+				for (Tweet tweet : (List<twitter4j.Tweet>) result.getTweets()) {
 					Log.d(TwListActivity.class.getName(), tweet.getFromUser() + ": " + tweet.getText());
 
 					TwUser twUser;
