@@ -155,7 +155,7 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 									changed = true;
 								} else {
 									Log.w(TwFilters.class.getName(), "Word already stored.");
-									UIHelper.showMessage(TwFilters.this, getString(R.string.error_tw_word_already_stored));
+									UIHelper.showMessage(getApplicationContext(), getString(R.string.error_tw_word_already_stored));
 								}
 							} else if (type.equals(getString(R.string.tw_hashtags_filter))) {
 								if (twFilterFacade.getTwFilterHashtagId(value) < 1) {
@@ -163,7 +163,7 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 									changed = true;
 								} else {
 									Log.w(TwFilters.class.getName(), "Hashtag already stored.");
-									UIHelper.showMessage(TwFilters.this, getString(R.string.error_tw_hashtag_already_stored));
+									UIHelper.showMessage(getApplicationContext(), getString(R.string.error_tw_hashtag_already_stored));
 								}
 							} else if (type.equals(getString(R.string.tw_users_filter))) {
 								if (twFilterFacade.getTwFilterUserId(value) < 1) {
@@ -171,7 +171,7 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 									changed = true;
 								} else {
 									Log.w(TwFilters.class.getName(), "User already stored.");
-									UIHelper.showMessage(TwFilters.this, getString(R.string.error_tw_user_already_stored));
+									UIHelper.showMessage(getApplicationContext(), getString(R.string.error_tw_user_already_stored));
 								}
 							}
 

@@ -110,7 +110,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 				UIHelper.setLastFetchDate(getApplicationContext(), photoFilename, dateFormat.format(lastFetchDate));
 		} catch (Exception e) {
 			try {
-				UIHelper.showMessage(CameraActivity.this, e.getMessage());
+				UIHelper.showMessage(getApplicationContext(), e.getMessage());
 			} catch (Exception e1) {
 				// empty
 			}
@@ -345,7 +345,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		}
 
 		/**
-		 * @see android.os.AsyncTask#doInBackground(Params[])
+		 * @see android.os.AsyncTask # doInBackground(Params[])
 		 */
 		@Override
 		protected Bitmap doInBackground(Void... voids) {
@@ -395,7 +395,7 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 			} else if (message != null) {
 				try {
 					setImageInfo(getResources().getString(R.string.image_stored_message));
-					UIHelper.showMessage(CameraActivity.this, message);
+					UIHelper.showMessage(getApplicationContext(), message);
 				} catch (Exception e1) {
 					// empty
 				}

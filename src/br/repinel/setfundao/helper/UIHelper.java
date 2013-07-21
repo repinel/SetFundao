@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2011 Roque Pinel
+ *
+ * This file is part of SetFundao.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package br.repinel.setfundao.helper;
 
 import android.app.Activity;
@@ -10,8 +29,9 @@ import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import br.repinel.R;
-import br.repinel.setfundao.ui.prefs.Preferences;
 import br.repinel.setfundao.util.Constants;
 
 /**
@@ -55,6 +75,25 @@ public class UIHelper {
 		builder.setPositiveButton(activity.getResources().getString(R.string.btn_message_box_ok), null);
 		builder.create();
 		builder.show();
+	}
+
+	/**
+	 * Show a toast message.
+	 *
+	 * @param message The message to be shown.
+	 */
+	public static void showMessage(Context context, String message) {
+		UIHelper.showMessage(context, message, Toast.LENGTH_SHORT);
+	}
+
+	/**
+	 * Show a toast message.
+	 *
+	 * @param message The message to be shown.
+	 * @param duration The time length to display the message. See <code>android.widget.Toast</code>.
+	 */
+	public static void showMessage(Context context, String message, int duration) {
+		Toast.makeText(context, message, duration).show();
 	}
 
 	/**

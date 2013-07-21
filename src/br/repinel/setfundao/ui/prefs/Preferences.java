@@ -66,11 +66,11 @@ public class Preferences extends PreferenceActivity implements
 		if (this.getIntent().getExtras() != null
 			&& this.getIntent().getExtras().get(BUNDLE_RESTORE) != null
 			&& this.getIntent().getExtras().getBoolean(BUNDLE_RESTORE)) {
-			UIHelper.showMessage(this, getString(R.string.reset_settings_message));
+			UIHelper.showMessage(getApplicationContext(), getString(R.string.reset_settings_message));
 		} else if (this.getIntent().getExtras() != null
 				&& this.getIntent().getExtras().get(BUNDLE_TW_SIGN_OUT) != null
 				&& this.getIntent().getExtras().getBoolean(BUNDLE_TW_SIGN_OUT)) {
-			UIHelper.showMessage(this, getString(R.string.twitter_sign_out_message));
+			UIHelper.showMessage(getApplicationContext(), getString(R.string.twitter_sign_out_message));
 		} else {
 			// handle Twitter OAUth URL before fixing preferences options
 			handleTwOAuthURL();
@@ -138,7 +138,7 @@ public class Preferences extends PreferenceActivity implements
 		if (authURL != null)
 			this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(authURL)));
 		else
-			UIHelper.showMessage(this, getString(R.string.error_tw_auth_url));
+			UIHelper.showMessage(getApplicationContext(), getString(R.string.error_tw_auth_url));
 	}
 
 	private void twSignOutDialog() {
@@ -167,7 +167,7 @@ public class Preferences extends PreferenceActivity implements
 				editor.putString(Constants.PREF_TW_ACCESS_TOKEN_SECRET, twAuth.oauthAccessTokenSecret);
 				editor.commit();
 			} else {
-				UIHelper.showMessage(this, getString(R.string.error_tw_auth));
+				UIHelper.showMessage(getApplicationContext(), getString(R.string.error_tw_auth));
 			}
 		}
 	}

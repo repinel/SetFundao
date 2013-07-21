@@ -379,7 +379,7 @@ public class TwListActivity extends ListActivity {
 
 			if (message != null) {
 				try {
-					UIHelper.showMessage(TwListActivity.this, message);
+					UIHelper.showMessage(getApplicationContext(), message);
 				} catch (Exception e1) {
 					// empty
 				}
@@ -474,7 +474,7 @@ public class TwListActivity extends ListActivity {
 				} catch (MainException e) {
 					try {
 						Log.e(TwListActivity.class.getName(), e.getMessage());
-						UIHelper.showMessage(TwListActivity.this, e.getMessage());
+						UIHelper.showMessage(getApplicationContext(), e.getMessage());
 					} catch (Exception e1) {
 						// empty
 					}
