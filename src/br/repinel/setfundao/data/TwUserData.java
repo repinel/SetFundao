@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Roque Pinel
+ * Copyright (C) 2013 Roque Pinel
  *
  * This file is part of SetFundao.
  *
