@@ -19,7 +19,6 @@
 	-->
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res/br.repinel"
 	xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
 	android:id="@+id/home_root"
 	android:orientation="vertical"
