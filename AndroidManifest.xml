@@ -36,12 +36,6 @@
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="app" android:host="SetFundao"/>
-			</intent-filter>
 		</activity>
 
 		<activity
@@ -51,7 +45,14 @@
 		<activity
 			android:name=".setfundao.ui.TwListActivity"
 			android:theme="@style/Theme.SetFundao"
-			android:label="@string/title_tw_list" />
+			android:label="@string/title_tw_list" >
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="app" android:host="SetFundao"/>
+			</intent-filter>
+		</activity>
 
 		<activity
 			android:name=".setfundao.ui.FundaoMapActivity"

@@ -19,16 +19,9 @@
 
 package br.repinel.setfundao.ui;
 
-import br.repinel.setfundao.core.TwAuth;
-import br.repinel.setfundao.helper.TwHelper;
-import br.repinel.setfundao.helper.UIHelper;
-import br.repinel.setfundao.util.Constants;
 import sheetrock.panda.changelog.ChangeLog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import br.repinel.R;
 import br.repinel.setfundao.helper.AnalyticsHelper;
@@ -49,9 +42,6 @@ public class HomeActivity extends BaseActivity {
 		setContentView(R.layout.home);
 
 		AnalyticsHelper.getInstance(this).trackPageView("/Home");
-
-		// handle Twitter OAUth URL
-		handleTwOAuthURL();
 
 		/*
 		 * Android Change Log
@@ -117,27 +107,5 @@ public class HomeActivity extends BaseActivity {
 		Intent intent = new Intent(this, CameraActivity.class);
 		intent.putExtra(CameraActivity.BUNDLE_INDEX, 3);
 		startActivity(intent);
-	}
-
-	/**
-	 * Handle the Twitter OAuth verifier.
-	 */
-	private void handleTwOAuthURL() {
-		Uri uri = getIntent().getData();
-
-		if (uri != null && uri.toString().startsWith(Constants.TW_CALLBACK_URL)) {
-			String oauthVerifier = uri.getQueryParameter(Constants.TW_OAUTH_VERIFIER);
-
-			TwAuth twAuth = TwHelper.getAuth(oauthVerifier);
-
-			if (twAuth != null) {
-				SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-				editor.putString(getString(R.string.pref_tw_access_token), twAuth.oauthAccessToken);
-				editor.putString(getString(R.string.pref_tw_access_token_secret), twAuth.oauthAccessTokenSecret);
-				editor.commit();
-			} else {
-				UIHelper.showMessage(getApplicationContext(), getString(R.string.error_tw_auth));
-			}
-		}
 	}
 }

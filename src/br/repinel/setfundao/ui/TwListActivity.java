@@ -41,6 +41,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -94,6 +95,9 @@ public class TwListActivity extends ListActivity {
 
 		this.twListAdapter = new TWListAdapter(TwListActivity.this, R.layout.tw_list_item, new ArrayList<TwItem>());
 		setListAdapter(twListAdapter);
+
+		// handle Twitter OAUth URL
+		handleTwOAuthURL();
 
 		new TwFetcher().execute();
 	}
@@ -194,6 +198,28 @@ public class TwListActivity extends ListActivity {
 		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Map", 0);
 		Intent intent = new Intent(this, FundaoMapActivity.class);
 		startActivity(intent);
+	}
+
+	/**
+	 * Handle the Twitter OAuth verifier.
+	 */
+	private void handleTwOAuthURL() {
+		Uri uri = getIntent().getData();
+
+		if (uri != null && uri.toString().startsWith(Constants.TW_CALLBACK_URL)) {
+			String oauthVerifier = uri.getQueryParameter(Constants.TW_OAUTH_VERIFIER);
+
+			TwAuth twAuth = TwHelper.getAuth(oauthVerifier);
+
+			if (twAuth != null) {
+				SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+				editor.putString(getString(R.string.pref_tw_access_token), twAuth.oauthAccessToken);
+				editor.putString(getString(R.string.pref_tw_access_token_secret), twAuth.oauthAccessTokenSecret);
+				editor.commit();
+			} else {
+				UIHelper.showMessage(getApplicationContext(), getString(R.string.error_tw_auth));
+			}
+		}
 	}
 
 	/**
