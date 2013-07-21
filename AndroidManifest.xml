@@ -36,6 +36,12 @@
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="app" android:host="SetFundao"/>
+			</intent-filter>
 		</activity>
 
 		<activity
@@ -54,14 +60,7 @@
 
 		<activity
 			android:name=".setfundao.ui.prefs.Preferences"
-			android:theme="@style/Theme.SetFundao">
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="app" android:host="SetFundao"/>
-			</intent-filter>
-		</activity>
+			android:theme="@style/Theme.SetFundao" />
 
 		<activity
 			android:name=".setfundao.ui.prefs.TwFilters"

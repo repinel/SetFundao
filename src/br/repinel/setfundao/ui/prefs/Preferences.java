@@ -66,14 +66,13 @@ public class Preferences extends PreferenceActivity implements
 		if (this.getIntent().getExtras() != null
 			&& this.getIntent().getExtras().get(BUNDLE_RESTORE) != null
 			&& this.getIntent().getExtras().getBoolean(BUNDLE_RESTORE)) {
+
 			UIHelper.showMessage(getApplicationContext(), getString(R.string.reset_settings_message));
 		} else if (this.getIntent().getExtras() != null
-				&& this.getIntent().getExtras().get(BUNDLE_TW_SIGN_OUT) != null
-				&& this.getIntent().getExtras().getBoolean(BUNDLE_TW_SIGN_OUT)) {
+			&& this.getIntent().getExtras().get(BUNDLE_TW_SIGN_OUT) != null
+			&& this.getIntent().getExtras().getBoolean(BUNDLE_TW_SIGN_OUT)) {
+
 			UIHelper.showMessage(getApplicationContext(), getString(R.string.twitter_sign_out_message));
-		} else {
-			// handle Twitter OAUth URL before fixing preferences options
-			handleTwOAuthURL();
 		}
 
 		// ensuring the default value...
@@ -151,25 +150,6 @@ public class Preferences extends PreferenceActivity implements
 		intent.putExtra(BUNDLE_TW_SIGN_OUT, true);
 		startActivity(intent);
 		finish();
-	}
-
-	private void handleTwOAuthURL() {
-		Uri uri = getIntent().getData();
-
-		if (uri != null && uri.toString().startsWith(Constants.TW_CALLBACK_URL)) {
-			String oauthVerifier = uri.getQueryParameter(Constants.TW_EXTRA_OAUTH_VERIFIER);
-
-			TwAuth twAuth = TwHelper.getAuth(oauthVerifier);
-
-			if (twAuth != null) {
-				SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-				editor.putString(getString(R.string.pref_tw_access_token), twAuth.oauthAccessToken);
-				editor.putString(getString(R.string.pref_tw_access_token_secret), twAuth.oauthAccessTokenSecret);
-				editor.commit();
-			} else {
-				UIHelper.showMessage(getApplicationContext(), getString(R.string.error_tw_auth));
-			}
-		}
 	}
 
 	/**

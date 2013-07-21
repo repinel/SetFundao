@@ -31,5 +31,5 @@ public class Constants {
 
 	public static final String TW_CALLBACK_URL = "app://SetFundao";
 
-	public static final String TW_EXTRA_OAUTH_VERIFIER = "oauth_verifier";
+	public static final String TW_OAUTH_VERIFIER = "oauth_verifier";
 }
