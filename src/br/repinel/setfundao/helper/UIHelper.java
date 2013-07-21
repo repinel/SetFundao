@@ -32,7 +32,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.repinel.R;
-import br.repinel.setfundao.util.Constants;
 
 /**
  * UI Helper
@@ -123,7 +122,7 @@ public class UIHelper {
 	public static int getUpdateInterval(Context context, Resources res) {
 		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 
-		final int updateInterval = Integer.parseInt(pref.getString(res.getString(R.string.update_interval),
+		final int updateInterval = Integer.parseInt(pref.getString(res.getString(R.string.pref_update_interval),
 				res.getString(R.string.default_update_interval)));
 
 		return updateInterval;
@@ -140,7 +139,7 @@ public class UIHelper {
 	public static String getLastFetchDate(Context context, Resources res, String camera) {
 		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 
-		final String lastFetchDate = pref.getString(Constants.PREFS_LAST_FETCH_DATE + camera, res.getString(R.string.default_last_fetch_date));
+		final String lastFetchDate = pref.getString(res.getString(R.string.pref_last_fetch_date_) + camera, res.getString(R.string.default_last_fetch_date));
 
 		return lastFetchDate;
 	}
@@ -156,7 +155,7 @@ public class UIHelper {
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 
 		SharedPreferences.Editor editor = pref.edit();
-		editor.putString(Constants.PREFS_LAST_FETCH_DATE + camera, value);
+		editor.putString(context.getString(R.string.pref_last_fetch_date_) + camera, value);
 		editor.commit();
 	}
 
@@ -170,7 +169,7 @@ public class UIHelper {
 	public static boolean getFetchImageOnCreateActivity(Context context, Resources res) {
 		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 
-		final boolean fetchImageOnCreateActivity = pref.getBoolean(res.getString(R.string.fetch_image_on_create_activity),
+		final boolean fetchImageOnCreateActivity = pref.getBoolean(res.getString(R.string.pref_fetch_image_on_create_activity),
 				res.getBoolean(R.bool.default_fetch_image_on_create_activity));
 
 		return fetchImageOnCreateActivity;
@@ -186,7 +185,7 @@ public class UIHelper {
 	public static boolean getFetchTwOnCreateActivity(Context context, Resources res) {
 		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 
-		final boolean fetchTwOnCreateActivity = pref.getBoolean(res.getString(R.string.fetch_tw_on_create_activity),
+		final boolean fetchTwOnCreateActivity = pref.getBoolean(res.getString(R.string.pref_fetch_tw_on_create_activity),
 				res.getBoolean(R.bool.default_fetch_tw_on_create_activity));
 
 		return fetchTwOnCreateActivity;

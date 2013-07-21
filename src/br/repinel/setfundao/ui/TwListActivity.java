@@ -309,7 +309,7 @@ public class TwListActivity extends ListActivity {
 
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(TwListActivity.this);
 
-			TwAuth twAuth = new TwAuth(prefs.getString(Constants.PREF_TW_ACCESS_TOKEN, null), prefs.getString(Constants.PREF_TW_ACCESS_TOKEN_SECRET, null));
+			TwAuth twAuth = new TwAuth(prefs.getString(getString(R.string.pref_tw_access_token), null), prefs.getString(getString(R.string.pref_tw_access_token_secret), null));
 
 			if (StringHelper.isBlank(twAuth.oauthAccessToken) || StringHelper.isBlank(twAuth.oauthAccessTokenSecret)) {
 				message = getString(R.string.error_tw_user_not_authorized);

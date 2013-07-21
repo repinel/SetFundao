@@ -26,16 +26,6 @@ package br.repinel.setfundao.util;
  */
 public class Constants {
 	/*
-	 * Preferences
-	 */
-
-	public static final String PREF_TW_ACCESS_TOKEN = "tw_access_token";
-
-	public static final String PREF_TW_ACCESS_TOKEN_SECRET = "tw_access_token_secret";
-
-	public static final String PREFS_LAST_FETCH_DATE = "last_fetch_date_";
-
-	/*
 	 * Twitter configuration.
 	 */
 

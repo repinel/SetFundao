@@ -95,7 +95,7 @@ public class Preferences extends PreferenceActivity implements
 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-		TwAuth twAuth = new TwAuth(prefs.getString(Constants.PREF_TW_ACCESS_TOKEN, null), prefs.getString(Constants.PREF_TW_ACCESS_TOKEN_SECRET, null));
+		TwAuth twAuth = new TwAuth(prefs.getString(getString(R.string.pref_tw_access_token), null), prefs.getString(getString(R.string.pref_tw_access_token_secret), null));
 
 		// if not signed in to Twitter
 		if (StringHelper.isBlank(twAuth.oauthAccessToken) || StringHelper.isBlank(twAuth.oauthAccessTokenSecret)) {
@@ -143,8 +143,8 @@ public class Preferences extends PreferenceActivity implements
 
 	private void twSignOutDialog() {
 		SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-		editor.remove(Constants.PREF_TW_ACCESS_TOKEN);
-		editor.remove(Constants.PREF_TW_ACCESS_TOKEN_SECRET);
+		editor.remove(getString(R.string.pref_tw_access_token));
+		editor.remove(getString(R.string.pref_tw_access_token_secret));
 		editor.commit();
 
 		Intent intent = new Intent(this, Preferences.class);
@@ -163,8 +163,8 @@ public class Preferences extends PreferenceActivity implements
 
 			if (twAuth != null) {
 				SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-				editor.putString(Constants.PREF_TW_ACCESS_TOKEN, twAuth.oauthAccessToken);
-				editor.putString(Constants.PREF_TW_ACCESS_TOKEN_SECRET, twAuth.oauthAccessTokenSecret);
+				editor.putString(getString(R.string.pref_tw_access_token), twAuth.oauthAccessToken);
+				editor.putString(getString(R.string.pref_tw_access_token_secret), twAuth.oauthAccessTokenSecret);
 				editor.commit();
 			} else {
 				UIHelper.showMessage(getApplicationContext(), getString(R.string.error_tw_auth));
@@ -184,9 +184,9 @@ public class Preferences extends PreferenceActivity implements
 		dataProvider.resetData();
 
 		SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-		editor.remove(getString(R.string.update_interval));
-		editor.remove(getString(R.string.fetch_image_on_create_activity));
-		editor.remove(getString(R.string.fetch_tw_on_create_activity));
+		editor.remove(getString(R.string.pref_update_interval));
+		editor.remove(getString(R.string.pref_fetch_image_on_create_activity));
+		editor.remove(getString(R.string.pref_fetch_tw_on_create_activity));
 		editor.commit();
 
 		Intent intent = new Intent(this, Preferences.class);
