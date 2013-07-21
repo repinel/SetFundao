@@ -17,21 +17,15 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.repinel.setfundao.core;
-
-import java.net.URL;
-
-import android.graphics.Bitmap;
+package br.repinel.setfundao.helper;
 
 /**
- * Tw User.
- * 
- * @author Roque Pinel
+ * The String Helper.
  *
+ * @author Roque Pinel.
  */
-public class TwUser {
-	public String username;
-
-	public String profileImageURL;
-	public Bitmap profileImage;
+public class StringHelper {
+	public static boolean isBlank(String s) {
+		return s == null || s.length() == 0;
+	}
 }

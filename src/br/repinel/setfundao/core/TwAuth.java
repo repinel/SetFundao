@@ -19,19 +19,16 @@
 
 package br.repinel.setfundao.core;
 
-import java.net.URL;
-
-import android.graphics.Bitmap;
-
 /**
- * Tw User.
- * 
- * @author Roque Pinel
- *
+ * @author Roque Pinel.
  */
-public class TwUser {
-	public String username;
+public class TwAuth {
 
-	public String profileImageURL;
-	public Bitmap profileImage;
+	public String oauthAccessToken;
+	public String oauthAccessTokenSecret;
+
+	public TwAuth(String oauthAccessToken, String oauthAccessTokenSecret) {
+		this.oauthAccessToken = oauthAccessToken;
+		this.oauthAccessTokenSecret = oauthAccessTokenSecret;
+	}
 }

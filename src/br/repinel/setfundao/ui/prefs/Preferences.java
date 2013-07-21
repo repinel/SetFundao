@@ -21,15 +21,22 @@ package br.repinel.setfundao.ui.prefs;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
 import br.repinel.R;
+import br.repinel.setfundao.core.TwAuth;
 import br.repinel.setfundao.data.DataProvider;
 import br.repinel.setfundao.helper.AnalyticsHelper;
+import br.repinel.setfundao.helper.StringHelper;
+import br.repinel.setfundao.helper.TwHelper;
 import br.repinel.setfundao.helper.UIHelper;
+import br.repinel.setfundao.util.Constants;
 
 /**
  * Preferences.
@@ -39,9 +46,13 @@ import br.repinel.setfundao.helper.UIHelper;
 public class Preferences extends PreferenceActivity implements
 		SharedPreferences.OnSharedPreferenceChangeListener {
 
-	private static String BUNDLE_RESTORE = "restore";
+	private static final String BUNDLE_RESTORE = "restore";
+	private static final String BUNDLE_TW_SIGN_OUT = "tw_sign_out";
 
-	public static final String PREFS_LAST_FETCH_DATE = "last_fetch_date_";
+	private static final String RESET_SETTINGS_XML_KEY = "reset_settings";
+	private static final String TW_CATEGORY_XML_KEY = "twitter_category";
+	private static final String TW_SIGN_OUT_XML_KEY = "twitter_sign_out";
+	private static final String TW_SIGN_IN_XML_KEY = "twitter_sign_in";
 
 	/**
 	 * @see android.preference.PreferenceActivity#onCreate(android.os.Bundle)
@@ -54,8 +65,16 @@ public class Preferences extends PreferenceActivity implements
 
 		if (this.getIntent().getExtras() != null
 			&& this.getIntent().getExtras().get(BUNDLE_RESTORE) != null
-			&& this.getIntent().getExtras().getBoolean(BUNDLE_RESTORE))
+			&& this.getIntent().getExtras().getBoolean(BUNDLE_RESTORE)) {
 			UIHelper.showMessage(this, getString(R.string.reset_settings_message));
+		} else if (this.getIntent().getExtras() != null
+				&& this.getIntent().getExtras().get(BUNDLE_TW_SIGN_OUT) != null
+				&& this.getIntent().getExtras().getBoolean(BUNDLE_TW_SIGN_OUT)) {
+			UIHelper.showMessage(this, getString(R.string.twitter_sign_out_message));
+		} else {
+			// handle Twitter OAUth URL before fixing preferences options
+			handleTwOAuthURL();
+		}
 
 		// ensuring the default value...
 		UIHelper.getFetchImageOnCreateActivity(this, getResources());
@@ -63,15 +82,46 @@ public class Preferences extends PreferenceActivity implements
 
 		this.addPreferencesFromResource(R.xml.prefs);
 
-		Preference p = this.findPreference("reset_settings");
+		Preference p = this.findPreference(RESET_SETTINGS_XML_KEY);
 		if (p != null) {
-			p.setOnPreferenceClickListener(// .
+			p.setOnPreferenceClickListener(
 					new Preference.OnPreferenceClickListener() {
 						public boolean onPreferenceClick(final Preference preference) {
 							resetSettingsDialog();
 							return true;
 						}
 					});
+		}
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+		TwAuth twAuth = new TwAuth(prefs.getString(Constants.PREF_TW_ACCESS_TOKEN, null), prefs.getString(Constants.PREF_TW_ACCESS_TOKEN_SECRET, null));
+
+		// if not signed in to Twitter
+		if (StringHelper.isBlank(twAuth.oauthAccessToken) || StringHelper.isBlank(twAuth.oauthAccessTokenSecret)) {
+			((PreferenceGroup) findPreference(TW_CATEGORY_XML_KEY)).removePreference(this.findPreference(TW_SIGN_OUT_XML_KEY));
+			p = this.findPreference(TW_SIGN_IN_XML_KEY);
+			if (p != null) {
+				p.setOnPreferenceClickListener(
+						new Preference.OnPreferenceClickListener() {
+							public boolean onPreferenceClick(final Preference preference) {
+								twSignInDialog();
+								return true;
+							}
+						});
+			}
+		} else {
+			((PreferenceGroup) findPreference(TW_CATEGORY_XML_KEY)).removePreference(this.findPreference(TW_SIGN_IN_XML_KEY));
+			p = this.findPreference(TW_SIGN_OUT_XML_KEY);
+			if (p != null) {
+				p.setOnPreferenceClickListener(
+						new Preference.OnPreferenceClickListener() {
+							public boolean onPreferenceClick(final Preference preference) {
+								twSignOutDialog();
+								return true;
+							}
+						});
+			}
 		}
 	}
 
@@ -80,6 +130,46 @@ public class Preferences extends PreferenceActivity implements
 	 */
 	public void onSharedPreferenceChanged(SharedPreferences arg0, String arg1) {
 		// TODO: think about a way to alert the other activities
+	}
+
+	private void twSignInDialog() {
+		String authURL = TwHelper.getAuthURL();
+
+		if (authURL != null)
+			this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(authURL)));
+		else
+			UIHelper.showMessage(this, getString(R.string.error_tw_auth_url));
+	}
+
+	private void twSignOutDialog() {
+		SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+		editor.remove(Constants.PREF_TW_ACCESS_TOKEN);
+		editor.remove(Constants.PREF_TW_ACCESS_TOKEN_SECRET);
+		editor.commit();
+
+		Intent intent = new Intent(this, Preferences.class);
+		intent.putExtra(BUNDLE_TW_SIGN_OUT, true);
+		startActivity(intent);
+		finish();
+	}
+
+	private void handleTwOAuthURL() {
+		Uri uri = getIntent().getData();
+
+		if (uri != null && uri.toString().startsWith(Constants.TW_CALLBACK_URL)) {
+			String oauthVerifier = uri.getQueryParameter(Constants.TW_EXTRA_OAUTH_VERIFIER);
+
+			TwAuth twAuth = TwHelper.getAuth(oauthVerifier);
+
+			if (twAuth != null) {
+				SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+				editor.putString(Constants.PREF_TW_ACCESS_TOKEN, twAuth.oauthAccessToken);
+				editor.putString(Constants.PREF_TW_ACCESS_TOKEN_SECRET, twAuth.oauthAccessTokenSecret);
+				editor.commit();
+			} else {
+				UIHelper.showMessage(this, getString(R.string.error_tw_auth));
+			}
+		}
 	}
 
 	/**

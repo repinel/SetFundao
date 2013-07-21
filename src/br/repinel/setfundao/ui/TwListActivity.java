@@ -21,24 +21,29 @@ package br.repinel.setfundao.ui;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.repinel.setfundao.core.TwAuth;
+import br.repinel.setfundao.helper.StringHelper;
+import br.repinel.setfundao.helper.TwHelper;
+import br.repinel.setfundao.util.Constants;
 import sheetrock.panda.changelog.ChangeLog;
 import twitter4j.Query;
 import twitter4j.QueryResult;
-import twitter4j.Tweet;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.User;
+
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -292,9 +297,6 @@ public class TwListActivity extends ListActivity {
 			message = null;
 		}
 
-		/**
-		 * @see android.os.AsyncTask#doInBackground(Params[])
-		 */
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			if (firstTime) {
@@ -305,11 +307,20 @@ public class TwListActivity extends ListActivity {
 					return null;
 			}
 
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(TwListActivity.this);
+
+			TwAuth twAuth = new TwAuth(prefs.getString(Constants.PREF_TW_ACCESS_TOKEN, null), prefs.getString(Constants.PREF_TW_ACCESS_TOKEN_SECRET, null));
+
+			if (StringHelper.isBlank(twAuth.oauthAccessToken) || StringHelper.isBlank(twAuth.oauthAccessTokenSecret)) {
+				message = getString(R.string.error_tw_user_not_authorized);
+				return null;
+			}
+
 			Log.d(TwListActivity.class.getName(), "Fetching tweets...");
 
-			Map<String, TwUser> userCache = new HashMap<String, TwUser>();
+			Map<Long, TwUser> userCache = new HashMap<Long, TwUser>();
 
-			Twitter twitter = new TwitterFactory().getInstance();
+			Twitter twitter = TwHelper.getTwitter(twAuth.oauthAccessToken, twAuth.oauthAccessTokenSecret);
 
 			String queryFilter = getQueryFilter();
 			Log.d(TwListActivity.class.getName(), queryFilter);
@@ -324,26 +335,26 @@ public class TwListActivity extends ListActivity {
 
 				QueryResult result = twitter.search(query);
 
-				for (Tweet tweet : (List<twitter4j.Tweet>) result.getTweets()) {
-					Log.d(TwListActivity.class.getName(), tweet.getFromUser() + ": " + tweet.getText());
+				for (twitter4j.Status status : result.getTweets()) {
+                    twitter4j.User statusUser = status.getUser();
+
+					Log.d(TwListActivity.class.getName(), statusUser.getScreenName() + ": " + status.getText());
 
 					TwUser twUser;
 
-					if (userCache.containsKey(tweet.getFromUser())) {
-						twUser = userCache.get(tweet.getFromUser());
+					if (userCache.containsKey(statusUser.getId())) {
+						twUser = userCache.get(statusUser.getId());
 					} else {
-						User user = twitter.showUser(tweet.getFromUser());
-
 						twUser = new TwUser();
-						twUser.username = tweet.getFromUser();
-						twUser.profileImageURL = user.getProfileImageURL();
+						twUser.username = statusUser.getScreenName();
+						twUser.profileImageURL = statusUser.getProfileImageURL();
 
-						userCache.put(tweet.getFromUser(), twUser);
+						userCache.put(statusUser.getId(), twUser);
 					}
 
 					TwItem twItem = new TwItem();
-					twItem.text = tweet.getText();
-					twItem.createdAt = tweet.getCreatedAt();
+					twItem.text = status.getText();
+					twItem.createdAt = status.getCreatedAt();
 					twItem.user = twUser;
 
 					items.add(twItem);
@@ -372,7 +383,7 @@ public class TwListActivity extends ListActivity {
 				} catch (Exception e1) {
 					// empty
 				}
-			} else if (!items.isEmpty()) {
+			} else if (items != null && !items.isEmpty()) {
 				twListAdapter.clear();
 
 				for (TwItem twItem : items) {

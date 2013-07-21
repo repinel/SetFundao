@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 import br.repinel.R;
 import br.repinel.setfundao.ui.prefs.Preferences;
+import br.repinel.setfundao.util.Constants;
 
 /**
  * UI Helper
@@ -100,7 +101,7 @@ public class UIHelper {
 	public static String getLastFetchDate(Context context, Resources res, String camera) {
 		final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 
-		final String lastFetchDate = pref.getString(Preferences.PREFS_LAST_FETCH_DATE + camera, res.getString(R.string.default_last_fetch_date));
+		final String lastFetchDate = pref.getString(Constants.PREFS_LAST_FETCH_DATE + camera, res.getString(R.string.default_last_fetch_date));
 
 		return lastFetchDate;
 	}
@@ -116,7 +117,7 @@ public class UIHelper {
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 
 		SharedPreferences.Editor editor = pref.edit();
-		editor.putString(Preferences.PREFS_LAST_FETCH_DATE + camera, value);
+		editor.putString(Constants.PREFS_LAST_FETCH_DATE + camera, value);
 		editor.commit();
 	}
 

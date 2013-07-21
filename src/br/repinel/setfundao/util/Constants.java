@@ -17,21 +17,29 @@
  * this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package br.repinel.setfundao.core;
-
-import java.net.URL;
-
-import android.graphics.Bitmap;
+package br.repinel.setfundao.util;
 
 /**
- * Tw User.
- * 
- * @author Roque Pinel
+ * General Constants.
  *
+ * @author Roque Pinel.
  */
-public class TwUser {
-	public String username;
+public class Constants {
+	/*
+	 * Preferences
+	 */
 
-	public String profileImageURL;
-	public Bitmap profileImage;
+	public static final String PREF_TW_ACCESS_TOKEN = "tw_access_token";
+
+	public static final String PREF_TW_ACCESS_TOKEN_SECRET = "tw_access_token_secret";
+
+	public static final String PREFS_LAST_FETCH_DATE = "last_fetch_date_";
+
+	/*
+	 * Twitter configuration.
+	 */
+
+	public static final String TW_CALLBACK_URL = "app://SetFundao";
+
+	public static final String TW_EXTRA_OAUTH_VERIFIER = "oauth_verifier";
 }

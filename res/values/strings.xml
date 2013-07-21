@@ -22,7 +22,7 @@
 	<!-- Application -->
 
 	<string name="app_name">SetFundao</string>
-	<string name="app_name_version">SetFundao 3.0</string>
+	<string name="app_name_version">SetFundao 3.1</string>
 	<string name="app_description">"Monitor de câmeras do CET Fundão http://diseg.pu.ufrj.br\n\nAs imagens exibidas estão sujeitas a disponibilidade da CET Fundão. As câmeras podem apresentar inatividade, não sendo um defeito do SetFundão.\n\nSob GPLv3 http://www.gnu.org/licenses/gpl-3.0.txt\n\nCopyright © 2011. Roque Pinel. Todos os direitos reservados.\n\nContribuições: Flávio Costa e Leonardo Marques."</string>
 
 	<!-- Cameras -->
@@ -82,6 +82,15 @@
 
 	<string name="fetch_tw_on_create_activity_">Recuperar Tweets ao abrir</string>
 	<string name="fetch_tw_on_create_activity_hint">Obtém Tweets automaticamente ao abrir a tela</string>
+
+	<string name="twitter_sign_in_">Entrar</string>
+	<string name="twitter_sign_in_hint">Entrar no Twitter</string>
+
+	<string name="twitter_sign_out_">Sair</string>
+	<string name="twitter_sign_out_hint">Sair do Twitter</string>
+	<string name="twitter_sign_out_message">Saiu com sucesso</string>
+
+	<string name="pin">PIN</string>
 
 	<string name="words_filter_">Filtro por Palavras</string>
 	<string name="words_filter_hint">Procura pelas palavras listadas</string>
@@ -152,6 +161,9 @@
 	<string name="error_tw_word_already_stored">Palavra já inserida</string>
 	<string name="error_tw_hashtag_already_stored">Hashtag já inserida</string>
 	<string name="error_tw_user_already_stored">Usuário já inserida</string>
+	<string name="error_tw_user_not_authorized">Por favor, entre em Preferências e autorize o acesso ao Twitter</string>
+	<string name="error_tw_auth_url">Não foi possível obter a URL do Twitter. Favor tentar novamente.</string>
+	<string name="error_tw_auth">Não foi possível authorizar o acesso ao Twitter. Favor tentar novamente.</string>
 
 	<!-- Android Change Log Lib -->
 
