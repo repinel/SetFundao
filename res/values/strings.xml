@@ -83,12 +83,12 @@
 	<string name="fetch_tw_on_create_activity_">Recuperar Tweets ao abrir</string>
 	<string name="fetch_tw_on_create_activity_hint">Obtém Tweets automaticamente ao abrir a tela</string>
 
-	<string name="tw_sign_in_">Entrar</string>
-	<string name="tw_sign_in_hint">Entrar no Twitter</string>
+	<string name="tw_sign_in_">Autorizar</string>
+	<string name="tw_sign_in_hint">Autorizar o acesso ao Twitter</string>
 
-	<string name="tw_sign_out_">Sair</string>
-	<string name="tw_sign_out_hint">Sair do Twitter</string>
-	<string name="tw_sign_out_message">Saiu com sucesso</string>
+	<string name="tw_sign_out_">Desautorizar</string>
+	<string name="tw_sign_out_hint">Desautorizar o acesso ao Twitter</string>
+	<string name="tw_sign_out_message">O acesso foi desautorizado.</string>
 
 	<string name="pin">PIN</string>
 
@@ -112,7 +112,7 @@
 
 	<string name="reset_settings_">Restaurar Configurações</string>
 	<string name="reset_settings_hint">Restaura as configurações para o padrão</string>
-	<string name="reset_settings_message">As configurações foram restauradas</string>
+	<string name="reset_settings_message">As configurações foram restauradas.</string>
 
 	<string-array name="dialog_delete">
 		<item>Delete</item>

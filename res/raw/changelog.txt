@@ -32,6 +32,7 @@ $ 3.1
 	_ 2013-07-21
 	! Por favor reportar bug pela <a href="https://github.com/repinel/SetFundao/issues">página do projeto</a>!
 		* Utilizando a nova API do Twitter.
+		* Melhorando o sistema de notificação.
 $ 3.0
 	% Versão 3.0
 	_ 2012-03-02
