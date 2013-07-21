@@ -36,7 +36,6 @@ import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.StringHelper;
 import br.repinel.setfundao.helper.TwHelper;
 import br.repinel.setfundao.helper.UIHelper;
-import br.repinel.setfundao.util.Constants;
 
 /**
  * Preferences.
@@ -72,7 +71,7 @@ public class Preferences extends PreferenceActivity implements
 			&& this.getIntent().getExtras().get(BUNDLE_TW_SIGN_OUT) != null
 			&& this.getIntent().getExtras().getBoolean(BUNDLE_TW_SIGN_OUT)) {
 
-			UIHelper.showMessage(getApplicationContext(), getString(R.string.twitter_sign_out_message));
+			UIHelper.showMessage(getApplicationContext(), getString(R.string.tw_sign_out_message));
 		}
 
 		// ensuring the default value...

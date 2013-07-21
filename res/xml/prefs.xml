@@ -43,10 +43,10 @@
 		android:title="@string/settings_tw" >
 
 		<PreferenceScreen android:key="twitter_sign_in"
-			android:title="@string/twitter_sign_in_" android:summary="@string/twitter_sign_in_hint" />
+			android:title="@string/tw_sign_in_" android:summary="@string/tw_sign_in_hint" />
 
 		<PreferenceScreen android:key="twitter_sign_out"
-			android:title="@string/twitter_sign_out_" android:summary="@string/twitter_sign_out_hint" />
+			android:title="@string/tw_sign_out_" android:summary="@string/tw_sign_out_hint" />
 
 		<PreferenceScreen
 			android:title="@string/words_filter_"

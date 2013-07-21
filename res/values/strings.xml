@@ -83,12 +83,12 @@
 	<string name="fetch_tw_on_create_activity_">Recuperar Tweets ao abrir</string>
 	<string name="fetch_tw_on_create_activity_hint">Obtém Tweets automaticamente ao abrir a tela</string>
 
-	<string name="twitter_sign_in_">Entrar</string>
-	<string name="twitter_sign_in_hint">Entrar no Twitter</string>
+	<string name="tw_sign_in_">Entrar</string>
+	<string name="tw_sign_in_hint">Entrar no Twitter</string>
 
-	<string name="twitter_sign_out_">Sair</string>
-	<string name="twitter_sign_out_hint">Sair do Twitter</string>
-	<string name="twitter_sign_out_message">Saiu com sucesso</string>
+	<string name="tw_sign_out_">Sair</string>
+	<string name="tw_sign_out_hint">Sair do Twitter</string>
+	<string name="tw_sign_out_message">Saiu com sucesso</string>
 
 	<string name="pin">PIN</string>
 
