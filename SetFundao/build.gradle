@@ -15,16 +15,16 @@ repositories {
 dependencies {
 	compile 'com.android.support:support-v4:13.0.0'
 	compile fileTree(dir: 'libs', include: '*.jar')
-	//compile project(':libraries:ActionBarSherlock:actionbarsherlock')
+	compile project(':libraries:ActionBarSherlock')
 }
 
 android {
-	compileSdkVersion "Google Inc.:Google APIs:7"
+	compileSdkVersion "Google Inc.:Google APIs:17"
 	buildToolsVersion "17.0.0"
 
 	defaultConfig {
 		minSdkVersion 7
-		targetSdkVersion 7
+		targetSdkVersion 17
 	}
 }
 
