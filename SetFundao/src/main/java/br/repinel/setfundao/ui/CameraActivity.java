@@ -33,7 +33,6 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import br.repinel.R;
-import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.ImageHelper;
 import br.repinel.setfundao.helper.UIHelper;
 import br.repinel.setfundao.ui.exception.MainException;
@@ -78,9 +77,6 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		this.image = null;
 
 		this.index = this.getIntent().getExtras().getInt(BUNDLE_INDEX);
-
-		AnalyticsHelper.getInstance(this).trackPageView(
-			"/" + getResources().getStringArray(R.array.camera_names)[index]);
 
 		this.photoURL = getResources().getStringArray(R.array.photo_urls)[index];
 		this.photoFilename = getResources().getStringArray(R.array.photo_filenames)[index];
@@ -142,8 +138,6 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	 * @see android.view.View.OnClickListener#onClick(android.view.View)
 	 */
 	public void onClick(View v) {
-		AnalyticsHelper.getInstance(this).trackEvent(getResources().getStringArray(R.array.camera_names)[index], "Click", "Image", 0);
-
 		doRefresh();
 	}
 
@@ -153,8 +147,6 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	 * @param v The view
 	 */
 	public void onHomeClick(View v) {
-		AnalyticsHelper.getInstance(this).trackEvent(getResources().getStringArray(R.array.camera_names)[index], "Click", "Home", 0);
-
 		final Intent intent = new Intent(this, HomeActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
@@ -166,8 +158,6 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 	 * @param v The view
 	 */
 	public void onRefreshClick(View v) {
-		AnalyticsHelper.getInstance(this).trackEvent(getResources().getStringArray(R.array.camera_names)[index], "Click", "Refresh", 0);
-
 		doRefresh();
 	}
 

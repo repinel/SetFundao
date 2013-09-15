@@ -21,7 +21,6 @@ package br.repinel.setfundao.ui;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +59,6 @@ import br.repinel.setfundao.core.TwItem;
 import br.repinel.setfundao.core.TwUser;
 import br.repinel.setfundao.data.TwFilterFacade;
 import br.repinel.setfundao.data.TwItemFacade;
-import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.ImageHelper;
 import br.repinel.setfundao.helper.UIHelper;
 import br.repinel.setfundao.ui.exception.MainException;
@@ -85,8 +83,6 @@ public class TwListActivity extends ListActivity {
 		setContentView(R.layout.tw_list);
 
 		this.firstTime = true;
-
-		AnalyticsHelper.getInstance(this).trackPageView("/TwList");
 
 		TextView titleView = (TextView) findViewById(R.id.bar_text);
 		if (titleView != null && UIHelper.isPortrait(this)) {
@@ -128,8 +124,6 @@ public class TwListActivity extends ListActivity {
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Menu", 0);
-
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 
@@ -145,18 +139,15 @@ public class TwListActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.full_log:
-				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "FullLog", 0);
 				Log.d(getClass().getName(), "onOptionsItemSelected:log");
 				ChangeLog changeLog = new ChangeLog(this);
 				changeLog.getFullLogDialog().show();
 				return true;
 			case R.id.item_settings:
-				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Settings", 0);
 				Log.d(getClass().getName(), "onOptionsItemSelected:preferences");
 				this.startActivity(new Intent(this, Preferences.class));
 				return true;
 			case R.id.main_about: {
-				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "About", 0);
 				Log.d(getClass().getName(), "onOptionsItemSelected:about");
 				UIHelper.showAbout(this);
 				return true;
@@ -171,8 +162,6 @@ public class TwListActivity extends ListActivity {
 	 * @param view The view
 	 */
 	public void onHomeClick(View view) {
-		AnalyticsHelper.getInstance(this).trackEvent(getTitle().toString(), "Click", "Home", 0);
-
 		final Intent intent = new Intent(this, HomeActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
@@ -184,8 +173,6 @@ public class TwListActivity extends ListActivity {
 	 * @param v The view
 	 */
 	public void onRefreshClick(View v) {
-		AnalyticsHelper.getInstance(this).trackEvent(getTitle().toString(), "Click", "Refresh", 0);
-
 		new TwFetcher().execute();
 	}
 
@@ -278,8 +265,7 @@ public class TwListActivity extends ListActivity {
 	 *
 	 */
 	private class TwFetcher extends AsyncTask<Void, Void, Void> {
-
-		private String message; 
+		private String message;
 
 		private ArrayList<TwItem> items;
 

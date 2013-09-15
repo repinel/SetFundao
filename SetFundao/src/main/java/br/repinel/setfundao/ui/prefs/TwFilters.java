@@ -38,7 +38,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import br.repinel.R;
 import br.repinel.setfundao.data.TwFilterFacade;
-import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.UIHelper;
 
 /**
@@ -62,8 +61,6 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 	public final void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.list_ok_add);
-
-		AnalyticsHelper.getInstance(this).trackPageView("/TwFilters");
 
 		this.type = this.getIntent().getExtras().getString(this.getString(R.string.tw_bundle_type));
 
@@ -117,8 +114,6 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.add:
-				AnalyticsHelper.getInstance(this).trackEvent(title, "Click", "Add", 0);
-
 				View addView = getLayoutInflater().inflate(R.layout.input_ok_cancel, null, false);
 
 				TextView entryLabel = (TextView) addView.findViewById(R.id.entry_label);
@@ -136,8 +131,6 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 				builder.setPositiveButton(this.getString(R.string.add),
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
-							AnalyticsHelper.getInstance(TwFilters.this).trackEvent(title, "Click", "Add Element", 0);
-
 							AlertDialog alertDialog = (AlertDialog) dialog;
 
 							if (alertDialog == null || alertDialog.getCurrentFocus() == null)
@@ -197,7 +190,6 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 				builder.show();
 				break;
 			case R.id.ok:
-				AnalyticsHelper.getInstance(this).trackEvent(title, "Click", "Ok", 0);
 				this.finish();
 				break;
 			default:
@@ -223,8 +215,6 @@ public class TwFilters extends ListActivity implements OnClickListener, OnItemCl
 				public void onClick(final DialogInterface dialog, final int which) {
 					switch (which) {
 						case 0:
-							AnalyticsHelper.getInstance(TwFilters.this).trackEvent(title, "Click", "Delete Element", 0);
-
 							String value = adapter.getItem(position);
 
 							TwFilterFacade twFilterFacade = new TwFilterFacade(TwFilters.this);

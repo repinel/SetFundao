@@ -29,7 +29,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import br.repinel.R;
-import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.UIHelper;
 import br.repinel.setfundao.ui.prefs.Preferences;
 
@@ -49,20 +48,10 @@ public class BaseActivity extends Activity {
 	}
 
 	/**
-	 * @see android.app.Activity#onDestroy()
-	 */
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-	}
-
-	/**
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Menu", 0);
-
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 
@@ -78,18 +67,15 @@ public class BaseActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.full_log:
-				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "FullLog", 0);
 				Log.d(getClass().getName(), "onOptionsItemSelected:log");
 				ChangeLog changeLog = new ChangeLog(this);
 				changeLog.getFullLogDialog().show();
 				return true;
 			case R.id.item_settings:
-				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Settings", 0);
 				Log.d(getClass().getName(), "onOptionsItemSelected:preferences");
 				this.startActivity(new Intent(this, Preferences.class));
 				return true;
 			case R.id.main_about: {
-				AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "About", 0);
 				Log.d(getClass().getName(), "onOptionsItemSelected:about");
 				UIHelper.showAbout(this);
 				return true;
@@ -104,7 +90,6 @@ public class BaseActivity extends Activity {
 	 * @param v The view.
 	 */
 	public void onTwClick(View v) {
-		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "TwList", 0);
 		Intent intent = new Intent(this, TwListActivity.class);
 		startActivity(intent);
 	}

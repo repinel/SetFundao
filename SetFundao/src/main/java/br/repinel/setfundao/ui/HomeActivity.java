@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import br.repinel.R;
-import br.repinel.setfundao.helper.AnalyticsHelper;
 
 /**
  * The Home Activity.
@@ -41,8 +40,6 @@ public class HomeActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 
-		AnalyticsHelper.getInstance(this).trackPageView("/Home");
-
 		/*
 		 * Android Change Log
 		 */
@@ -52,22 +49,11 @@ public class HomeActivity extends BaseActivity {
 	}
 
 	/**
-	 * @see android.app.Activity#onDestroy()
-	 */
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-
-		AnalyticsHelper.getInstance(this).stopSession();
-	}
-
-	/**
 	 * Called when Camera1 is clicked.
 	 * 
 	 * @param v The View
 	 */
 	public void onCamera1Click(View v) {
-		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Camera1", 0);
 		Intent intent = new Intent(this, CameraActivity.class);
 		intent.putExtra(CameraActivity.BUNDLE_INDEX, 0);
 		startActivity(intent);
@@ -79,7 +65,6 @@ public class HomeActivity extends BaseActivity {
 	 * @param v The View
 	 */
 	public void onCamera2Click(View v) {
-		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Camera2", 0);
 		Intent intent = new Intent(this, CameraActivity.class);
 		intent.putExtra(CameraActivity.BUNDLE_INDEX, 1);
 		startActivity(intent);
@@ -91,7 +76,6 @@ public class HomeActivity extends BaseActivity {
 	 * @param v The View
 	 */
 	public void onCamera3Click(View v) {
-		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Camera3", 0);
 		Intent intent = new Intent(this, CameraActivity.class);
 		intent.putExtra(CameraActivity.BUNDLE_INDEX, 2);
 		startActivity(intent);
@@ -103,7 +87,6 @@ public class HomeActivity extends BaseActivity {
 	 * @param v The View
 	 */
 	public void onCamera4Click(View v) {
-		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Camera4", 0);
 		Intent intent = new Intent(this, CameraActivity.class);
 		intent.putExtra(CameraActivity.BUNDLE_INDEX, 3);
 		startActivity(intent);

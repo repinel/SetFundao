@@ -32,7 +32,6 @@ import android.util.Log;
 import br.repinel.R;
 import br.repinel.setfundao.core.TwAuth;
 import br.repinel.setfundao.data.DataProvider;
-import br.repinel.setfundao.helper.AnalyticsHelper;
 import br.repinel.setfundao.helper.StringHelper;
 import br.repinel.setfundao.helper.TwHelper;
 import br.repinel.setfundao.helper.UIHelper;
@@ -59,8 +58,6 @@ public class Preferences extends PreferenceActivity implements
 	@Override
 	public final void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		AnalyticsHelper.getInstance(this).trackPageView("/Preferences");
 
 		if (this.getIntent().getExtras() != null
 			&& this.getIntent().getExtras().get(BUNDLE_RESTORE) != null
@@ -155,8 +152,6 @@ public class Preferences extends PreferenceActivity implements
 	 * Reset all settings.
 	 */
 	private void resetSettingsDialog() {
-		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "ResetSettings", 0);
-
 		Log.w(Preferences.class.getName(), "Resetting settings...");
 
 		DataProvider dataProvider = new DataProvider(this);
