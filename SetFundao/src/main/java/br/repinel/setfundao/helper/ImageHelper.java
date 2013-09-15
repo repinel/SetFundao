@@ -171,7 +171,7 @@ public class ImageHelper {
 	 * @return The image loaded
 	 * @throws MainException
 	 */
-	public static Bitmap loadImage (Activity activity, String filename) throws MainException {
+	public static Bitmap loadImage(Activity activity, String filename) throws MainException {
 		Bitmap image = BitmapFactory.decodeFile(activity.getFileStreamPath(filename).getAbsolutePath());
 
 		return image;

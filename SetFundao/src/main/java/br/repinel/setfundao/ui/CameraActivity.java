@@ -103,11 +103,12 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 		super.onDestroy();
 
 		try {
-			if (image != null)
+			if (image != null) {
 				ImageHelper.saveImage(CameraActivity.this, image, photoFilename);
 
-				SimpleDateFormat dateFormat = new SimpleDateFormat(getResources().getString(R.string.date_format));
-				UIHelper.setLastFetchDate(getApplicationContext(), photoFilename, dateFormat.format(lastFetchDate));
+                SimpleDateFormat dateFormat = new SimpleDateFormat(getResources().getString(R.string.date_format));
+                UIHelper.setLastFetchDate(getApplicationContext(), photoFilename, dateFormat.format(lastFetchDate));
+            }
 		} catch (Exception e) {
 			try {
 				UIHelper.showMessage(getApplicationContext(), e.getMessage());
@@ -323,8 +324,12 @@ public class CameraActivity extends BaseActivity implements OnClickListener {
 			try {
 				if (firstTime) {
 					Bitmap image = ImageHelper.loadImage(CameraActivity.this, photoFilename);
-	
-					if (image != null) {
+
+                    // first time ever
+                    if (image == null) {
+                        imgView.setImageResource(R.drawable.sem_imagem);
+                    // last loaded image
+                    } else {
 						imgView.setImageBitmap(image);
 		
 						final String lastFetchDate = UIHelper.getLastFetchDate(getApplicationContext(), getResources(), photoFilename);
