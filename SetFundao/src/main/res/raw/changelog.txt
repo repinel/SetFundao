@@ -27,6 +27,14 @@
 		</style>
 	</head>
 	<body>
+$ 3.2
+	% Versão 3.2
+	_ 2013-09-15
+	! Por favor reportar bug pela <a href="https://github.com/repinel/SetFundao/issues">página do projeto</a>!
+		* Melhorando a carga de imagens pela primeira vez.
+		* Atualizando para a nova versão do AdMob.
+		* Removendo suporte ao Google Maps.
+		* Removendo suporte ao Google Analytics. Reduzindo o número de acessos a internet.
 $ 3.1
 	% Versão 3.1
 	_ 2013-07-23
