@@ -36,13 +36,6 @@
 		<ImageView style="@style/BarSeparator" />
 		<ImageButton
 			style="@style/BarAction"
-			android:contentDescription="@string/description_map"
-			android:src="@drawable/ic_map"
-			android:onClick="onMapClick" />
-
-		<ImageView style="@style/BarSeparator" />
-		<ImageButton
-			style="@style/BarAction"
 			android:contentDescription="@string/description_tw"
 			android:src="@drawable/ic_tw"
 			android:onClick="onTwClick" />

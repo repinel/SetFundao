@@ -47,13 +47,6 @@
 			style="@style/BarProgressIndicator"
 			android:id="@+id/refresh_progress"
 			android:visibility="gone" />
-
-		<ImageView style="@style/BarSeparator" />
-		<ImageButton
-			style="@style/BarAction"
-			android:contentDescription="@string/description_map"
-			android:src="@drawable/ic_map"
-			android:onClick="onMapClick" />
 	</LinearLayout>
 
 	<ListView

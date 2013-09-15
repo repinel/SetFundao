@@ -190,17 +190,6 @@ public class TwListActivity extends ListActivity {
 	}
 
 	/**
-	 * Open the Map view.
-	 * 
-	 * @param v The view.
-	 */
-	public void onMapClick(View v) {
-		AnalyticsHelper.getInstance(this).trackEvent(getClass().getName(), "Click", "Map", 0);
-		Intent intent = new Intent(this, FundaoMapActivity.class);
-		startActivity(intent);
-	}
-
-	/**
 	 * Handle the Twitter OAuth verifier.
 	 */
 	private void handleTwOAuthURL() {

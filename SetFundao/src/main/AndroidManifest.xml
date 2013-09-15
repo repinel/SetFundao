@@ -54,12 +54,7 @@
 			</intent-filter>
 		</activity>
 
-		<activity
-			android:name=".setfundao.ui.FundaoMapActivity"
-			android:theme="@style/Theme.SetFundao"
-			android:label="@string/title_map" />
-
-		<activity
+        <activity
 			android:name=".setfundao.ui.prefs.Preferences"
 			android:theme="@style/Theme.SetFundao" />
 
@@ -71,10 +66,6 @@
 		<activity
 			android:name="com.google.ads.AdActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation"/>
-
-		<uses-library
-			android:name="com.google.android.maps"
-			android:required="true" />
 	</application>
 
 	<uses-sdk android:minSdkVersion="7" />
